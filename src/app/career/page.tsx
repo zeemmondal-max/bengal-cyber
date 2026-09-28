@@ -199,6 +199,7 @@ export default function CareerPage() {
     expectedSalary: "",
     coverNote: ""
   });
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -216,14 +217,36 @@ export default function CareerPage() {
     }
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("email", formData.email);
+    data.append("phone", formData.phone);
+    data.append("role", formData.role);
+    data.append("portfolio", formData.portfolio);
+    data.append("expectedSalary", formData.expectedSalary);
+    data.append("coverNote", formData.coverNote);
+    data.append("formType", "Career Job Application");
+    if (resumeFile) {
+      data.append("resume", resumeFile);
+    }
+
+    try {
+      await fetch("/send-mail.php", {
+        method: "POST",
+        body: data,
+      });
+    } catch (err) {
+      console.warn("Mail dispatch notice:", err);
+    } finally {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 1200);
+    }
   };
+
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-800">
@@ -721,19 +744,35 @@ export default function CareerPage() {
                   </div>
                 </div>
 
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                    Attach CV / Resume Document (PDF, DOC, DOCX up to 25MB)
+                  </label>
+                  <input 
+                    type="file" 
+                    accept=".pdf,.doc,.docx"
+                    onChange={(e) => setResumeFile(e.target.files?.[0] || null)}
+                    className="w-full px-5 py-3 rounded-2xl bg-white border border-dashed border-slate-300 text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-primary file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-brand-primary file:text-white hover:file:bg-orange-600 cursor-pointer text-sm font-medium"
+                  />
+                  {resumeFile && (
+                    <p className="text-xs text-brand-primary font-bold mt-1.5 pl-1">
+                      Attached: {resumeFile.name} ({(resumeFile.size / 1024 / 1024).toFixed(2)} MB)
+                    </p>
+                  )}
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                      Google Drive CV / Resume Link *
+                      Or Google Drive CV Link
                     </label>
                     <input 
                       type="url"
-                      required
                       value={formData.portfolio}
                       onChange={(e) => setFormData({ ...formData, portfolio: e.target.value })}
                       className="w-full px-5 py-3.5 rounded-2xl bg-white border border-slate-200 text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-transparent text-sm"
                     />
-                    <p className="text-[11px] text-slate-400 mt-1">Please ensure your Google Drive link has public view access.</p>
+                    <p className="text-[11px] text-slate-400 mt-1">Optional if you attached your CV document above.</p>
                   </div>
 
                   <div>
@@ -748,6 +787,7 @@ export default function CareerPage() {
                     />
                   </div>
                 </div>
+
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">

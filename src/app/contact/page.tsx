@@ -31,18 +31,41 @@ export default function ContactPage() {
       }
     }
   }, []);
+
+
+  const [file, setFile] = useState<File | null>(null);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+
+    const formData = new FormData();
+    formData.append("name", formState.name);
+    formData.append("email", formState.email);
+    formData.append("phone", formState.phone);
+    formData.append("subject", formState.service);
+    formData.append("message", formState.message);
+    formData.append("formType", "Client Inquiry");
+    if (file) {
+      formData.append("document", file);
+    }
+
+    try {
+      await fetch("/send-mail.php", {
+        method: "POST",
+        body: formData,
+      });
+    } catch (err) {
+      console.warn("Mail dispatch notice:", err);
+    } finally {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 1500);
+    }
   };
+
 
   return (
     <main className="min-h-screen bg-slate-50">
@@ -251,7 +274,25 @@ export default function ContactPage() {
                     ></textarea>
                   </div>
 
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest pl-2">
+                      Attach Document / Brief (Optional - PDF, DOCX, ZIP, Images up to 25MB)
+                    </label>
+                    <input 
+                      type="file" 
+                      accept=".pdf,.doc,.docx,.zip,.rar,.png,.jpg,.jpeg"
+                      onChange={(e) => setFile(e.target.files?.[0] || null)}
+                      className="w-full px-6 py-4 bg-slate-50 border-2 border-dashed border-slate-300 rounded-2xl focus:outline-none focus:border-brand-primary file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-brand-primary file:text-white hover:file:bg-orange-600 cursor-pointer text-slate-600 text-sm font-medium transition-all"
+                    />
+                    {file && (
+                      <p className="text-xs text-brand-primary font-bold pl-2">
+                        Attached: {file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)
+                      </p>
+                    )}
+                  </div>
+
                   <button 
+
                     type="submit" 
                     disabled={isSubmitting}
                     className="w-full bg-gradient-to-r from-orange-500 to-brand-primary text-white font-black text-xl py-5 rounded-2xl hover:shadow-2xl hover:shadow-brand-primary/40 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center group disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
