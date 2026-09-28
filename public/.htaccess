@@ -10,9 +10,15 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 # RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
-# 3. Handle directory slash and fallback
+# 3. Allow LiteSpeed to serve static Next.js assets
+<IfModule litespeed>
+  AllowBlockedUrl on
+</IfModule>
+
+# 4. Handle directory slash and fallback
 DirectorySlash On
 DirectoryIndex index.html
+
 
 # 4. Custom 404 Error page
 ErrorDocument 404 /404.html
