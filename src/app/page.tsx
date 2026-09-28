@@ -6,13 +6,10 @@ import BangladeshMarket from "@/components/BangladeshMarket";
 import Brands from "@/components/Brands";
 import HomeContactForm from "@/components/HomeContactForm";
 import Footer from "@/components/Footer";
-import VantaBackground from "@/components/VantaBackground";
 
 export default function Home() {
   return (
-    <main className="min-h-screen relative">
-      <VantaBackground />
-      
+    <main className="min-h-screen bg-white relative">
       <Navbar />
       <Hero />
       <LogoTicker />
