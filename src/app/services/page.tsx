@@ -4,10 +4,10 @@ import Services from "@/components/Services";
 import ServiceRoadmap from "@/components/ServiceRoadmap";
 import ServiceFAQ from "@/components/ServiceFAQ";
 import Footer from "@/components/Footer";
-import VantaNetBackground from "@/components/VantaNetBackground";
 import Script from "next/script";
 
 export const metadata: Metadata = {
+
   title: "Top Digital Marketing & Website Design Services in Bangladesh | Bengal Cyber",
   description: "Scale your revenue with Bengal Cyber's elite digital services: Custom Website Design & Development, Viral Social Media Marketing, Performance Media Buying, High-End Graphics Design, and Video Editing in Bangladesh.",
   keywords: [
@@ -141,22 +141,22 @@ export default function ServicesPage() {
   };
 
   return (
-    <main className="min-h-screen relative">
+    <main className="min-h-screen bg-slate-50 relative">
       <Script
         id="service-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
-      <VantaNetBackground />
       <Navbar />
       
       {/* Spacer to account for fixed navbar */}
       <div className="h-20 bg-transparent"></div>
       
       {/* Services Header */}
-      <section className="py-20 bg-transparent text-center relative z-10">
+      <section className="py-20 text-center relative z-10">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="bg-white/80 backdrop-blur-2xl p-6 md:p-16 rounded-[3rem] border border-white shadow-xl shadow-brand-primary/5">
+          <div className="bg-white p-6 md:p-16 rounded-[3rem] border border-slate-200/80 shadow-xl shadow-brand-primary/5">
+
             <span className="inline-block px-4 py-1.5 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-widest mb-4">
               Digital Growth & Market Dominance
             </span>
