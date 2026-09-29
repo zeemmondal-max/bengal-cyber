@@ -276,75 +276,9 @@ export default function AboutPage() {
 
         </div>
       </section>
- 
-      {/* Advisory Panel */}
-      <section className="py-24 bg-slate-50 relative overflow-hidden border-t border-slate-200/60">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[100px] translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
-          {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <h4 className="text-brand-primary font-bold tracking-widest uppercase text-sm mb-4">Strategic Governance</h4>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-brand-dark mb-6 tracking-tight">Advisory Panel</h2>
-              <p className="text-lg md:text-xl text-slate-600 leading-relaxed text-balance">
-                Distinguished mentors and industry leaders guiding Bengal Cyber with seasoned strategic foresight, market governance, and enduring business wisdom.
-              </p>
-            </motion.div>
-          </div>
-
-          {/* Advisors Container */}
-          <div className="flex justify-center">
-            {/* Advisor: Md Kamruzzaman Didar */}
-            <motion.div
-              className="w-full max-w-md bg-white rounded-[2.5rem] border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col group relative"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="relative aspect-[4/4.5] overflow-hidden bg-slate-100">
-                <Image
-                  src="/kamruzzaman-didar.jpg"
-                  alt="Md Kamruzzaman Didar - Business Consultant and Development Advisor"
-                  fill
-                  className="object-cover object-top hover:scale-105 transition-transform duration-700"
-                  priority
-                />
-                <div className="absolute top-4 right-4 z-10">
-                  <span className="px-3.5 py-1.5 bg-brand-primary text-white text-xs font-bold rounded-full uppercase tracking-wider shadow-md">
-                    Advisor
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-8 flex flex-col flex-1 justify-between">
-                <div>
-                  <span className="text-brand-primary font-bold text-xs uppercase tracking-widest">Business & Development</span>
-                  <h3 className="text-2xl font-extrabold text-brand-dark mt-1 mb-2">Md Kamruzzaman Didar</h3>
-                  <p className="text-slate-500 font-semibold text-sm mb-4">Business Consultant & Development Advisor</p>
-                  <p className="text-slate-600 text-sm leading-relaxed">
-                    Provides seasoned mentorship and strategic guidance to Bengal Cyber on enterprise business scaling, development strategy, and long-term commercial innovation.
-                  </p>
-                </div>
-
-                <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-sm font-semibold text-slate-500">
-                  <span>Advisory Council</span>
-                  <span className="text-brand-primary font-bold">Bengal Cyber</span>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-        </div>
-      </section>
 
       {/* Mission & Vision Cards */}
+
       <section className="py-24 bg-brand-dark text-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

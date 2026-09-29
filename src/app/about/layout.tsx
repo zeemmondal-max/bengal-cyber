@@ -90,13 +90,8 @@ const aboutJsonLd = {
             "image": "https://bengalcyber.com/ismahile-hossain.jpg"
           }
         ],
-        "sponsor": {
-          "@type": "Person",
-          "name": "Md Kamruzzaman Didar",
-          "jobTitle": "Business Consultant & Development Advisor",
-          "image": "https://bengalcyber.com/kamruzzaman-didar.jpg"
-        },
         "knowsAbout": [
+
           "Website Design",
           "Web Development",
           "Social Media Marketing",
