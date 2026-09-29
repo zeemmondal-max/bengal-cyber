@@ -67,8 +67,9 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Bengal Cyber",
-    "image": "https://bengalcyber.com/brands/bengal-cyber-logo.png",
+    "image": "https://bengalcyber.com/logo.png",
     "description": "Top Digital Marketing, Social Media Marketing, and Website Design Agency in Bangladesh.",
+
     "url": "https://bengalcyber.com",
     "telephone": "+8801901364583",
     "address": [
