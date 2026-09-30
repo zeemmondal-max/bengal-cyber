@@ -10,33 +10,43 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center pointer-events-none">
-      
-      {/* Trigger Area (Water Drop) */}
-      <div 
-        className={`absolute top-0 w-64 h-16 flex justify-center items-start cursor-pointer group z-[60] ${isNavVisible ? 'pointer-events-none' : 'pointer-events-auto'}`}
-        onMouseEnter={() => setIsNavVisible(true)}
-        onClick={() => setIsNavVisible(!isNavVisible)}
-      >
-        <motion.div 
-          animate={{ scale: isNavVisible ? 0 : 1, opacity: isNavVisible ? 0 : 1, y: isNavVisible ? -20 : 0 }}
-          className="relative mt-2 flex items-center justify-center transition-all duration-300 animate-bounce"
-        >
-          <div className="absolute w-6 h-6 bg-brand-primary/40 rounded-full animate-ping" />
-          <div className="relative w-3.5 h-3.5 bg-brand-primary rounded-full rounded-br-none rotate-45 group-hover:scale-125 transition-transform duration-300 shadow-md shadow-brand-primary/20" />
-        </motion.div>
-      </div>
+    <>
+      {/* Mobile Backdrop when menu is open */}
+      {isNavVisible && (
+        <div 
+          className="fixed inset-0 bg-black/25 backdrop-blur-[2px] md:hidden z-40 pointer-events-auto"
+          onClick={() => setIsNavVisible(false)}
+        />
+      )}
 
-      {/* The Dynamic Island Dropdown Panel */}
-      <motion.div 
-        initial={{ y: "-75%" }}
-        animate={{ y: isNavVisible ? 0 : "-75%" }}
-        transition={{ type: "spring", stiffness: 120, damping: 20, mass: 0.8 }}
-        onMouseEnter={() => setIsNavVisible(true)}
-        onMouseLeave={() => setIsNavVisible(false)}
-        className="w-full flex justify-center pointer-events-auto absolute top-0 px-4 md:px-0"
-      >
-        <nav className={`relative bg-brand-dark/70 backdrop-blur-xl text-white p-4 md:p-6 rounded-b-[2.5rem] w-full max-w-fit transition-shadow duration-500 ${isNavVisible ? 'shadow-2xl shadow-brand-primary/40' : 'shadow-lg shadow-brand-primary/30'}`}>
+      <div className="fixed top-0 left-0 right-0 z-50 flex flex-col items-end md:items-center pointer-events-none">
+        
+        {/* Trigger Area (Water Drop) */}
+        <div 
+          className={`absolute top-0 right-4 sm:right-6 md:right-auto md:left-1/2 md:-translate-x-1/2 w-28 md:w-64 h-16 flex justify-center items-start cursor-pointer group z-[60] ${isNavVisible ? 'pointer-events-none' : 'pointer-events-auto'}`}
+          onMouseEnter={() => setIsNavVisible(true)}
+          onClick={() => setIsNavVisible(!isNavVisible)}
+        >
+          <motion.div 
+            animate={{ scale: isNavVisible ? 0 : 1, opacity: isNavVisible ? 0 : 1, y: isNavVisible ? -20 : 0 }}
+            className="relative mt-2 flex items-center justify-center transition-all duration-300 animate-bounce"
+          >
+            <div className="absolute w-6 h-6 bg-brand-primary/40 rounded-full animate-ping" />
+            <div className="relative w-3.5 h-3.5 bg-brand-primary rounded-full rounded-br-none rotate-45 group-hover:scale-125 transition-transform duration-300 shadow-md shadow-brand-primary/20" />
+          </motion.div>
+        </div>
+
+        {/* The Dynamic Island Dropdown Panel */}
+        <motion.div 
+          initial={{ y: "-75%" }}
+          animate={{ y: isNavVisible ? 0 : "-75%" }}
+          transition={{ type: "spring", stiffness: 120, damping: 20, mass: 0.8 }}
+          onMouseEnter={() => setIsNavVisible(true)}
+          onMouseLeave={() => setIsNavVisible(false)}
+          className="w-full flex justify-end md:justify-center pointer-events-auto absolute top-0 px-3 sm:px-4 md:px-0"
+        >
+          <nav className={`relative bg-brand-dark/70 backdrop-blur-xl text-white p-3.5 sm:p-4 md:p-6 rounded-b-[2rem] md:rounded-b-[2.5rem] w-auto max-w-[94vw] sm:max-w-md md:max-w-fit transition-shadow duration-500 ${isNavVisible ? 'shadow-2xl shadow-brand-primary/40' : 'shadow-lg shadow-brand-primary/30'}`}>
+
           
           {/* Animated Orange Wave Shadow when Menu Bar is Hidden */}
           <motion.div
@@ -217,5 +227,7 @@ export default function Navbar() {
         </nav>
       </motion.div>
     </div>
+    </>
   );
 }
+
