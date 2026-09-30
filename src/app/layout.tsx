@@ -1,14 +1,20 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import LiveChat from "@/components/LiveChat";
-
 import Script from "next/script";
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0f172a",
+};
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+
   title: {
     default: "Bengal Cyber | Architecting Digital Empires & Viral Marketing",
     template: "%s | Bengal Cyber"

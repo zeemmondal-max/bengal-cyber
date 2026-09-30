@@ -174,45 +174,46 @@ export default function Navbar() {
             }}
           />
 
-          {/* Middle Row: Pill Tabs (Now the only content) */}
-          <div className="flex flex-wrap justify-center gap-3">
+          {/* Middle Row: Pill Tabs */}
+          <div className="flex flex-wrap justify-center items-center gap-1.5 sm:gap-2.5 md:gap-3 max-w-full">
             <a 
               href="/" 
-              className={`px-6 py-2.5 rounded-full text-sm flex items-center transition-all ${pathname === "/" ? "bg-white text-brand-dark font-bold shadow-md hover:scale-105" : "bg-white/10 text-white font-medium hover:bg-white/20"}`}
+              className={`px-3.5 py-1.5 sm:px-5 md:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm flex items-center transition-all ${pathname === "/" ? "bg-white text-brand-dark font-bold shadow-md hover:scale-105" : "bg-white/10 text-white font-medium hover:bg-white/20"}`}
             >
               Home
             </a>
             <a 
               href="/services" 
-              className={`px-6 py-2.5 rounded-full text-sm flex items-center transition-all ${pathname === "/services" ? "bg-white text-brand-dark font-bold shadow-md hover:scale-105" : "bg-white/10 text-white font-medium hover:bg-white/20"}`}
+              className={`px-3.5 py-1.5 sm:px-5 md:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm flex items-center transition-all ${pathname === "/services" ? "bg-white text-brand-dark font-bold shadow-md hover:scale-105" : "bg-white/10 text-white font-medium hover:bg-white/20"}`}
             >
               Services
             </a>
             <a 
               href="/portfolio" 
-              className={`px-6 py-2.5 rounded-full text-sm flex items-center transition-all ${pathname === "/portfolio" ? "bg-white text-brand-dark font-bold shadow-md hover:scale-105" : "bg-white/10 text-white font-medium hover:bg-white/20"}`}
+              className={`px-3.5 py-1.5 sm:px-5 md:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm flex items-center transition-all ${pathname === "/portfolio" ? "bg-white text-brand-dark font-bold shadow-md hover:scale-105" : "bg-white/10 text-white font-medium hover:bg-white/20"}`}
             >
               Portfolio
             </a>
             <a 
               href="/about" 
-              className={`px-6 py-2.5 rounded-full text-sm flex items-center transition-all ${pathname === "/about" ? "bg-white text-brand-dark font-bold shadow-md hover:scale-105" : "bg-white/10 text-white font-medium hover:bg-white/20"}`}
+              className={`px-3.5 py-1.5 sm:px-5 md:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm flex items-center transition-all ${pathname === "/about" ? "bg-white text-brand-dark font-bold shadow-md hover:scale-105" : "bg-white/10 text-white font-medium hover:bg-white/20"}`}
             >
               About Us
             </a>
             <a 
               href="/career" 
-              className={`px-6 py-2.5 rounded-full text-sm flex items-center transition-all ${pathname === "/career" ? "bg-white text-brand-dark font-bold shadow-md hover:scale-105" : "bg-white/10 text-white font-medium hover:bg-white/20"}`}
+              className={`px-3.5 py-1.5 sm:px-5 md:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm flex items-center transition-all ${pathname === "/career" ? "bg-white text-brand-dark font-bold shadow-md hover:scale-105" : "bg-white/10 text-white font-medium hover:bg-white/20"}`}
             >
               Career
             </a>
             <a 
               href="/contact" 
-              className={`px-6 py-2.5 rounded-full text-sm flex items-center transition-all ${pathname === "/contact" ? "bg-brand-primary text-white font-bold shadow-lg shadow-brand-primary/20 hover:scale-105 hover:bg-orange-600" : "bg-brand-primary text-white font-medium hover:bg-orange-600 shadow-lg shadow-brand-primary/20"}`}
+              className={`px-4 py-1.5 sm:px-5 md:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm flex items-center transition-all ${pathname === "/contact" ? "bg-brand-primary text-white font-bold shadow-lg shadow-brand-primary/20 hover:scale-105 hover:bg-orange-600" : "bg-brand-primary text-white font-medium hover:bg-orange-600 shadow-lg shadow-brand-primary/20"}`}
             >
               Get in Touch
             </a>
           </div>
+
         </nav>
       </motion.div>
     </div>

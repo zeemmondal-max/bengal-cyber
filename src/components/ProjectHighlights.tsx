@@ -93,7 +93,7 @@ export default function ProjectHighlights() {
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-              className={`group relative block rounded-[2rem] overflow-hidden shadow-lg border border-white/40 cursor-none ${item.gridClass}`}
+              className={`group relative block rounded-[2rem] overflow-hidden shadow-lg border border-white/40 cursor-pointer ${item.gridClass}`}
             >
               {/* Media Background */}
               <div className="absolute inset-0 bg-black">
@@ -104,8 +104,10 @@ export default function ProjectHighlights() {
                     loop 
                     muted 
                     playsInline 
+                    preload="metadata"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                   />
+
                 ) : (
                   <Image 
                     src={item.media} 
