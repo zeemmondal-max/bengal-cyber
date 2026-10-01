@@ -100,11 +100,18 @@ export default function ProjectHighlights() {
                 {item.type === 'video' ? (
                   <video 
                     src={item.media} 
-                    autoPlay 
                     loop 
                     muted 
                     playsInline 
-                    preload="metadata"
+                    preload="none"
+                    onMouseEnter={(e) => {
+                      const v = e.currentTarget;
+                      if (v.paused) v.play().catch(() => {});
+                    }}
+                    onMouseLeave={(e) => {
+                      const v = e.currentTarget;
+                      v.pause();
+                    }}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                   />
 
@@ -113,6 +120,7 @@ export default function ProjectHighlights() {
                     src={item.media} 
                     alt={item.title} 
                     fill 
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover object-top transition-transform duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100 bg-white"
                   />
                 )}

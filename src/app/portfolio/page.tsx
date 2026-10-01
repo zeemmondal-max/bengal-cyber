@@ -194,11 +194,10 @@ export default function ProjectsPage() {
               <video 
                 className="w-full h-full object-contain"
                 controls
-                autoPlay
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                preload="none"
               >
                 <source src="/projects/project1.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
@@ -396,11 +395,10 @@ export default function ProjectsPage() {
               <video 
                 className="w-full h-full object-contain relative z-10"
                 controls
-                autoPlay
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                preload="none"
               >
                 <source src="/projects/cancer-answer.mp4" type="video/mp4" />
                 Your browser does not support the video tag.

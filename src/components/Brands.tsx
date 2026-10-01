@@ -31,6 +31,7 @@ export default function Brands() {
                   src={brand.logo} 
                   alt={`${brand.name} Logo`} 
                   fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
                   className="object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500 opacity-70 group-hover:opacity-100 scale-95 group-hover:scale-100 mix-blend-multiply"
                 />
               </div>

@@ -5,6 +5,9 @@
  */
 
 header('Content-Type: application/json; charset=utf-8');
+header_remove('X-Powered-By');
+ini_set('display_errors', '0');
+error_reporting(0);
 
 // Enable CORS for same-origin and development
 header('Access-Control-Allow-Origin: *');
