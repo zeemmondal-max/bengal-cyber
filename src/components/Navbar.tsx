@@ -49,7 +49,7 @@ export default function Navbar() {
               exit={{ x: 30, opacity: 0 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMobileOpen(true)}
-              className="fixed right-0 top-1/2 -translate-y-1/2 z-[60] flex flex-col items-center justify-center bg-brand-dark/90 backdrop-blur-xl border-l-2 border-y-2 border-orange-500/50 rounded-l-2xl py-3 px-2 shadow-2xl shadow-brand-primary/40 cursor-pointer group pointer-events-auto"
+              className="fixed right-0 top-[38%] -translate-y-1/2 z-[60] flex flex-col items-center justify-center bg-brand-dark/90 backdrop-blur-xl border-l-2 border-y-2 border-orange-500/50 rounded-l-2xl py-3 px-2 shadow-2xl shadow-brand-primary/40 cursor-pointer group pointer-events-auto"
               aria-label="Open Navigation Menu"
             >
               {/* Droplet with Ping and Bounce */}
@@ -77,7 +77,7 @@ export default function Navbar() {
               animate={{ x: 0, opacity: 1, scale: 1 }}
               exit={{ x: 200, opacity: 0, scale: 0.92 }}
               transition={{ type: "spring", stiffness: 220, damping: 24, mass: 0.8 }}
-              className="fixed right-3 top-1/2 -translate-y-1/2 z-[80] w-[270px] max-w-[85vw] pointer-events-auto"
+              className="fixed right-3 top-[38%] -translate-y-1/2 z-[80] w-[270px] max-w-[85vw] pointer-events-auto"
             >
               <div className="relative bg-brand-dark/95 backdrop-blur-2xl text-white p-5 rounded-3xl border border-orange-500/40 shadow-2xl shadow-brand-primary/50 flex flex-col gap-3 overflow-hidden">
                 
