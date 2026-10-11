@@ -25,7 +25,7 @@ export default function Navbar() {
       {/* 1. MOBILE RESPONSIVE MENU BAR (RIGHT SIDE DOCKED)         */}
       {/* Positioned vertically centered on the right edge (< md)    */}
       {/* ========================================================= */}
-      <div className="md:hidden">
+      <div className="lg:hidden">
         {/* Full Backdrop Overlay when Mobile Menu is Open */}
         <AnimatePresence>
           {isMobileOpen && (
@@ -40,32 +40,93 @@ export default function Navbar() {
           )}
         </AnimatePresence>
 
-        {/* Floating Mobile Trigger Tab (Visible on Right Edge when Menu is Closed) */}
+        {/* Floating Mobile & Tablet Trigger Tab (Visible on Right Edge when Menu is Closed) */}
         <AnimatePresence>
           {!isMobileOpen && (
-            <motion.button
+            <motion.div
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: 30, opacity: 0 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setIsMobileOpen(true)}
-              className="fixed right-0 top-[38%] -translate-y-1/2 z-[60] flex flex-col items-center justify-center bg-brand-dark/90 backdrop-blur-xl border-l-2 border-y-2 border-orange-500/50 rounded-l-2xl py-3 px-2 shadow-2xl shadow-brand-primary/40 cursor-pointer group pointer-events-auto"
-              aria-label="Open Navigation Menu"
+              className="fixed right-0 top-[38%] -translate-y-1/2 z-[60] flex flex-col items-end pointer-events-auto select-none"
             >
-              {/* Droplet with Ping and Bounce */}
-              <div className="relative flex items-center justify-center my-1">
-                <div className="absolute w-6 h-6 bg-brand-primary/40 rounded-full animate-ping pointer-events-none" />
-                <div className="relative w-3.5 h-3.5 bg-brand-primary rounded-full rounded-br-none rotate-45 shadow-md shadow-brand-primary/40 animate-bounce" />
+              {/* Top Inverse Curve Fillet (Concave Scoop into Screen Edge) */}
+              <div className="relative w-5 h-5 overflow-visible pointer-events-none">
+                <div 
+                  className="absolute inset-0 bg-brand-dark/95 backdrop-blur-xl"
+                  style={{ 
+                    WebkitMaskImage: 'radial-gradient(circle at top left, transparent 20px, black 20.2px)', 
+                    maskImage: 'radial-gradient(circle at top left, transparent 20px, black 20.2px)' 
+                  }}
+                />
+                <svg 
+                  viewBox="0 0 20 20" 
+                  className="absolute inset-0 w-full h-full"
+                  fill="none"
+                >
+                  <path 
+                    d="M 0 20 A 20 20 0 0 0 20 0 L 20 20 Z" 
+                    fill="#0f172a" 
+                    fillOpacity="0.95"
+                  />
+                  <path 
+                    d="M 0 20 A 20 20 0 0 0 20 0" 
+                    stroke="rgba(249, 115, 22, 0.5)" 
+                    strokeWidth="2" 
+                    strokeLinecap="round"
+                  />
+                </svg>
               </div>
 
-              {/* Vertical Text Indicator */}
-              <span className="text-[9px] font-extrabold tracking-widest text-orange-400 rotate-90 my-3.5 select-none uppercase">
-                MENU
-              </span>
+              {/* Main Tab Button */}
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsMobileOpen(true)}
+                className="relative flex flex-col items-center justify-center bg-brand-dark/95 backdrop-blur-xl border-l-2 border-orange-500/50 rounded-l-2xl py-3 px-2 sm:px-2.5 shadow-2xl shadow-brand-primary/40 cursor-pointer group"
+                aria-label="Open Navigation Menu"
+              >
+                {/* Droplet with Ping and Bounce */}
+                <div className="relative flex items-center justify-center my-1">
+                  <div className="absolute w-6 h-6 bg-brand-primary/40 rounded-full animate-ping pointer-events-none" />
+                  <div className="relative w-3.5 h-3.5 bg-brand-primary rounded-full rounded-br-none rotate-45 shadow-md shadow-brand-primary/40 animate-bounce" />
+                </div>
 
-              {/* Glowing Pulse Dot */}
-              <div className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
-            </motion.button>
+                {/* Vertical Text Indicator */}
+                <span className="text-[9px] font-extrabold tracking-widest text-orange-400 rotate-90 my-3.5 select-none uppercase">
+                  MENU
+                </span>
+
+                {/* Glowing Pulse Dot */}
+                <div className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
+              </motion.button>
+
+              {/* Bottom Inverse Curve Fillet (Concave Scoop into Screen Edge) */}
+              <div className="relative w-5 h-5 overflow-visible pointer-events-none">
+                <div 
+                  className="absolute inset-0 bg-brand-dark/95 backdrop-blur-xl"
+                  style={{ 
+                    WebkitMaskImage: 'radial-gradient(circle at bottom left, transparent 20px, black 20.2px)', 
+                    maskImage: 'radial-gradient(circle at bottom left, transparent 20px, black 20.2px)' 
+                  }}
+                />
+                <svg 
+                  viewBox="0 0 20 20" 
+                  className="absolute inset-0 w-full h-full"
+                  fill="none"
+                >
+                  <path 
+                    d="M 0 0 L 20 0 L 20 20 A 20 20 0 0 0 0 0 Z" 
+                    fill="#0f172a" 
+                    fillOpacity="0.95"
+                  />
+                  <path 
+                    d="M 20 20 A 20 20 0 0 0 0 0" 
+                    stroke="rgba(249, 115, 22, 0.5)" 
+                    strokeWidth="2" 
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </motion.div>
           )}
         </AnimatePresence>
 
@@ -206,7 +267,7 @@ export default function Navbar() {
       {/* 2. DESKTOP NAVBAR (CENTERED DYNAMIC ISLAND AT TOP)         */}
       {/* Preserves 100% of desktop original layout & animations     */}
       {/* ========================================================= */}
-      <div className="hidden md:flex fixed top-0 left-0 right-0 z-50 flex-col items-center pointer-events-none">
+      <div className="hidden lg:flex fixed top-0 left-0 right-0 z-50 flex-col items-center pointer-events-none">
         {/* Trigger Area (Water Drop) */}
         <div 
           className={`absolute top-0 left-1/2 -translate-x-1/2 w-64 h-16 flex justify-center items-start cursor-pointer group z-[60] ${isNavVisible ? 'pointer-events-none' : 'pointer-events-auto'}`}
