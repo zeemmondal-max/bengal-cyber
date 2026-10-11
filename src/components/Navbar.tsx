@@ -43,50 +43,52 @@ export default function Navbar() {
         {/* Floating Mobile & Tablet Trigger Tab (Visible on Right Edge when Menu is Closed) */}
         <AnimatePresence>
           {!isMobileOpen && (
-            <motion.div
-              initial={{ x: 20, opacity: 0 }}
+            <motion.button
+              initial={{ x: 30, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: 30, opacity: 0 }}
-              className="fixed right-0 top-[38%] -translate-y-1/2 z-[60] flex flex-col items-end pointer-events-auto select-none"
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsMobileOpen(true)}
+              className="fixed right-0 top-[38%] -translate-y-1/2 z-[60] w-[42px] h-[116px] flex flex-col items-center justify-center cursor-pointer group pointer-events-auto select-none"
+              aria-label="Open Navigation Menu"
             >
-              {/* Top Inverse Curve Fillet (Concave Scoop into Screen Edge) */}
-              <div className="relative w-5 h-5 overflow-visible pointer-events-none">
-                <div 
-                  className="absolute inset-0 bg-brand-dark/95 backdrop-blur-xl"
-                  style={{ 
-                    WebkitMaskImage: 'radial-gradient(circle at top left, transparent 20px, black 20.2px)', 
-                    maskImage: 'radial-gradient(circle at top left, transparent 20px, black 20.2px)' 
-                  }}
-                />
-                <svg 
-                  viewBox="0 0 20 20" 
-                  className="absolute inset-0 w-full h-full"
-                  fill="none"
-                >
-                  <path 
-                    d="M 0 20 A 20 20 0 0 0 20 0 L 20 20 Z" 
-                    fill="#0f172a" 
-                    fillOpacity="0.95"
-                  />
-                  <path 
-                    d="M 0 20 A 20 20 0 0 0 20 0" 
-                    stroke="rgba(249, 115, 22, 0.5)" 
-                    strokeWidth="2" 
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </div>
-
-              {/* Main Tab Button */}
-              <motion.button
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setIsMobileOpen(true)}
-                className="relative flex flex-col items-center justify-center bg-brand-dark/95 backdrop-blur-xl border-l-2 border-orange-500/50 rounded-l-2xl py-3 px-2 sm:px-2.5 shadow-2xl shadow-brand-primary/40 cursor-pointer group"
-                aria-label="Open Navigation Menu"
+              {/* Unified Background and Seamless Inverse Fillets SVG */}
+              <svg
+                viewBox="0 0 42 116"
+                className="absolute inset-0 w-full h-full overflow-visible filter drop-shadow-[-4px_4px_16px_rgba(249,115,22,0.35)]"
+                fill="none"
               >
+                <defs>
+                  <linearGradient id="tabOrangeBorderGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#ea580c" stopOpacity="0.2" />
+                    <stop offset="15%" stopColor="#f97316" stopOpacity="0.9" />
+                    <stop offset="50%" stopColor="#fb923c" stopOpacity="1" />
+                    <stop offset="85%" stopColor="#f97316" stopOpacity="0.9" />
+                    <stop offset="100%" stopColor="#ea580c" stopOpacity="0.2" />
+                  </linearGradient>
+                </defs>
+
+                {/* Seamless Glassmorphic Tab Body with Inverse Fillets */}
+                <path
+                  d="M 42 0 C 42 13, 0 11, 0 24 L 0 92 C 0 105, 42 103, 42 116 L 42 0 Z"
+                  fill="#0f172a"
+                  fillOpacity="0.95"
+                />
+
+                {/* Continuous Glowing Orange Contour Stroke */}
+                <path
+                  d="M 42 0 C 42 13, 0 11, 0 24 L 0 92 C 0 105, 42 103, 42 116"
+                  stroke="url(#tabOrangeBorderGrad)"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+
+              {/* Foreground Interactive Elements */}
+              <div className="relative z-10 flex flex-col items-center justify-center pl-1">
                 {/* Droplet with Ping and Bounce */}
-                <div className="relative flex items-center justify-center my-1">
-                  <div className="absolute w-6 h-6 bg-brand-primary/40 rounded-full animate-ping pointer-events-none" />
+                <div className="relative flex items-center justify-center my-0.5">
+                  <div className="absolute w-5 h-5 bg-brand-primary/40 rounded-full animate-ping pointer-events-none" />
                   <div className="relative w-3.5 h-3.5 bg-brand-primary rounded-full rounded-br-none rotate-45 shadow-md shadow-brand-primary/40 animate-bounce" />
                 </div>
 
@@ -97,36 +99,8 @@ export default function Navbar() {
 
                 {/* Glowing Pulse Dot */}
                 <div className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
-              </motion.button>
-
-              {/* Bottom Inverse Curve Fillet (Concave Scoop into Screen Edge) */}
-              <div className="relative w-5 h-5 overflow-visible pointer-events-none">
-                <div 
-                  className="absolute inset-0 bg-brand-dark/95 backdrop-blur-xl"
-                  style={{ 
-                    WebkitMaskImage: 'radial-gradient(circle at bottom left, transparent 20px, black 20.2px)', 
-                    maskImage: 'radial-gradient(circle at bottom left, transparent 20px, black 20.2px)' 
-                  }}
-                />
-                <svg 
-                  viewBox="0 0 20 20" 
-                  className="absolute inset-0 w-full h-full"
-                  fill="none"
-                >
-                  <path 
-                    d="M 0 0 L 20 0 L 20 20 A 20 20 0 0 0 0 0 Z" 
-                    fill="#0f172a" 
-                    fillOpacity="0.95"
-                  />
-                  <path 
-                    d="M 20 20 A 20 20 0 0 0 0 0" 
-                    stroke="rgba(249, 115, 22, 0.5)" 
-                    strokeWidth="2" 
-                    strokeLinecap="round"
-                  />
-                </svg>
               </div>
-            </motion.div>
+            </motion.button>
           )}
         </AnimatePresence>
 
