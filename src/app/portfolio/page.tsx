@@ -197,7 +197,7 @@ export default function ProjectsPage() {
                 muted
                 loop
                 playsInline
-                preload="none"
+                preload="metadata"
               >
                 <source src="/projects/project1.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
@@ -270,14 +270,28 @@ export default function ProjectsPage() {
               </a>
             </div>
 
-            {/* Image Side (Right) */}
-            <div className="relative w-full h-[350px] md:h-full bg-slate-100 flex items-center justify-center order-1 md:order-2 overflow-hidden">
-              <img 
-                src="https://scontent.fdac24-5.fna.fbcdn.net/v/t39.30808-1/326243305_1412548819486609_342316993152286966_n.png?stp=dst-png&cstp=mx540x540&ctp=s540x540&_nc_cat=101&ccb=1-7&_nc_sid=3ab345&_nc_ohc=NKkZXaUiFPYQ7kNvwE17J19&_nc_oc=AdpEBUZyOW-mFu0_lCRag0n7uVkD_BEXicE4SnRHjvziU7_k7UIir3POqJLd0_4Ypf4&_nc_zt=24&_nc_ht=scontent.fdac24-5.fna&_nc_gid=xVQ9d9PDQsISSAVol3P26w&_nc_ss=7c100&oh=00_AQJWKGnezqTPRdnVviVqt4bdKGa-VvsPLtXFybepFeqtwQ&oe=6ABBDBBF" 
-                alt="Athena's Furniture BD - Social Media Marketing Case Study by Bengal Cyber" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-brand-dark text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm z-10">
+            {/* Showcase Side (Right) */}
+            <div className="relative w-full h-[350px] md:h-full bg-gradient-to-br from-slate-900 via-[#0d1e3d] to-slate-900 flex flex-col items-center justify-center order-1 md:order-2 overflow-hidden p-8 border-l border-slate-100">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#1877F2]/20 via-transparent to-transparent"></div>
+              
+              {/* Brand Logo & Presentation */}
+              <div className="relative z-10 w-full max-w-xs flex flex-col items-center text-center">
+                <div className="w-28 h-28 sm:w-32 sm:h-32 bg-white rounded-3xl p-4 shadow-2xl shadow-black/40 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform duration-500 border border-white/20">
+                  <img 
+                    src="/brands/brand7.png" 
+                    alt="Athena's Furniture BD Logo" 
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1877F2]/20 border border-[#1877F2]/40 text-[#60a5fa] text-xs font-bold uppercase tracking-wider mb-2">
+                  <span>Meta Ads & Growth Partner</span>
+                </div>
+                <p className="text-slate-300 text-xs sm:text-sm font-medium">
+                  Official Social Media Management & Performance Campaign
+                </p>
+              </div>
+
+              <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-brand-dark text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm z-20">
                 Media Buying
               </div>
             </div>
@@ -287,14 +301,28 @@ export default function ProjectsPage() {
           {/* Project 3: TIANAS */}
           <div className="bg-white rounded-3xl overflow-hidden shadow-xl shadow-brand-dark/5 border border-slate-100 grid md:grid-cols-2 gap-0 group hover:shadow-2xl transition-all duration-500 mt-12">
             
-            {/* Image Side (Left) */}
-            <div className="relative w-full h-[350px] md:h-full bg-slate-100 flex items-center justify-center overflow-hidden">
-              <img 
-                src="https://scontent.fdac24-5.fna.fbcdn.net/v/t39.30808-1/489024044_967870215555559_1532836838664359163_n.jpg?stp=dst-jpg_tt6&cstp=mx1500x1500&ctp=s720x720&_nc_cat=102&ccb=1-7&_nc_sid=3ab345&_nc_ohc=sVvsay42Xu8Q7kNvwF4TvTf&_nc_oc=Adorg6tTVxB9njLP-JKiwbc-gpub3f-oOCSLJgt5OVfaKR7wLK-M1W5gLZh9BP7JgF4&_nc_zt=24&_nc_ht=scontent.fdac24-5.fna&_nc_gid=RDYYqsAsQrNO_r58SXRXwA&_nc_ss=7c100&oh=00_AQIPVqFBVi3RIXcgQx53tIxThbh97bCbY0v1YTsJNIN3Bg&oe=6ABBCF6A" 
-                alt="TIANAS BD - Fashion E-Commerce Marketing Campaign by Bengal Cyber" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-brand-dark text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm z-10">
+            {/* Showcase Side (Left) */}
+            <div className="relative w-full h-[350px] md:h-full bg-gradient-to-br from-slate-950 via-[#1c1326] to-slate-950 flex flex-col items-center justify-center overflow-hidden p-8 border-r border-slate-100">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-primary/20 via-transparent to-transparent"></div>
+              
+              {/* Brand Logo & Presentation */}
+              <div className="relative z-10 w-full max-w-xs flex flex-col items-center text-center">
+                <div className="w-28 h-28 sm:w-32 sm:h-32 bg-white rounded-3xl p-4 shadow-2xl shadow-black/40 flex items-center justify-center mb-5 group-hover:scale-105 transition-transform duration-500 border border-white/20">
+                  <img 
+                    src="/brands/brand1.png" 
+                    alt="TIANAS BD Logo" 
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/20 border border-orange-500/40 text-orange-400 text-xs font-bold uppercase tracking-wider mb-2">
+                  <span>E-Commerce Performance Ads</span>
+                </div>
+                <p className="text-slate-300 text-xs sm:text-sm font-medium">
+                  Fashion Brand Scaling & Conversion Retargeting
+                </p>
+              </div>
+
+              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-brand-dark text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm z-20">
                 Digital Marketing
               </div>
             </div>
@@ -398,7 +426,7 @@ export default function ProjectsPage() {
                 muted
                 loop
                 playsInline
-                preload="none"
+                preload="metadata"
               >
                 <source src="/projects/cancer-answer.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
