@@ -37,10 +37,10 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2 md:col-start-7">
             <h4 className="text-lg font-bold mb-6">Company</h4>
             <ul className="space-y-4">
-              <li><a href="/about" className="text-gray-400 hover:text-brand-primary transition-colors">About Us</a></li>
-              <li><a href="/career" className="text-gray-400 hover:text-brand-primary transition-colors">Career</a></li>
+              <li><Link href="/about" className="text-gray-400 hover:text-brand-primary transition-colors">About Us</Link></li>
+              <li><Link href="/career" className="text-gray-400 hover:text-brand-primary transition-colors">Career</Link></li>
               <li><a href="#team" className="text-gray-400 hover:text-brand-primary transition-colors">Team</a></li>
-              <li><a href="/contact" className="text-gray-400 hover:text-brand-primary transition-colors">Contact Us</a></li>
+              <li><Link href="/contact" className="text-gray-400 hover:text-brand-primary transition-colors">Contact Us</Link></li>
             </ul>
           </div>
           
@@ -49,7 +49,7 @@ export default function Footer() {
             <ul className="space-y-4">
               <li><a href="#faq" className="text-gray-400 hover:text-brand-primary transition-colors">FAQ</a></li>
               <li><a href="#process" className="text-gray-400 hover:text-brand-primary transition-colors">Process</a></li>
-              <li><a href="/services" className="text-gray-400 hover:text-brand-primary transition-colors">Services</a></li>
+              <li><Link href="/services" className="text-gray-400 hover:text-brand-primary transition-colors">Services</Link></li>
             </ul>
           </div>
 

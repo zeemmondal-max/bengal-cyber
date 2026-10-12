@@ -198,7 +198,7 @@ export default function Navbar() {
                     const isActive = pathname === link.href;
                     if (link.isCta) {
                       return (
-                        <a
+                        <Link
                           key={link.href}
                           href={link.href}
                           onClick={() => setIsMobileOpen(false)}
@@ -210,11 +210,11 @@ export default function Navbar() {
                         >
                           <span>{link.name}</span>
                           <span className="text-sm">→</span>
-                        </a>
+                        </Link>
                       );
                     }
                     return (
-                      <a
+                      <Link
                         key={link.href}
                         href={link.href}
                         onClick={() => setIsMobileOpen(false)}
@@ -226,7 +226,7 @@ export default function Navbar() {
                       >
                         <span>{link.name}</span>
                         {isActive && <span className="w-1.5 h-1.5 rounded-full bg-brand-primary" />}
-                      </a>
+                      </Link>
                     );
                   })}
                 </div>
@@ -410,7 +410,7 @@ export default function Navbar() {
                 const isActive = pathname === link.href;
                 if (link.isCta) {
                   return (
-                    <a
+                    <Link
                       key={link.href}
                       href={link.href}
                       className={`px-5 md:px-6 py-2.5 rounded-full text-sm flex items-center transition-all ${
@@ -420,11 +420,11 @@ export default function Navbar() {
                       }`}
                     >
                       {link.name}
-                    </a>
+                    </Link>
                   );
                 }
                 return (
-                  <a
+                  <Link
                     key={link.href}
                     href={link.href}
                     className={`px-5 md:px-6 py-2.5 rounded-full text-sm flex items-center transition-all ${
@@ -434,7 +434,7 @@ export default function Navbar() {
                     }`}
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 );
               })}
             </div>

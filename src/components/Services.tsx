@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MdCampaign, MdBrush, MdMovie, MdSupportAgent, MdTrendingUp, MdArrowForward, MdCode } from "react-icons/md";
+import Link from "next/link";
 
 const services = [
   {
@@ -118,9 +119,9 @@ export default function Services() {
             <div className="absolute inset-0 bg-brand-primary/20 mix-blend-overlay group-hover:bg-brand-primary/40 transition-colors duration-500"></div>
             <h4 className="text-2xl font-bold text-white mb-4 relative z-10">Don't see what you need?</h4>
             <p className="text-white/70 mb-8 relative z-10">We create custom digital solutions tailored to your specific business challenges.</p>
-            <a href="/contact" className="relative z-10 inline-flex items-center justify-center px-6 py-3 bg-brand-primary text-white font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-xl shadow-brand-primary/30">
+            <Link href="/contact" className="relative z-10 inline-flex items-center justify-center px-6 py-3 bg-brand-primary text-white font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-xl shadow-brand-primary/30">
               Let's Talk
-            </a>
+            </Link>
           </motion.div>
 
         </div>

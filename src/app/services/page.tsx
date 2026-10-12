@@ -5,6 +5,7 @@ import ServiceRoadmap from "@/components/ServiceRoadmap";
 import ServiceFAQ from "@/components/ServiceFAQ";
 import Footer from "@/components/Footer";
 import Script from "next/script";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 
@@ -217,12 +218,12 @@ export default function ServicesPage() {
             Let's build a high-converting website and viral marketing machine that accelerates your revenue and brand authority.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="/contact" className="inline-flex items-center justify-center bg-brand-dark text-white px-8 py-4 rounded-full text-lg font-bold hover:scale-105 transition-transform shadow-2xl shadow-black/30">
+            <Link href="/contact" className="inline-flex items-center justify-center bg-brand-dark text-white px-8 py-4 rounded-full text-lg font-bold hover:scale-105 transition-transform shadow-2xl shadow-black/30">
               Claim Your Free Strategy Audit
-            </a>
-            <a href="/portfolio" className="inline-flex items-center justify-center bg-white/20 hover:bg-white/30 text-white px-8 py-4 rounded-full text-lg font-bold backdrop-blur-md transition-colors">
+            </Link>
+            <Link href="/portfolio" className="inline-flex items-center justify-center bg-white/20 hover:bg-white/30 text-white px-8 py-4 rounded-full text-lg font-bold backdrop-blur-md transition-colors">
               Explore Our Portfolio
-            </a>
+            </Link>
           </div>
         </div>
       </section>

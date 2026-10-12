@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -36,7 +37,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
           {/* Primary Button */}
-          <a href="/contact" className="group border-2 border-brand-primary ease-bouncy inline-flex h-14 sm:h-16 cursor-pointer items-center rounded-full p-1.5 transition-transform duration-400 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto shadow-xl animate-borderFlash">
+          <Link href="/contact" className="group border-2 border-brand-primary ease-bouncy inline-flex h-14 sm:h-16 cursor-pointer items-center rounded-full p-1.5 transition-transform duration-400 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto shadow-xl animate-borderFlash">
             <span className="bg-brand-primary relative overflow-hidden flex h-full w-full items-center justify-between gap-x-4 sm:gap-x-6 rounded-full py-2 pr-2 pl-6 sm:pl-8">
               {/* Shimmer effect inside button */}
               <div className="absolute inset-0 -translate-x-[150%] bg-white/30 skew-x-12 animate-[shimmer_3s_ease-in-out_infinite] pointer-events-none" style={{ animationDelay: '0s' }}></div>
@@ -48,10 +49,10 @@ export default function Hero() {
                 </svg>
               </span>
             </span>
-          </a>
+          </Link>
           
           {/* Secondary Button */}
-          <a href="/services" className="group border-2 border-brand-primary ease-bouncy inline-flex h-14 sm:h-16 cursor-pointer items-center rounded-full p-1.5 transition-transform duration-400 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto hover:bg-slate-50 animate-borderFlash" style={{ animationDelay: '0.5s' }}>
+          <Link href="/services" className="group border-2 border-brand-primary ease-bouncy inline-flex h-14 sm:h-16 cursor-pointer items-center rounded-full p-1.5 transition-transform duration-400 hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto hover:bg-slate-50 animate-borderFlash" style={{ animationDelay: '0.5s' }}>
             <span className="bg-transparent backdrop-blur-sm relative overflow-hidden flex h-full w-full items-center justify-between gap-x-4 sm:gap-x-6 rounded-full py-2 pr-2 pl-6 sm:pl-8">
               {/* Shimmer effect inside button */}
               <div className="absolute inset-0 -translate-x-[150%] bg-brand-primary/10 skew-x-12 animate-[shimmer_3s_ease-in-out_infinite] pointer-events-none" style={{ animationDelay: '0.5s' }}></div>
@@ -60,7 +61,7 @@ export default function Hero() {
                 <ArrowRight className="ease-bouncy size-4 sm:size-5 stroke-current transition-transform duration-400 group-hover:translate-x-1" />
               </span>
             </span>
-          </a>
+          </Link>
         </motion.div>
 
         

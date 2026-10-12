@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Script from "next/script";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Client Case Studies & Portfolio | Web Design & Marketing | Bengal Cyber",
@@ -540,12 +541,12 @@ export default function ProjectsPage() {
             Let's engineer a high-converting website and viral marketing campaign that scales your revenue and dominates your industry in Bangladesh.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="/contact" className="inline-flex items-center justify-center bg-brand-dark text-white px-8 py-4 rounded-full text-lg font-bold hover:scale-105 transition-transform shadow-2xl shadow-black/30">
+            <Link href="/contact" className="inline-flex items-center justify-center bg-brand-dark text-white px-8 py-4 rounded-full text-lg font-bold hover:scale-105 transition-transform shadow-2xl shadow-black/30">
               Start Your Project Today
-            </a>
-            <a href="/services" className="inline-flex items-center justify-center bg-white/20 hover:bg-white/30 text-white px-8 py-4 rounded-full text-lg font-bold backdrop-blur-md transition-colors">
+            </Link>
+            <Link href="/services" className="inline-flex items-center justify-center bg-white/20 hover:bg-white/30 text-white px-8 py-4 rounded-full text-lg font-bold backdrop-blur-md transition-colors">
               Explore Our Services
-            </a>
+            </Link>
           </div>
         </div>
       </section>
