@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+import ServicesHero from "@/components/ServicesHero";
 import Services from "@/components/Services";
 import ServiceRoadmap from "@/components/ServiceRoadmap";
 import ServiceFAQ from "@/components/ServiceFAQ";
@@ -150,53 +151,8 @@ export default function ServicesPage() {
       />
       <Navbar />
       
-      {/* Spacer to account for fixed navbar */}
-      <div className="h-20 bg-transparent"></div>
-      
-      {/* Services Header */}
-      <section className="py-20 text-center relative z-10">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="bg-white p-6 md:p-16 rounded-[3rem] border border-slate-200/80 shadow-xl shadow-brand-primary/5">
-
-            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-widest mb-4">
-              Digital Growth & Market Dominance
-            </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-brand-dark mb-6 tracking-tight">
-              High-Performance Digital & Web Services in Bangladesh
-            </h1>
-            <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-10 leading-relaxed">
-              Scale your revenue with custom website engineering, viral social media marketing, high-ROAS media buying, and unforgettable visual branding.
-            </p>
-
-            <div className="flex flex-nowrap overflow-x-auto py-4 justify-start xl:justify-center gap-3 w-full scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-              {/* Spacers to prevent clipping on mobile scroll */}
-              <div className="w-2 shrink-0 xl:hidden"></div>
-              
-              <a href="#web-design" className="shrink-0 whitespace-nowrap px-5 py-2.5 bg-brand-primary/10 text-brand-primary font-bold rounded-full text-sm hover:bg-brand-primary hover:text-white transition-colors duration-300">
-                Web Design & Development
-              </a>
-              <a href="#social-media" className="shrink-0 whitespace-nowrap px-5 py-2.5 bg-brand-primary/10 text-brand-primary font-bold rounded-full text-sm hover:bg-brand-primary hover:text-white transition-colors duration-300">
-                Social Media Marketing
-              </a>
-              <a href="#media-buying" className="shrink-0 whitespace-nowrap px-5 py-2.5 bg-brand-primary/10 text-brand-primary font-bold rounded-full text-sm hover:bg-brand-primary hover:text-white transition-colors duration-300">
-                Media Buying
-              </a>
-              <a href="#graphics-design" className="shrink-0 whitespace-nowrap px-5 py-2.5 bg-brand-primary/10 text-brand-primary font-bold rounded-full text-sm hover:bg-brand-primary hover:text-white transition-colors duration-300">
-                Graphics Design
-              </a>
-              <a href="#video-editing" className="shrink-0 whitespace-nowrap px-5 py-2.5 bg-brand-primary/10 text-brand-primary font-bold rounded-full text-sm hover:bg-brand-primary hover:text-white transition-colors duration-300">
-                Video Editing
-              </a>
-              <a href="#customer-service" className="shrink-0 whitespace-nowrap px-5 py-2.5 bg-brand-primary/10 text-brand-primary font-bold rounded-full text-sm hover:bg-brand-primary hover:text-white transition-colors duration-300">
-                Customer Service
-              </a>
-              
-              {/* Spacers to prevent clipping on mobile scroll */}
-              <div className="w-2 shrink-0 xl:hidden"></div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* High-Converting Lucrative Services Hero Header */}
+      <ServicesHero />
 
       <Services />
       
