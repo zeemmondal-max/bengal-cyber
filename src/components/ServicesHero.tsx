@@ -52,16 +52,16 @@ export default function ServicesHero() {
           {/* Glowing Top Rim Streak */}
           <div className="absolute top-0 left-10 right-10 h-[1.5px] bg-gradient-to-r from-transparent via-orange-400 to-transparent opacity-80" />
 
-          {/* Headline */}
+          {/* SEO-Friendly Short Headline */}
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight mb-6 leading-[1.15] max-w-5xl mx-auto"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-5 leading-[1.2] max-w-4xl mx-auto"
           >
-            We Don't Just Offer Services. <br />
+            Digital Marketing &{" "}
             <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-500 bg-clip-text text-transparent drop-shadow-sm">
-              We Build Market Dominance.
+              Web Services
             </span>
           </motion.h1>
 
@@ -70,9 +70,9 @@ export default function ServicesHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-base sm:text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-normal"
+            className="text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed font-normal"
           >
-            Stop wasting budget on disconnected deliverables. Bengal Cyber engineers end-to-end revenue machines—combining conversion-obsessed web architecture, aggressive paid media buying, and viral creative production.
+            Scale your business in Bangladesh with high-converting Website Design, viral Social Media Marketing, and precision Media Buying engineered for maximum ROI.
           </motion.p>
 
           {/* Quick Jump Filter Pills */}
