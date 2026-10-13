@@ -12,7 +12,7 @@ export default function Hero() {
 
 
         <motion.h1 
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-brand-dark tracking-tight mb-4 md:mb-6 leading-tight max-w-4xl mx-auto"
+          className="text-[1.05rem] min-[360px]:text-[1.2rem] min-[400px]:text-[1.35rem] sm:text-[1.75rem] md:text-[2.25rem] lg:text-[2.85rem] xl:text-[3.5rem] font-extrabold text-brand-dark tracking-tight mb-5 md:mb-7 leading-none whitespace-nowrap w-full mx-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
