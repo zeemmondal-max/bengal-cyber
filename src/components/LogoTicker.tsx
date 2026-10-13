@@ -15,8 +15,8 @@ export default function LogoTicker() {
   const marqueeLogos = [...logos, ...logos, ...logos, ...logos];
 
   return (
-    <section className="py-10 bg-white/40 backdrop-blur-md border-y border-white/50 overflow-hidden relative flex flex-col items-center shadow-sm z-10">
-      <h2 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-6">Proud Members & Recognitions</h2>
+    <section className="pt-4 pb-8 md:pt-6 md:pb-10 bg-white/40 backdrop-blur-md border-y border-white/50 overflow-hidden relative flex flex-col items-center shadow-sm z-10">
+      <h2 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Proud Members & Recognitions</h2>
       
       {/* Fade edges */}
       <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white/80 to-transparent z-10 pointer-events-none"></div>

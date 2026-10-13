@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="pt-24 pb-20 md:pt-32 md:pb-32 px-4 overflow-hidden relative min-h-[90vh] flex items-center">
+    <section className="pt-24 pb-4 md:pt-32 md:pb-6 px-4 overflow-hidden relative">
       <div className="max-w-7xl mx-auto text-center relative z-10 w-full flex flex-col items-center">
 
 
@@ -66,13 +66,13 @@ export default function Hero() {
         
         {/* Industries Expertise */}
         <motion.div
-          className="mt-16 pt-10 border-t border-slate-200/60 w-full max-w-[95%] mx-auto"
+          className="mt-10 md:mt-12 pt-6 border-t border-slate-200/60 w-full max-w-[95%] mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="text-sm font-bold text-slate-400 tracking-widest uppercase mb-6">Industries We Dominate</p>
-          <div className="flex flex-nowrap overflow-x-auto xl:overflow-visible py-8 px-4 justify-start xl:justify-center items-center gap-3 md:gap-4 w-full scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <p className="text-xs sm:text-sm font-bold text-slate-400 tracking-widest uppercase mb-3">Industries We Dominate</p>
+          <div className="flex flex-nowrap overflow-x-auto xl:overflow-visible pt-2 pb-4 px-4 justify-start xl:justify-center items-center gap-3 md:gap-4 w-full scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {/* Spacers to prevent shadow clipping on mobile scroll */}
             <div className="w-2 shrink-0 xl:hidden"></div>
             
