@@ -71,10 +71,10 @@ export default function ContactPage() {
     <main className="min-h-screen bg-slate-50">
       <Navbar />
       
-      {/* Spacer */}
-      <div className="h-32 bg-brand-dark rounded-b-[3rem]"></div>
+      {/* Top Header Accent */}
+      <div className="h-8 sm:h-12 md:h-16 lg:h-32 bg-brand-dark rounded-b-2xl sm:rounded-b-[2rem] md:rounded-b-[2.5rem] lg:rounded-b-[3rem] transition-all"></div>
       
-      <section className="py-20">
+      <section className="pt-8 sm:pt-12 md:pt-16 pb-16 sm:pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
