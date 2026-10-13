@@ -16,8 +16,9 @@ export default function Navbar() {
     topPercent: 42,
   });
 
-  // Long-press (3 seconds) & drag states
+  // Long-press (3 seconds) & Move Option states
   const [isHolding, setIsHolding] = useState(false);
+  const [isMoveOptionOpen, setIsMoveOptionOpen] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [dragCoords, setDragCoords] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [hoveredZone, setHoveredZone] = useState<"top-left" | "mid-left" | "bot-left" | "top-right" | "mid-right" | "bot-right" | null>(null);
@@ -25,7 +26,7 @@ export default function Navbar() {
 
   const holdTimerRef = useRef<NodeJS.Timeout | null>(null);
   const startPosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const isDraggingRef = useRef<boolean>(false);
+  const is3sDoneRef = useRef<boolean>(false);
   const didMoveRef = useRef<boolean>(false);
 
   // Restore saved position from localStorage
@@ -64,34 +65,33 @@ export default function Navbar() {
     };
   }, []);
 
-  // Body scroll lock when menu is open
+  // Body scroll lock when menu or move options modal is open
   useEffect(() => {
-    if (isMobileOpen) {
+    if (isMobileOpen || isMoveOptionOpen) {
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = "hidden";
       return () => {
         document.body.style.overflow = originalOverflow;
       };
     }
-  }, [isMobileOpen]);
+  }, [isMobileOpen, isMoveOptionOpen]);
 
   // Touch and pointer start/move/end handlers
   const startHold = (clientX: number, clientY: number) => {
-    if (isMobileOpen) return;
+    if (isMobileOpen || isMoveOptionOpen) return;
 
     startPosRef.current = { x: clientX, y: clientY };
-    isDraggingRef.current = false;
+    is3sDoneRef.current = false;
     didMoveRef.current = false;
     setIsHolding(true);
 
     cancelHoldTimer();
 
-    // Exactly 3.0s (3000ms) uninterrupted hold threshold
+    // Exactly 3.0s (3000ms) uninterrupted hold opens Move Option!
     holdTimerRef.current = setTimeout(() => {
-      isDraggingRef.current = true;
+      is3sDoneRef.current = true;
       setIsHolding(false);
-      setIsDragging(true);
-      setDragCoords({ x: clientX, y: clientY });
+      setIsMoveOptionOpen(true); // <--- OPEN MOVE OPTION!
 
       if (typeof navigator !== "undefined" && navigator.vibrate) {
         try {
@@ -102,7 +102,7 @@ export default function Navbar() {
   };
 
   const moveHold = (clientX: number, clientY: number) => {
-    if (isDraggingRef.current) {
+    if (isDragging) {
       setDragCoords({ x: clientX, y: clientY });
       const isLeft = clientX < window.innerWidth / 2;
       const yRatio = clientY / window.innerHeight;
@@ -124,7 +124,7 @@ export default function Navbar() {
   const endHold = (clientX: number, clientY: number) => {
     cancelHoldTimer();
 
-    if (isDraggingRef.current) {
+    if (isDragging) {
       const isLeft = clientX < window.innerWidth / 2;
       const yRatio = Math.max(0.12, Math.min(0.85, clientY / window.innerHeight));
 
@@ -144,7 +144,6 @@ export default function Navbar() {
       };
 
       savePosition(newPos);
-      isDraggingRef.current = false;
       setIsDragging(false);
       setHoveredZone(null);
 
@@ -153,10 +152,19 @@ export default function Navbar() {
       return;
     }
 
+    // If 3s hold completed, move option is already open!
+    if (is3sDoneRef.current) {
+      setIsHolding(false);
+      setTimeout(() => {
+        is3sDoneRef.current = false;
+      }, 500);
+      return;
+    }
+
+    // One-click/single tap: Open menubar immediately!
     const wasHolding = !didMoveRef.current;
     setIsHolding(false);
 
-    // If tapped without moving and without waiting 3s, open menu immediately
     if (wasHolding) {
       setIsMobileOpen(true);
     }
@@ -164,10 +172,18 @@ export default function Navbar() {
 
   const cancelHold = () => {
     cancelHoldTimer();
-    isDraggingRef.current = false;
     setIsHolding(false);
     setIsDragging(false);
     setHoveredZone(null);
+  };
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (is3sDoneRef.current) {
+      return;
+    }
+    // Single click open menubar!
+    setIsMobileOpen(true);
   };
 
   // Window listeners during active drag
@@ -319,7 +335,7 @@ export default function Navbar() {
           )}
         </AnimatePresence>
 
-        {/* Floating Mobile Trigger Tab (Repositionable: Hold 3s to move anywhere) */}
+        {/* Floating Mobile Trigger Tab (One click: open menubar | 3s hold: open move options) */}
         <AnimatePresence>
           {!isMobileOpen && !isDragging && (
             <motion.div
@@ -327,6 +343,7 @@ export default function Navbar() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               whileTap={{ scale: 0.96 }}
+              onClick={handleClick}
               onTouchStart={(e) => {
                 const t = e.touches[0];
                 startHold(t.clientX, t.clientY);
@@ -363,7 +380,7 @@ export default function Navbar() {
               className={`fixed ${
                 dockPosition.side === "left" ? "left-0" : "right-0"
               } z-[60] w-[42px] h-[116px] flex flex-col items-center justify-center cursor-pointer group pointer-events-auto select-none touch-none`}
-              aria-label="Open Navigation Menu (Hold 3s to Move)"
+              aria-label="Open Navigation Menu (Click to open, Hold 3s to Move)"
             >
               {/* Unified Background and Seamless Inverse Fillets SVG */}
               <svg
@@ -450,11 +467,109 @@ export default function Navbar() {
                         />
                       </svg>
                     </div>
-                    <span>Hold 3s to Move Menubar...</span>
+                    <span>Hold 3s to open Move Options...</span>
                   </motion.div>
                 )}
               </AnimatePresence>
             </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Move Option Modal (Opened by 3-Second Hold) */}
+        <AnimatePresence>
+          {isMoveOptionOpen && (
+            <div className="fixed inset-0 z-[160] flex items-center justify-center p-4 pointer-events-auto">
+              {/* Dark backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 bg-black/80 backdrop-blur-md"
+                onClick={() => setIsMoveOptionOpen(false)}
+              />
+
+              {/* Modal Card */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                className="relative w-full max-w-[340px] bg-[#0c1220] border border-orange-500/50 rounded-3xl p-5 shadow-2xl text-white flex flex-col items-center z-10"
+              >
+                {/* Header */}
+                <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl">🧭</span>
+                    <div>
+                      <h3 className="text-sm font-bold text-white tracking-wide">Move Menubar</h3>
+                      <p className="text-[10px] text-white/60">Choose dock corner on screen</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setIsMoveOptionOpen(false)}
+                    className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
+                    aria-label="Close"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                {/* Simulated Screen with 6 Dock Targets */}
+                <div className="w-full my-4 p-3 rounded-2xl bg-black/40 border border-white/10 grid grid-cols-2 gap-2.5">
+                  {[
+                    { label: "↖ Top-Left", side: "left", topPercent: 16, desc: "Top Corner" },
+                    { label: "↗ Top-Right", side: "right", topPercent: 16, desc: "Top Corner" },
+                    { label: "⬅ Mid-Left", side: "left", topPercent: 42, desc: "Center Edge" },
+                    { label: "➡ Mid-Right", side: "right", topPercent: 42, desc: "Center Edge" },
+                    { label: "↙ Bot-Left", side: "left", topPercent: 82, desc: "Bottom Corner" },
+                    { label: "↘ Bot-Right", side: "right", topPercent: 82, desc: "Bottom Corner" },
+                  ].map((target) => {
+                    const isSelected =
+                      dockPosition.side === target.side &&
+                      Math.abs(dockPosition.topPercent - target.topPercent) < 18;
+                    return (
+                      <button
+                        key={target.label}
+                        onClick={() => {
+                          const newPos = { side: target.side as "left" | "right", topPercent: target.topPercent };
+                          savePosition(newPos);
+                          setIsMoveOptionOpen(false);
+                          setToastMessage(`Menubar moved to ${target.side === "left" ? "Left" : "Right"} ${target.desc}!`);
+                          setTimeout(() => setToastMessage(null), 2500);
+                        }}
+                        className={`p-3 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
+                          isSelected
+                            ? "bg-brand-primary text-white border-orange-400 shadow-lg shadow-brand-primary/40 ring-2 ring-white/50"
+                            : "bg-white/5 hover:bg-white/15 border-white/10 text-white/80 hover:text-white"
+                        }`}
+                      >
+                        <span className="text-xs font-bold">{target.label}</span>
+                        <span className="text-[9px] opacity-70 mt-0.5">{target.desc}</span>
+                        {isSelected && (
+                          <span className="text-[8px] font-extrabold uppercase bg-white/20 px-1.5 py-0.5 rounded-full mt-1">
+                            Active
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Free Drag option */}
+                <button
+                  onClick={() => {
+                    setIsMoveOptionOpen(false);
+                    setIsDragging(true);
+                    setDragCoords({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+                    setToastMessage("🎯 Drag and release anywhere to dock!");
+                    setTimeout(() => setToastMessage(null), 2000);
+                  }}
+                  className="w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold text-orange-300 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <span>🎯</span>
+                  <span>Drag Freely on Screen</span>
+                </button>
+              </motion.div>
+            </div>
           )}
         </AnimatePresence>
 
@@ -581,6 +696,17 @@ export default function Navbar() {
                         );
                       })}
                     </div>
+
+                    <button
+                      onClick={() => {
+                        setIsMobileOpen(false);
+                        setIsMoveOptionOpen(true);
+                      }}
+                      className="px-2 py-0.5 rounded-full bg-white/10 hover:bg-orange-500/20 text-orange-300 text-[10px] font-semibold flex items-center gap-1 transition-colors cursor-pointer"
+                      title="Move Options"
+                    >
+                      <span>🧭 Move</span>
+                    </button>
 
                     <button
                       onClick={() => setIsMobileOpen(false)}
