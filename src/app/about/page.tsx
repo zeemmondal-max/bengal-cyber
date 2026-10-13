@@ -37,14 +37,78 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div 
-              className="relative aspect-[4/3] rounded-[2.5rem] overflow-hidden bg-brand-light p-12 flex items-center justify-center group"
+              className="rounded-[2.5rem] bg-gradient-to-br from-[#0a0f1d] via-[#0d1629] to-[#080d19] p-8 sm:p-10 text-white relative overflow-hidden border border-orange-500/20 shadow-2xl shadow-orange-500/5 group flex flex-col justify-between"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-tr from-brand-primary/20 to-transparent mix-blend-multiply transition-opacity duration-500 group-hover:opacity-50"></div>
-              <Image src="/logo.png" alt="Bengal Cyber Logo - Leading Web Design & Digital Marketing Agency in Bangladesh" width={400} height={150} className="object-contain relative z-10 filter grayscale brightness-0 opacity-80 group-hover:scale-105 transition-transform duration-700" />
+              {/* Ambient glows */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/20 rounded-full blur-[80px] pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-500/10 rounded-full blur-[70px] pointer-events-none"></div>
+
+              {/* Card Header with Symbol */}
+              <div className="relative z-10 mb-8 pb-6 border-b border-white/10 flex items-center justify-between">
+                <div>
+                  <span className="text-brand-primary font-bold tracking-widest uppercase text-xs flex items-center gap-1.5">
+                    <MdRocketLaunch className="w-3.5 h-3.5 text-brand-primary" />
+                    Built For Growth
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">Our Core Disciplines</h3>
+                </div>
+                <div className="w-12 h-12 rounded-2xl bg-brand-primary/20 border border-brand-primary/30 flex items-center justify-center text-brand-primary">
+                  <MdSecurity className="w-6 h-6" />
+                </div>
+              </div>
+
+              {/* 4 Feature Items with Symbols and Text */}
+              <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/5 hover:border-brand-primary/30 hover:bg-white/[0.08] transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center mb-3">
+                    <MdTrendingUp className="w-5 h-5" />
+                  </div>
+                  <h4 className="font-bold text-white text-base mb-1">Data-Driven ROI</h4>
+                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">Precision ad buying across Meta and Google engineered to scale.</p>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/5 hover:border-brand-primary/30 hover:bg-white/[0.08] transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center mb-3">
+                    <MdCode className="w-5 h-5" />
+                  </div>
+                  <h4 className="font-bold text-white text-base mb-1">Custom Web Dev</h4>
+                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">Lightning-fast Next.js engineering with high SEO authority.</p>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/5 hover:border-brand-primary/30 hover:bg-white/[0.08] transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center mb-3">
+                    <MdPalette className="w-5 h-5" />
+                  </div>
+                  <h4 className="font-bold text-white text-base mb-1">Prestige Creative</h4>
+                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">Scroll-stopping graphic identities & high-retention video reels.</p>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/5 hover:border-brand-primary/30 hover:bg-white/[0.08] transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center mb-3">
+                    <MdCheckCircle className="w-5 h-5" />
+                  </div>
+                  <h4 className="font-bold text-white text-base mb-1">24/7 Client Care</h4>
+                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">Omnichannel support with zero lock-in contracts and transparency.</p>
+                </div>
+
+              </div>
+
+              {/* Bottom Trust Row with Symbols and Text */}
+              <div className="relative z-10 mt-6 pt-5 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+                <span className="flex items-center gap-1.5 text-slate-300 font-medium">
+                  <MdSpeed className="w-4 h-4 text-orange-400" />
+                  High-Velocity Delivery
+                </span>
+                <span className="flex items-center gap-1.5 text-slate-300 font-medium">
+                  <MdHandshake className="w-4 h-4 text-orange-400" />
+                  Full Partnership Model
+                </span>
+              </div>
             </motion.div>
             
             <motion.div
