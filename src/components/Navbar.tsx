@@ -111,13 +111,12 @@ export default function Navbar() {
       return;
     }
 
-    if (!didMoveRef.current) {
-      const dist = Math.hypot(clientX - startPosRef.current.x, clientY - startPosRef.current.y);
-      if (dist > 15) {
-        didMoveRef.current = true;
-        cancelHoldTimer();
-        setIsHolding(false);
-      }
+    // Only cancel hold if user moves far away (e.g. > 70px) indicating a deliberate swipe/scroll
+    const dist = Math.hypot(clientX - startPosRef.current.x, clientY - startPosRef.current.y);
+    if (dist > 70) {
+      didMoveRef.current = true;
+      cancelHoldTimer();
+      setIsHolding(false);
     }
   };
 
@@ -157,15 +156,16 @@ export default function Navbar() {
       setIsHolding(false);
       setTimeout(() => {
         is3sDoneRef.current = false;
-      }, 500);
+      }, 600);
       return;
     }
 
     // One-click/single tap: Open menubar immediately!
-    const wasHolding = !didMoveRef.current;
+    const dist = Math.hypot(clientX - startPosRef.current.x, clientY - startPosRef.current.y);
     setIsHolding(false);
 
-    if (wasHolding) {
+    // If released without large swipe (dist < 70px), treat as tap/click!
+    if (dist < 70) {
       setIsMobileOpen(true);
     }
   };
@@ -190,6 +190,10 @@ export default function Navbar() {
   useEffect(() => {
     if (!isDragging) return;
 
+    const handleWindowTouchStart = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (t) moveHold(t.clientX, t.clientY);
+    };
     const handleWindowTouchMove = (e: TouchEvent) => {
       const t = e.touches[0];
       if (t) moveHold(t.clientX, t.clientY);
@@ -198,6 +202,9 @@ export default function Navbar() {
       const t = e.changedTouches[0];
       if (t) endHold(t.clientX, t.clientY);
     };
+    const handleWindowMouseDown = (e: MouseEvent) => {
+      moveHold(e.clientX, e.clientY);
+    };
     const handleWindowMouseMove = (e: MouseEvent) => {
       moveHold(e.clientX, e.clientY);
     };
@@ -205,14 +212,18 @@ export default function Navbar() {
       endHold(e.clientX, e.clientY);
     };
 
+    window.addEventListener("touchstart", handleWindowTouchStart);
     window.addEventListener("touchmove", handleWindowTouchMove, { passive: false });
     window.addEventListener("touchend", handleWindowTouchEnd);
+    window.addEventListener("mousedown", handleWindowMouseDown);
     window.addEventListener("mousemove", handleWindowMouseMove);
     window.addEventListener("mouseup", handleWindowMouseUp);
 
     return () => {
+      window.removeEventListener("touchstart", handleWindowTouchStart);
       window.removeEventListener("touchmove", handleWindowTouchMove);
       window.removeEventListener("touchend", handleWindowTouchEnd);
+      window.removeEventListener("mousedown", handleWindowMouseDown);
       window.removeEventListener("mousemove", handleWindowMouseMove);
       window.removeEventListener("mouseup", handleWindowMouseUp);
     };
@@ -342,7 +353,6 @@ export default function Navbar() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              whileTap={{ scale: 0.96 }}
               onClick={handleClick}
               onTouchStart={(e) => {
                 const t = e.touches[0];
@@ -375,11 +385,10 @@ export default function Navbar() {
                 WebkitTouchCallout: "none",
                 WebkitUserSelect: "none",
                 userSelect: "none",
-                touchAction: "none",
               }}
               className={`fixed ${
                 dockPosition.side === "left" ? "left-0" : "right-0"
-              } z-[60] w-[42px] h-[116px] flex flex-col items-center justify-center cursor-pointer group pointer-events-auto select-none touch-none`}
+              } z-[60] w-[42px] h-[116px] flex flex-col items-center justify-center cursor-pointer group pointer-events-auto select-none`}
               aria-label="Open Navigation Menu (Click to open, Hold 3s to Move)"
             >
               {/* Unified Background and Seamless Inverse Fillets SVG */}
@@ -439,35 +448,40 @@ export default function Navbar() {
                 <div className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
               </div>
 
-              {/* 3-Second Hold Countdown Tooltip & Circular Progress Ring */}
+              {/* 3-Second Hold Countdown Tooltip & Animated Circular Progress Ring */}
               <AnimatePresence>
                 {isHolding && (
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.85 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, scale: 0.85, x: dockPosition.side === "right" ? 10 : -10 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
                     exit={{ opacity: 0, scale: 0.85 }}
                     className={`absolute top-1/2 -translate-y-1/2 ${
                       dockPosition.side === "right" ? "right-[48px]" : "left-[48px]"
-                    } bg-brand-dark/95 text-white border border-orange-500/80 text-[10px] font-bold px-3 py-1.5 rounded-2xl whitespace-nowrap shadow-2xl flex items-center gap-2 pointer-events-none z-50`}
+                    } bg-[#0c1220]/95 backdrop-blur-md text-white border border-orange-500/80 text-[11px] font-bold px-3 py-2 rounded-2xl whitespace-nowrap shadow-2xl flex items-center gap-2.5 pointer-events-none z-50`}
                   >
-                    <div className="w-4 h-4 relative flex items-center justify-center shrink-0">
+                    <div className="w-5 h-5 relative flex items-center justify-center shrink-0">
                       <svg className="w-full h-full -rotate-90" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.2)" strokeWidth="3" fill="none" />
-                        <circle
+                        <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.2)" strokeWidth="2.5" fill="none" />
+                        <motion.circle
                           cx="12"
                           cy="12"
                           r="10"
                           stroke="#f97316"
-                          strokeWidth="3"
+                          strokeWidth="2.5"
                           fill="none"
                           strokeDasharray={62.8}
-                          strokeDashoffset={isHolding ? 0 : 62.8}
+                          initial={{ strokeDashoffset: 62.8 }}
+                          animate={{ strokeDashoffset: 0 }}
+                          transition={{ duration: 3.0, ease: "linear" }}
                           strokeLinecap="round"
-                          className={isHolding ? "transition-[stroke-dashoffset] duration-[3000ms] ease-linear" : "none"}
                         />
                       </svg>
+                      <span className="absolute text-[8px] font-extrabold text-orange-400">3s</span>
                     </div>
-                    <span>Hold 3s to open Move Options...</span>
+                    <div className="flex flex-col">
+                      <span className="text-white text-[11px] font-bold leading-tight">Hold 3s to Move</span>
+                      <span className="text-orange-400/80 text-[9px] font-medium leading-tight">Release early to open menu</span>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
