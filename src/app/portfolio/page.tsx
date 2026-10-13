@@ -194,6 +194,7 @@ export default function ProjectsPage() {
             <div className="relative w-full h-[350px] md:h-full bg-black flex items-center justify-center">
               <video 
                 className="w-full h-full object-contain"
+                poster="/projects/karizma-care-thumb.jpg"
                 controls
                 muted
                 loop
@@ -423,6 +424,7 @@ export default function ProjectsPage() {
             <div className="relative w-full h-[350px] md:h-full bg-black flex items-center justify-center overflow-hidden">
               <video 
                 className="w-full h-full object-contain relative z-10"
+                poster="/projects/cancer-answer-thumb.jpg"
                 controls
                 muted
                 loop

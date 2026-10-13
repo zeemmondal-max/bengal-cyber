@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { MdArrowForward, MdPlayCircleOutline } from "react-icons/md";
 
@@ -10,6 +11,7 @@ const highlights = [
     title: "Cancer Answer",
     category: "Medical Video Production",
     media: "/projects/cancer-answer.mp4",
+    poster: "/projects/cancer-answer-thumb.jpg",
     type: "video",
     gridClass: "md:col-span-8 md:row-span-2 h-[400px] md:h-[600px]",
     color: "from-[#00a859]/80 to-black/90"
@@ -28,6 +30,7 @@ const highlights = [
     title: "Karizma Care",
     category: "Video Marketing",
     media: "/projects/project1.mp4",
+    poster: "/projects/karizma-care-thumb.jpg",
     type: "video",
     gridClass: "md:col-span-4 md:row-span-1 h-[300px] md:h-[288px]",
     color: "from-brand-primary/80 to-black/90"
@@ -72,38 +75,42 @@ export default function ProjectHighlights() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <a 
+            <Link 
               href="/portfolio" 
               className="group relative inline-flex items-center gap-2 font-bold text-white bg-brand-dark px-8 py-4 rounded-full overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-brand-dark/20 transition-all duration-300 hover:-translate-y-1"
             >
               <div className="absolute inset-0 bg-brand-primary translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out"></div>
               <span className="relative z-10">Explore Our Portfolio</span>
               <MdArrowForward className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </a>
+            </Link>
           </motion.div>
         </div>
 
         {/* Bento Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-auto">
           {highlights.map((item, index) => (
-            <motion.a
+            <Link
               href="/portfolio"
               key={item.id}
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
               className={`group relative block rounded-[2rem] overflow-hidden shadow-lg border border-white/40 cursor-pointer ${item.gridClass}`}
             >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                className="w-full h-full relative"
+              >
               {/* Media Background */}
               <div className="absolute inset-0 bg-black">
                 {item.type === 'video' ? (
                   <video 
                     src={item.media} 
+                    poster={item.poster}
                     loop 
                     muted 
                     playsInline 
-                    preload="none"
+                    preload="metadata"
                     onMouseEnter={(e) => {
                       const v = e.currentTarget;
                       if (v.paused) v.play().catch(() => {});
@@ -147,8 +154,9 @@ export default function ProjectHighlights() {
                   </h3>
                 </div>
               </div>
-            </motion.a>
-          ))}
+            </motion.div>
+          </Link>
+        ))}
         </div>
 
       </div>
