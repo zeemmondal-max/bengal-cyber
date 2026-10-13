@@ -30,10 +30,10 @@ export default function ServicesHero() {
 
   return (
     <section className="pt-24 pb-12 sm:pt-28 md:pb-16 text-center relative z-10 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         
         {/* Main Lucrative Hero Container */}
-        <div className="relative rounded-[2.5rem] sm:rounded-[3.5rem] p-6 sm:p-10 md:p-14 lg:p-16 overflow-hidden border border-orange-500/25 bg-gradient-to-b from-[#0a0f1d]/95 via-[#0d1629]/95 to-[#080d19]/95 backdrop-blur-2xl shadow-2xl shadow-orange-500/10">
+        <div className="relative rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-10 md:p-14 lg:p-16 overflow-hidden border border-orange-500/25 bg-gradient-to-b from-[#0a0f1d]/95 via-[#0d1629]/95 to-[#080d19]/95 backdrop-blur-2xl shadow-2xl shadow-orange-500/10">
           
           {/* Ambient Lighting Gradients */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-2xl h-48 bg-gradient-to-r from-orange-600/30 via-amber-500/25 to-orange-500/30 blur-[100px] pointer-events-none -z-10" />
@@ -52,12 +52,12 @@ export default function ServicesHero() {
           {/* Glowing Top Rim Streak */}
           <div className="absolute top-0 left-10 right-10 h-[1.5px] bg-gradient-to-r from-transparent via-orange-400 to-transparent opacity-80" />
 
-          {/* SEO-Friendly Short Headline */}
+          {/* SEO-Friendly Headline (Guaranteed Single Line) */}
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-5 leading-[1.2] max-w-4xl mx-auto"
+            className="text-xl min-[360px]:text-2xl min-[420px]:text-3xl sm:text-4xl md:text-5xl lg:text-[3.2rem] xl:text-[3.75rem] font-extrabold text-white tracking-tight mb-5 leading-tight whitespace-nowrap w-full mx-auto"
           >
             Digital Marketing &{" "}
             <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-500 bg-clip-text text-transparent drop-shadow-sm">
