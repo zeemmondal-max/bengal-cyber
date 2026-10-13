@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,6 +10,69 @@ export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const pathname = usePathname();
 
+  // Mobile Menubar Dock Position: 'left' | 'right', and vertical percentage (e.g. 42%)
+  const [dockPosition, setDockPosition] = useState<{ side: "left" | "right"; topPercent: number }>({
+    side: "right",
+    topPercent: 42,
+  });
+
+  // Long-press (3 seconds) & drag states
+  const [isHolding, setIsHolding] = useState(false);
+  const [holdProgress, setHoldProgress] = useState(0); // 0 to 100
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragCoords, setDragCoords] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [hoveredZone, setHoveredZone] = useState<"top-left" | "mid-left" | "bot-left" | "top-right" | "mid-right" | "bot-right" | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const holdTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const holdStartTimeRef = useRef<number>(0);
+  const startPosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const didDragRef = useRef<boolean>(false);
+
+  // Restore saved position from localStorage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("bengal_mobile_menu_pos");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if ((parsed.side === "left" || parsed.side === "right") && typeof parsed.topPercent === "number") {
+          setDockPosition({
+            side: parsed.side,
+            topPercent: Math.max(12, Math.min(85, parsed.topPercent)),
+          });
+        }
+      }
+    } catch {}
+  }, []);
+
+  const savePosition = (newPos: { side: "left" | "right"; topPercent: number }) => {
+    setDockPosition(newPos);
+    try {
+      localStorage.setItem("bengal_mobile_menu_pos", JSON.stringify(newPos));
+    } catch {}
+  };
+
+  const clearHold = () => {
+    if (holdTimerRef.current) {
+      clearTimeout(holdTimerRef.current);
+      holdTimerRef.current = null;
+    }
+    if (progressIntervalRef.current) {
+      clearInterval(progressIntervalRef.current);
+      progressIntervalRef.current = null;
+    }
+    setIsHolding(false);
+    setHoldProgress(0);
+  };
+
+  useEffect(() => {
+    return () => {
+      clearHold();
+    };
+  }, []);
+
+  // Body scroll lock when menu is open
   useEffect(() => {
     if (isMobileOpen) {
       const originalOverflow = document.body.style.overflow;
@@ -19,6 +82,124 @@ export default function Navbar() {
       };
     }
   }, [isMobileOpen]);
+
+  // Pointer event handlers for 3-second hold to drag
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (isMobileOpen) return;
+
+    try {
+      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    } catch {}
+
+    didDragRef.current = false;
+    startPosRef.current = { x: e.clientX, y: e.clientY };
+    holdStartTimeRef.current = Date.now();
+    setIsHolding(true);
+    setHoldProgress(0);
+
+    // Update circular progress every 30ms over 3000ms
+    progressIntervalRef.current = setInterval(() => {
+      const elapsed = Date.now() - holdStartTimeRef.current;
+      const pct = Math.min(100, (elapsed / 3000) * 100);
+      setHoldProgress(pct);
+    }, 30);
+
+    // Trigger drag mode after 3 seconds (3000ms) of steady holding
+    holdTimerRef.current = setTimeout(() => {
+      didDragRef.current = true;
+      clearHold();
+      setIsDragging(true);
+      setDragCoords({ x: e.clientX, y: e.clientY });
+
+      // Haptic vibration feedback on mobile
+      if (typeof navigator !== "undefined" && navigator.vibrate) {
+        try {
+          navigator.vibrate([60, 40, 80]);
+        } catch {}
+      }
+    }, 3000);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (isDragging) {
+      setDragCoords({ x: e.clientX, y: e.clientY });
+
+      // Identify closest snap zone
+      const isLeft = e.clientX < window.innerWidth / 2;
+      const yRatio = e.clientY / window.innerHeight;
+      const vZone = yRatio < 0.33 ? "top" : yRatio > 0.67 ? "bot" : "mid";
+      setHoveredZone(`${vZone}-${isLeft ? "left" : "right"}` as any);
+      return;
+    }
+
+    if (isHolding) {
+      // If user swipes more than 14px before 3s, cancel hold (user was scrolling)
+      const dist = Math.hypot(e.clientX - startPosRef.current.x, e.clientY - startPosRef.current.y);
+      if (dist > 14) {
+        clearHold();
+      }
+    }
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    try {
+      (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+    } catch {}
+
+    if (isDragging) {
+      // Drop and dock to chosen edge or corner
+      const isLeft = e.clientX < window.innerWidth / 2;
+      const yRatio = Math.max(0.12, Math.min(0.85, e.clientY / window.innerHeight));
+
+      let targetTop = Math.round(yRatio * 100);
+      let cornerLabel = "Center Edge";
+      if (yRatio < 0.28) {
+        targetTop = 16;
+        cornerLabel = "Top Corner";
+      } else if (yRatio > 0.72) {
+        targetTop = 82;
+        cornerLabel = "Bottom Corner";
+      }
+
+      const newPos = {
+        side: (isLeft ? "left" : "right") as "left" | "right",
+        topPercent: targetTop,
+      };
+
+      savePosition(newPos);
+      setIsDragging(false);
+      setHoveredZone(null);
+
+      setToastMessage(`Menubar docked to ${isLeft ? "Left" : "Right"} ${cornerLabel}!`);
+      setTimeout(() => setToastMessage(null), 2500);
+      return;
+    }
+
+    const wasHolding = isHolding;
+    clearHold();
+
+    // If hold was released under 3 seconds without dragging, treat as normal click!
+    if (wasHolding && !didDragRef.current) {
+      setIsMobileOpen(true);
+    }
+  };
+
+  const handlePointerCancel = (e: React.PointerEvent) => {
+    try {
+      (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+    } catch {}
+    clearHold();
+    setIsDragging(false);
+    setHoveredZone(null);
+  };
+
+  const toggleDockSide = () => {
+    const nextSide = dockPosition.side === "left" ? "right" : "left";
+    const newPos = { ...dockPosition, side: nextSide };
+    savePosition(newPos);
+    setToastMessage(`Menubar moved to ${nextSide === "left" ? "Left" : "Right"} Side!`);
+    setTimeout(() => setToastMessage(null), 2000);
+  };
 
   const normalizePath = (p: string | null | undefined) => {
     if (!p) return "/";
@@ -39,10 +220,81 @@ export default function Navbar() {
   return (
     <>
       {/* ========================================================= */}
-      {/* 1. MOBILE RESPONSIVE MENU BAR (RIGHT SIDE DOCKED)         */}
-      {/* Positioned vertically centered on the right edge (< md)    */}
+      {/* 1. MOBILE RESPONSIVE MENU BAR (REPOSITIONABLE TAB & PANEL) */}
+      {/* Supports 3-second hold to drag & dock anywhere on screen    */}
       {/* ========================================================= */}
       <div className="lg:hidden">
+        {/* Docking Confirmation Toast */}
+        <AnimatePresence>
+          {toastMessage && (
+            <motion.div
+              initial={{ opacity: 0, y: -20, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.9 }}
+              className="fixed top-5 left-1/2 -translate-x-1/2 z-[160] bg-brand-dark/95 border border-orange-500/70 shadow-2xl shadow-brand-primary/40 text-white text-xs font-bold px-4 py-2 rounded-full flex items-center gap-2 pointer-events-none whitespace-nowrap"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>{toastMessage}</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Drop Target Zones Overlay (Visible when dragging) */}
+        {isDragging && (
+          <div className="fixed inset-0 z-[130] pointer-events-none select-none">
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] transition-opacity duration-300" />
+            {[
+              { id: "top-left", label: "Top-Left", pos: "top-4 left-3" },
+              { id: "mid-left", label: "Left Edge", pos: "top-1/2 -translate-y-1/2 left-3" },
+              { id: "bot-left", label: "Bottom-Left", pos: "bottom-4 left-3" },
+              { id: "top-right", label: "Top-Right", pos: "top-4 right-3" },
+              { id: "mid-right", label: "Right Edge", pos: "top-1/2 -translate-y-1/2 right-3" },
+              { id: "bot-right", label: "Bottom-Right", pos: "bottom-4 right-3" },
+            ].map((zone) => {
+              const isHovered = hoveredZone === zone.id;
+              return (
+                <div
+                  key={zone.id}
+                  className={`absolute ${zone.pos} w-20 h-28 rounded-3xl border-2 border-dashed flex flex-col items-center justify-center p-2 text-center transition-all duration-200 ${
+                    isHovered
+                      ? "border-orange-400 bg-orange-500/30 scale-105 shadow-2xl shadow-brand-primary/60 text-white"
+                      : "border-white/30 bg-white/5 text-white/60"
+                  }`}
+                >
+                  <span className="text-xl">{isHovered ? "📍" : "⚓"}</span>
+                  <span className="text-[9px] font-extrabold uppercase tracking-tight mt-1 leading-tight">
+                    {zone.label}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Floating Active Drag Ghost (Follows Finger while Dragging) */}
+        {isDragging && (
+          <div
+            className="fixed z-[140] w-[46px] h-[120px] pointer-events-none select-none flex flex-col items-center justify-center"
+            style={{
+              left: `${dragCoords.x - 23}px`,
+              top: `${dragCoords.y - 60}px`,
+            }}
+          >
+            {/* Guide Badge above user's finger */}
+            <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black/95 text-white text-[10px] font-bold px-3 py-1 rounded-full whitespace-nowrap border border-orange-500 shadow-xl shadow-orange-500/50 flex items-center gap-1.5 animate-bounce">
+              <span>🎯</span>
+              <span>Drop on any corner or edge</span>
+            </div>
+
+            {/* Glowing Ghost Replica */}
+            <div className="w-full h-full rounded-2xl bg-orange-500/80 border-2 border-white shadow-2xl shadow-orange-500 flex flex-col items-center justify-center text-white scale-110">
+              <span className="text-[10px] font-extrabold tracking-widest uppercase rotate-90">
+                MOVE
+              </span>
+            </div>
+          </div>
+        )}
+
         {/* Full Backdrop Overlay when Mobile Menu is Open */}
         <AnimatePresence>
           {isMobileOpen && (
@@ -58,22 +310,34 @@ export default function Navbar() {
           )}
         </AnimatePresence>
 
-        {/* Floating Mobile & Tablet Trigger Tab (Visible on Right Edge when Menu is Closed) */}
+        {/* Floating Mobile Trigger Tab (Repositionable: Hold 3s to move anywhere) */}
         <AnimatePresence>
-          {!isMobileOpen && (
-            <motion.button
-              initial={{ x: 30, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: 30, opacity: 0 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setIsMobileOpen(true)}
-              className="fixed right-0 inset-y-0 my-auto z-[60] w-[42px] h-[116px] flex flex-col items-center justify-center cursor-pointer group pointer-events-auto select-none"
-              aria-label="Open Navigation Menu"
+          {!isMobileOpen && !isDragging && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              whileTap={{ scale: 0.96 }}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onPointerCancel={handlePointerCancel}
+              style={{
+                top: `calc(${dockPosition.topPercent}% - 58px)`,
+              }}
+              className={`fixed ${
+                dockPosition.side === "left" ? "left-0" : "right-0"
+              } z-[60] w-[42px] h-[116px] flex flex-col items-center justify-center cursor-pointer group pointer-events-auto select-none touch-none`}
+              aria-label="Open Navigation Menu (Hold 3s to Move)"
             >
               {/* Unified Background and Seamless Inverse Fillets SVG */}
               <svg
                 viewBox="0 0 42 116"
-                className="absolute inset-0 w-full h-full overflow-visible filter drop-shadow-[-4px_4px_16px_rgba(249,115,22,0.35)]"
+                className={`absolute inset-0 w-full h-full overflow-visible filter ${
+                  dockPosition.side === "left"
+                    ? "drop-shadow-[4px_4px_16px_rgba(249,115,22,0.35)] scale-x-[-1]"
+                    : "drop-shadow-[-4px_4px_16px_rgba(249,115,22,0.35)]"
+                }`}
                 fill="none"
               >
                 <defs>
@@ -103,7 +367,11 @@ export default function Navbar() {
               </svg>
 
               {/* Foreground Interactive Elements */}
-              <div className="relative z-10 flex flex-col items-center justify-center pl-1">
+              <div
+                className={`relative z-10 flex flex-col items-center justify-center ${
+                  dockPosition.side === "left" ? "pr-1" : "pl-1"
+                }`}
+              >
                 {/* Droplet with Ping and Bounce */}
                 <div className="relative flex items-center justify-center my-0.5">
                   <div className="absolute w-5 h-5 bg-brand-primary/40 rounded-full animate-ping pointer-events-none" />
@@ -118,19 +386,61 @@ export default function Navbar() {
                 {/* Glowing Pulse Dot */}
                 <div className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
               </div>
-            </motion.button>
+
+              {/* 3-Second Hold Countdown Tooltip & Circular Progress Ring */}
+              <AnimatePresence>
+                {isHolding && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.85 }}
+                    className={`absolute top-1/2 -translate-y-1/2 ${
+                      dockPosition.side === "right" ? "right-[48px]" : "left-[48px]"
+                    } bg-brand-dark/95 text-white border border-orange-500/80 text-[10px] font-bold px-3 py-1.5 rounded-2xl whitespace-nowrap shadow-2xl flex items-center gap-2 pointer-events-none z-50`}
+                  >
+                    <div className="w-4 h-4 relative flex items-center justify-center shrink-0">
+                      <svg className="w-full h-full -rotate-90" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.2)" strokeWidth="3" fill="none" />
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="#f97316"
+                          strokeWidth="3"
+                          fill="none"
+                          strokeDasharray={62.8}
+                          strokeDashoffset={62.8 - (62.8 * holdProgress) / 100}
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </div>
+                    <span>Hold 3s to Move ({Math.max(1, Math.ceil((3000 - (holdProgress * 30)) / 1000))}s)</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Mobile Slide-Out Menu Island Panel (Right Side Docked) */}
+        {/* Mobile Slide-Out Menu Island Panel (Docked on Left or Right) */}
         <AnimatePresence>
           {isMobileOpen && (
             <motion.div
-              initial={{ x: 180, opacity: 0, scale: 0.95 }}
+              initial={{
+                x: dockPosition.side === "left" ? -180 : 180,
+                opacity: 0,
+                scale: 0.95,
+              }}
               animate={{ x: 0, opacity: 1, scale: 1 }}
-              exit={{ x: 180, opacity: 0, scale: 0.95 }}
+              exit={{
+                x: dockPosition.side === "left" ? -180 : 180,
+                opacity: 0,
+                scale: 0.95,
+              }}
               transition={{ type: "spring", stiffness: 260, damping: 25, mass: 0.8 }}
-              className="fixed inset-y-2 sm:inset-y-4 right-2 sm:right-4 my-auto z-[120] w-[280px] landscape:w-[420px] max-w-[calc(100vw-16px)] h-fit max-h-[calc(100dvh-16px)] sm:max-h-[calc(100dvh-32px)] flex flex-col pointer-events-auto"
+              className={`fixed inset-y-2 sm:inset-y-4 ${
+                dockPosition.side === "left" ? "left-2 sm:left-4" : "right-2 sm:right-4"
+              } my-auto z-[120] w-[280px] landscape:w-[420px] max-w-[calc(100vw-16px)] h-fit max-h-[calc(100dvh-16px)] sm:max-h-[calc(100dvh-32px)] flex flex-col pointer-events-auto`}
             >
               <div className="relative bg-brand-dark/95 backdrop-blur-2xl text-white p-3.5 sm:p-4 rounded-3xl border border-orange-500/40 shadow-2xl shadow-brand-primary/50 flex flex-col max-h-[calc(100dvh-16px)] sm:max-h-[calc(100dvh-32px)] overflow-hidden">
                 
@@ -190,7 +500,7 @@ export default function Navbar() {
                   className="absolute -top-2 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-gradient-to-r from-orange-600 via-amber-500 to-orange-600 rounded-full blur-xl pointer-events-none -z-10"
                 />
 
-                {/* Header with Droplet and Close Button */}
+                {/* Header with Droplet, Side-Switch, and Close Button */}
                 <div className="flex items-center justify-between pt-1 pb-2 border-b border-white/10 shrink-0">
                   <div className="flex items-center gap-2">
                     <div className="relative flex items-center justify-center">
@@ -201,13 +511,27 @@ export default function Navbar() {
                       Navigation
                     </span>
                   </div>
-                  <button
-                    onClick={() => setIsMobileOpen(false)}
-                    className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
-                    aria-label="Close Menu"
-                  >
-                    ✕
-                  </button>
+
+                  <div className="flex items-center gap-1.5">
+                    {/* Quick Switch Side Button */}
+                    <button
+                      onClick={toggleDockSide}
+                      className="px-2.5 py-1 rounded-full bg-white/10 hover:bg-orange-500/20 border border-white/10 text-[10px] font-semibold text-orange-300 flex items-center gap-1 transition-colors cursor-pointer"
+                      title="Switch side"
+                      aria-label="Switch side"
+                    >
+                      <span>⇋</span>
+                      <span>{dockPosition.side === "left" ? "Dock Right" : "Dock Left"}</span>
+                    </button>
+
+                    <button
+                      onClick={() => setIsMobileOpen(false)}
+                      className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
+                      aria-label="Close Menu"
+                    >
+                      ✕
+                    </button>
+                  </div>
                 </div>
 
                 {/* Scrollable Links List */}
