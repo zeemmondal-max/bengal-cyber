@@ -10,6 +10,13 @@ export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const pathname = usePathname();
 
+  const normalizePath = (p: string | null | undefined) => {
+    if (!p) return "/";
+    const clean = p.split("?")[0].split("#")[0].replace(/\/+$/, "");
+    return clean === "" ? "/" : clean;
+  };
+  const currentPath = normalizePath(pathname);
+
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
@@ -195,7 +202,7 @@ export default function Navbar() {
                 {/* Vertical Links List */}
                 <div className="flex flex-col gap-2 pt-1">
                   {navLinks.map((link) => {
-                    const isActive = pathname === link.href;
+                    const isActive = currentPath === normalizePath(link.href);
                     if (link.isCta) {
                       return (
                         <Link
@@ -204,7 +211,7 @@ export default function Navbar() {
                           onClick={() => setIsMobileOpen(false)}
                           className={`mt-1 px-4 py-2.5 rounded-2xl text-xs font-bold flex items-center justify-between transition-all ${
                             isActive
-                              ? "bg-brand-primary text-white shadow-lg shadow-brand-primary/30 ring-2 ring-white/50"
+                              ? "bg-white text-brand-dark shadow-md ring-2 ring-brand-primary/50"
                               : "bg-brand-primary text-white shadow-lg shadow-brand-primary/20 hover:bg-orange-600"
                           }`}
                         >
@@ -221,7 +228,7 @@ export default function Navbar() {
                         className={`px-4 py-2.5 rounded-2xl text-xs font-medium flex items-center justify-between transition-all ${
                           isActive
                             ? "bg-white text-brand-dark font-bold shadow-md"
-                            : "bg-white/5 text-white/90 hover:bg-white/15 border border-white/5"
+                            : "bg-white/5 text-white/80 hover:bg-white/15 border border-white/5 hover:text-white"
                         }`}
                       >
                         <span>{link.name}</span>
@@ -407,7 +414,7 @@ export default function Navbar() {
             {/* Middle Row: Pill Tabs */}
             <div className="flex items-center gap-2.5 md:gap-3 max-w-full">
               {navLinks.map((link) => {
-                const isActive = pathname === link.href;
+                const isActive = currentPath === normalizePath(link.href);
                 if (link.isCta) {
                   return (
                     <Link
@@ -415,7 +422,7 @@ export default function Navbar() {
                       href={link.href}
                       className={`px-5 md:px-6 py-2.5 rounded-full text-sm flex items-center transition-all ${
                         isActive
-                          ? "bg-brand-primary text-white font-bold shadow-lg shadow-brand-primary/20 hover:scale-105 hover:bg-orange-600"
+                          ? "bg-white text-brand-dark font-bold shadow-lg shadow-white/20 ring-2 ring-brand-primary/50 hover:scale-105"
                           : "bg-brand-primary text-white font-medium hover:bg-orange-600 shadow-lg shadow-brand-primary/20"
                       }`}
                     >
@@ -430,7 +437,7 @@ export default function Navbar() {
                     className={`px-5 md:px-6 py-2.5 rounded-full text-sm flex items-center transition-all ${
                       isActive
                         ? "bg-white text-brand-dark font-bold shadow-md hover:scale-105"
-                        : "bg-white/10 text-white font-medium hover:bg-white/20"
+                        : "bg-white/10 text-white/85 font-medium hover:bg-white/20 hover:text-white"
                     }`}
                   >
                     {link.name}
