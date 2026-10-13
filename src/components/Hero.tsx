@@ -12,22 +12,21 @@ export default function Hero() {
 
 
         <motion.h1 
-          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-brand-dark tracking-tight mb-6 md:mb-8 leading-[1.2] md:leading-[1.1]"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-brand-dark tracking-tight mb-4 md:mb-6 leading-tight max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          Architecting <span className="text-brand-primary">Digital Empires</span> through <br className="hidden md:block" />
-          <span className="text-brand-primary">Magnetic Web Design</span>
+          Website Design & <span className="text-brand-primary">Digital Marketing Agency</span>
         </motion.h1>
         
         <motion.p 
-          className="text-base sm:text-lg md:text-2xl text-slate-700 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed text-balance font-medium"
+          className="text-base sm:text-lg md:text-xl text-slate-600 mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed text-balance font-normal"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
-          We don't just build websites; we engineer revenue-generating ecosystems. From <strong>Viral Social Media Marketing</strong> to conversion-obsessed <strong>Website Design</strong> and aggressive <strong>Digital Marketing</strong> strategies.
+          We engineer conversion-obsessed <strong>Website Design</strong>, high-ROAS <strong>Media Buying</strong>, and viral <strong>Social Media Marketing</strong> to scale your brand in Bangladesh.
         </motion.p>
         
         <motion.div 
