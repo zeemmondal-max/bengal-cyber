@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,6 +9,16 @@ export default function Navbar() {
   const [isNavVisible, setIsNavVisible] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    if (isMobileOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [isMobileOpen]);
 
   const normalizePath = (p: string | null | undefined) => {
     if (!p) return "/";
@@ -43,6 +53,7 @@ export default function Navbar() {
               transition={{ duration: 0.2 }}
               className="fixed inset-0 bg-black/60 backdrop-blur-[3px] z-[110] pointer-events-auto"
               onClick={() => setIsMobileOpen(false)}
+              onTouchMove={(e) => e.preventDefault()}
             />
           )}
         </AnimatePresence>
@@ -56,7 +67,7 @@ export default function Navbar() {
               exit={{ x: 30, opacity: 0 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMobileOpen(true)}
-              className="fixed right-0 top-[38%] -translate-y-1/2 z-[60] w-[42px] h-[116px] flex flex-col items-center justify-center cursor-pointer group pointer-events-auto select-none"
+              className="fixed right-0 inset-y-0 my-auto z-[60] w-[42px] h-[116px] flex flex-col items-center justify-center cursor-pointer group pointer-events-auto select-none"
               aria-label="Open Navigation Menu"
             >
               {/* Unified Background and Seamless Inverse Fillets SVG */}
@@ -115,13 +126,13 @@ export default function Navbar() {
         <AnimatePresence>
           {isMobileOpen && (
             <motion.div
-              initial={{ x: 200, opacity: 0, scale: 0.92 }}
+              initial={{ x: 180, opacity: 0, scale: 0.95 }}
               animate={{ x: 0, opacity: 1, scale: 1 }}
-              exit={{ x: 200, opacity: 0, scale: 0.92 }}
-              transition={{ type: "spring", stiffness: 220, damping: 24, mass: 0.8 }}
-              className="fixed right-2 sm:right-4 top-1/2 -translate-y-1/2 z-[120] w-[280px] max-w-[88vw] max-h-[calc(100dvh-20px)] flex flex-col pointer-events-auto"
+              exit={{ x: 180, opacity: 0, scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 260, damping: 25, mass: 0.8 }}
+              className="fixed inset-y-2 sm:inset-y-4 right-2 sm:right-4 my-auto z-[120] w-[280px] landscape:w-[420px] max-w-[calc(100vw-16px)] h-fit max-h-[calc(100dvh-16px)] sm:max-h-[calc(100dvh-32px)] flex flex-col pointer-events-auto"
             >
-              <div className="relative bg-brand-dark/95 backdrop-blur-2xl text-white p-3.5 sm:p-5 rounded-3xl border border-orange-500/40 shadow-2xl shadow-brand-primary/50 flex flex-col max-h-[calc(100dvh-20px)] overflow-hidden">
+              <div className="relative bg-brand-dark/95 backdrop-blur-2xl text-white p-3.5 sm:p-4 rounded-3xl border border-orange-500/40 shadow-2xl shadow-brand-primary/50 flex flex-col max-h-[calc(100dvh-16px)] sm:max-h-[calc(100dvh-32px)] overflow-hidden">
                 
                 {/* Traveling Sine Wave Light Ribbon (Top of Island) */}
                 <div className="absolute top-0 left-0 right-0 h-4 overflow-hidden pointer-events-none">
@@ -199,43 +210,45 @@ export default function Navbar() {
                   </button>
                 </div>
 
-                {/* Vertical Scrollable Links List */}
-                <div className="flex flex-col gap-1.5 sm:gap-2 pt-2 overflow-y-auto overscroll-contain pr-1 flex-1 min-h-0 [scrollbar-width:thin] [scrollbar-color:rgba(249,115,22,0.4)_transparent] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-orange-500/40 [&::-webkit-scrollbar-thumb]:rounded-full">
-                  {navLinks.map((link) => {
-                    const isActive = currentPath === normalizePath(link.href);
-                    if (link.isCta) {
+                {/* Scrollable Links List */}
+                <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain pr-1 pt-1 touch-pan-y [webkit-overflow-scrolling:touch] [scrollbar-width:thin] [scrollbar-color:rgba(249,115,22,0.4)_transparent] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-orange-500/40 [&::-webkit-scrollbar-thumb]:rounded-full">
+                  <div className="grid grid-cols-1 landscape:grid-cols-2 gap-1.5 sm:gap-2">
+                    {navLinks.map((link) => {
+                      const isActive = currentPath === normalizePath(link.href);
+                      if (link.isCta) {
+                        return (
+                          <Link
+                            key={link.href}
+                            href={link.href}
+                            onClick={() => setIsMobileOpen(false)}
+                            className={`px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-bold flex items-center justify-between transition-all shrink-0 ${
+                              isActive
+                                ? "bg-white text-brand-dark shadow-md ring-2 ring-brand-primary/50"
+                                : "bg-brand-primary text-white shadow-lg shadow-brand-primary/20 hover:bg-orange-600"
+                            }`}
+                          >
+                            <span>{link.name}</span>
+                            <span className="text-sm">→</span>
+                          </Link>
+                        );
+                      }
                       return (
                         <Link
                           key={link.href}
                           href={link.href}
                           onClick={() => setIsMobileOpen(false)}
-                          className={`mt-1 px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-bold flex items-center justify-between transition-all shrink-0 ${
+                          className={`px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-medium flex items-center justify-between transition-all shrink-0 ${
                             isActive
-                              ? "bg-white text-brand-dark shadow-md ring-2 ring-brand-primary/50"
-                              : "bg-brand-primary text-white shadow-lg shadow-brand-primary/20 hover:bg-orange-600"
+                              ? "bg-white text-brand-dark font-bold shadow-md"
+                              : "bg-white/5 text-white/80 hover:bg-white/15 border border-white/5 hover:text-white"
                           }`}
                         >
                           <span>{link.name}</span>
-                          <span className="text-sm">→</span>
+                          {isActive && <span className="w-1.5 h-1.5 rounded-full bg-brand-primary" />}
                         </Link>
                       );
-                    }
-                    return (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        onClick={() => setIsMobileOpen(false)}
-                        className={`px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-medium flex items-center justify-between transition-all shrink-0 ${
-                          isActive
-                            ? "bg-white text-brand-dark font-bold shadow-md"
-                            : "bg-white/5 text-white/80 hover:bg-white/15 border border-white/5 hover:text-white"
-                        }`}
-                      >
-                        <span>{link.name}</span>
-                        {isActive && <span className="w-1.5 h-1.5 rounded-full bg-brand-primary" />}
-                      </Link>
-                    );
-                  })}
+                    })}
+                  </div>
                 </div>
 
               </div>

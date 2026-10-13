@@ -11,7 +11,7 @@ export default function LiveChat() {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 w-14 h-14 sm:w-16 sm:h-16 rounded-full text-white shadow-2xl flex items-center justify-center z-[100] bg-brand-primary hover:bg-orange-600 transition-colors duration-300 group"
+      className="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 w-14 h-14 sm:w-16 sm:h-16 rounded-full text-white shadow-2xl flex items-center justify-center z-40 bg-brand-primary hover:bg-orange-600 transition-colors duration-300 group"
       whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.95 }}
 
