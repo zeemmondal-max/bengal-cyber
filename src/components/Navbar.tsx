@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,232 +10,15 @@ export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const pathname = usePathname();
 
-  // Mobile Menubar Dock Position: 'left' | 'right', and vertical percentage (e.g. 42%)
-  const [dockPosition, setDockPosition] = useState<{ side: "left" | "right"; topPercent: number }>({
-    side: "right",
-    topPercent: 42,
-  });
-
-  // Long-press (3 seconds) & Move Option states
-  const [isHolding, setIsHolding] = useState(false);
-  const [isMoveOptionOpen, setIsMoveOptionOpen] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragCoords, setDragCoords] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-  const [hoveredZone, setHoveredZone] = useState<"top-left" | "mid-left" | "bot-left" | "top-right" | "mid-right" | "bot-right" | null>(null);
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
-
-  const holdTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const startPosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const is3sDoneRef = useRef<boolean>(false);
-  const didMoveRef = useRef<boolean>(false);
-
-  // Restore saved position from localStorage
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("bengal_mobile_menu_pos");
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if ((parsed.side === "left" || parsed.side === "right") && typeof parsed.topPercent === "number") {
-          setDockPosition({
-            side: parsed.side,
-            topPercent: Math.max(12, Math.min(85, parsed.topPercent)),
-          });
-        }
-      }
-    } catch {}
-  }, []);
-
-  const savePosition = (newPos: { side: "left" | "right"; topPercent: number }) => {
-    setDockPosition(newPos);
-    try {
-      localStorage.setItem("bengal_mobile_menu_pos", JSON.stringify(newPos));
-    } catch {}
-  };
-
-  const cancelHoldTimer = () => {
-    if (holdTimerRef.current) {
-      clearTimeout(holdTimerRef.current);
-      holdTimerRef.current = null;
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      cancelHoldTimer();
-    };
-  }, []);
-
-  // Body scroll lock when menu or move options modal is open
-  useEffect(() => {
-    if (isMobileOpen || isMoveOptionOpen) {
+    if (isMobileOpen) {
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = "hidden";
       return () => {
         document.body.style.overflow = originalOverflow;
       };
     }
-  }, [isMobileOpen, isMoveOptionOpen]);
-
-  // Touch and pointer start/move/end handlers
-  const startHold = (clientX: number, clientY: number) => {
-    if (isMobileOpen || isMoveOptionOpen) return;
-
-    startPosRef.current = { x: clientX, y: clientY };
-    is3sDoneRef.current = false;
-    didMoveRef.current = false;
-    setIsHolding(true);
-
-    cancelHoldTimer();
-
-    // Exactly 3.0s (3000ms) uninterrupted hold opens Move Option!
-    holdTimerRef.current = setTimeout(() => {
-      is3sDoneRef.current = true;
-      setIsHolding(false);
-      setIsMoveOptionOpen(true); // <--- OPEN MOVE OPTION!
-
-      if (typeof navigator !== "undefined" && navigator.vibrate) {
-        try {
-          navigator.vibrate([60, 40, 80]);
-        } catch {}
-      }
-    }, 3000);
-  };
-
-  const moveHold = (clientX: number, clientY: number) => {
-    if (isDragging) {
-      setDragCoords({ x: clientX, y: clientY });
-      const isLeft = clientX < window.innerWidth / 2;
-      const yRatio = clientY / window.innerHeight;
-      const vZone = yRatio < 0.33 ? "top" : yRatio > 0.67 ? "bot" : "mid";
-      setHoveredZone(`${vZone}-${isLeft ? "left" : "right"}` as any);
-      return;
-    }
-
-    // Only cancel hold if user moves far away (e.g. > 70px) indicating a deliberate swipe/scroll
-    const dist = Math.hypot(clientX - startPosRef.current.x, clientY - startPosRef.current.y);
-    if (dist > 70) {
-      didMoveRef.current = true;
-      cancelHoldTimer();
-      setIsHolding(false);
-    }
-  };
-
-  const endHold = (clientX: number, clientY: number) => {
-    cancelHoldTimer();
-
-    if (isDragging) {
-      const isLeft = clientX < window.innerWidth / 2;
-      const yRatio = Math.max(0.12, Math.min(0.85, clientY / window.innerHeight));
-
-      let targetTop = Math.round(yRatio * 100);
-      let cornerLabel = "Center Edge";
-      if (yRatio < 0.28) {
-        targetTop = 16;
-        cornerLabel = "Top Corner";
-      } else if (yRatio > 0.72) {
-        targetTop = 82;
-        cornerLabel = "Bottom Corner";
-      }
-
-      const newPos = {
-        side: (isLeft ? "left" : "right") as "left" | "right",
-        topPercent: targetTop,
-      };
-
-      savePosition(newPos);
-      setIsDragging(false);
-      setHoveredZone(null);
-
-      setToastMessage(`Menubar docked to ${isLeft ? "Left" : "Right"} ${cornerLabel}!`);
-      setTimeout(() => setToastMessage(null), 2500);
-      return;
-    }
-
-    // If 3s hold completed, move option is already open!
-    if (is3sDoneRef.current) {
-      setIsHolding(false);
-      setTimeout(() => {
-        is3sDoneRef.current = false;
-      }, 600);
-      return;
-    }
-
-    // One-click/single tap: Open menubar immediately!
-    const dist = Math.hypot(clientX - startPosRef.current.x, clientY - startPosRef.current.y);
-    setIsHolding(false);
-
-    // If released without large swipe (dist < 70px), treat as tap/click!
-    if (dist < 70) {
-      setIsMobileOpen(true);
-    }
-  };
-
-  const cancelHold = () => {
-    cancelHoldTimer();
-    setIsHolding(false);
-    setIsDragging(false);
-    setHoveredZone(null);
-  };
-
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    if (is3sDoneRef.current) {
-      return;
-    }
-    // Single click open menubar!
-    setIsMobileOpen(true);
-  };
-
-  // Window listeners during active drag
-  useEffect(() => {
-    if (!isDragging) return;
-
-    const handleWindowTouchStart = (e: TouchEvent) => {
-      const t = e.touches[0];
-      if (t) moveHold(t.clientX, t.clientY);
-    };
-    const handleWindowTouchMove = (e: TouchEvent) => {
-      const t = e.touches[0];
-      if (t) moveHold(t.clientX, t.clientY);
-    };
-    const handleWindowTouchEnd = (e: TouchEvent) => {
-      const t = e.changedTouches[0];
-      if (t) endHold(t.clientX, t.clientY);
-    };
-    const handleWindowMouseDown = (e: MouseEvent) => {
-      moveHold(e.clientX, e.clientY);
-    };
-    const handleWindowMouseMove = (e: MouseEvent) => {
-      moveHold(e.clientX, e.clientY);
-    };
-    const handleWindowMouseUp = (e: MouseEvent) => {
-      endHold(e.clientX, e.clientY);
-    };
-
-    window.addEventListener("touchstart", handleWindowTouchStart);
-    window.addEventListener("touchmove", handleWindowTouchMove, { passive: false });
-    window.addEventListener("touchend", handleWindowTouchEnd);
-    window.addEventListener("mousedown", handleWindowMouseDown);
-    window.addEventListener("mousemove", handleWindowMouseMove);
-    window.addEventListener("mouseup", handleWindowMouseUp);
-
-    return () => {
-      window.removeEventListener("touchstart", handleWindowTouchStart);
-      window.removeEventListener("touchmove", handleWindowTouchMove);
-      window.removeEventListener("touchend", handleWindowTouchEnd);
-      window.removeEventListener("mousedown", handleWindowMouseDown);
-      window.removeEventListener("mousemove", handleWindowMouseMove);
-      window.removeEventListener("mouseup", handleWindowMouseUp);
-    };
-  }, [isDragging]);
-
-  const toggleDockSide = () => {
-    const nextSide = dockPosition.side === "left" ? "right" : "left";
-    const newPos = { ...dockPosition, side: nextSide };
-    savePosition(newPos);
-    setToastMessage(`Menubar moved to ${nextSide === "left" ? "Left" : "Right"} Side!`);
-    setTimeout(() => setToastMessage(null), 2000);
-  };
+  }, [isMobileOpen]);
 
   const normalizePath = (p: string | null | undefined) => {
     if (!p) return "/";
@@ -256,81 +39,10 @@ export default function Navbar() {
   return (
     <>
       {/* ========================================================= */}
-      {/* 1. MOBILE RESPONSIVE MENU BAR (REPOSITIONABLE TAB & PANEL) */}
-      {/* Supports 3-second hold to drag & dock anywhere on screen    */}
+      {/* 1. MOBILE RESPONSIVE MENU BAR (RIGHT SIDE DOCKED)         */}
+      {/* Positioned vertically centered on the right edge (< md)    */}
       {/* ========================================================= */}
       <div className="lg:hidden">
-        {/* Docking Confirmation Toast */}
-        <AnimatePresence>
-          {toastMessage && (
-            <motion.div
-              initial={{ opacity: 0, y: -20, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.9 }}
-              className="fixed top-5 left-1/2 -translate-x-1/2 z-[160] bg-brand-dark/95 border border-orange-500/70 shadow-2xl shadow-brand-primary/40 text-white text-xs font-bold px-4 py-2 rounded-full flex items-center gap-2 pointer-events-none whitespace-nowrap"
-            >
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>{toastMessage}</span>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Drop Target Zones Overlay (Visible when dragging) */}
-        {isDragging && (
-          <div className="fixed inset-0 z-[130] pointer-events-none select-none">
-            <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] transition-opacity duration-300" />
-            {[
-              { id: "top-left", label: "Top-Left", pos: "top-4 left-3" },
-              { id: "mid-left", label: "Left Edge", pos: "top-1/2 -translate-y-1/2 left-3" },
-              { id: "bot-left", label: "Bottom-Left", pos: "bottom-4 left-3" },
-              { id: "top-right", label: "Top-Right", pos: "top-4 right-3" },
-              { id: "mid-right", label: "Right Edge", pos: "top-1/2 -translate-y-1/2 right-3" },
-              { id: "bot-right", label: "Bottom-Right", pos: "bottom-4 right-3" },
-            ].map((zone) => {
-              const isHovered = hoveredZone === zone.id;
-              return (
-                <div
-                  key={zone.id}
-                  className={`absolute ${zone.pos} w-20 h-28 rounded-3xl border-2 border-dashed flex flex-col items-center justify-center p-2 text-center transition-all duration-200 ${
-                    isHovered
-                      ? "border-orange-400 bg-orange-500/30 scale-105 shadow-2xl shadow-brand-primary/60 text-white"
-                      : "border-white/30 bg-white/5 text-white/60"
-                  }`}
-                >
-                  <span className="text-xl">{isHovered ? "📍" : "⚓"}</span>
-                  <span className="text-[9px] font-extrabold uppercase tracking-tight mt-1 leading-tight">
-                    {zone.label}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        )}
-
-        {/* Floating Active Drag Ghost (Follows Finger while Dragging) */}
-        {isDragging && (
-          <div
-            className="fixed z-[140] w-[46px] h-[120px] pointer-events-none select-none flex flex-col items-center justify-center"
-            style={{
-              left: `${dragCoords.x - 23}px`,
-              top: `${dragCoords.y - 60}px`,
-            }}
-          >
-            {/* Guide Badge above user's finger */}
-            <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black/95 text-white text-[10px] font-bold px-3 py-1 rounded-full whitespace-nowrap border border-orange-500 shadow-xl shadow-orange-500/50 flex items-center gap-1.5 animate-bounce">
-              <span>🎯</span>
-              <span>Drop on any corner or edge</span>
-            </div>
-
-            {/* Glowing Ghost Replica */}
-            <div className="w-full h-full rounded-2xl bg-orange-500/80 border-2 border-white shadow-2xl shadow-orange-500 flex flex-col items-center justify-center text-white scale-110">
-              <span className="text-[10px] font-extrabold tracking-widest uppercase rotate-90">
-                MOVE
-              </span>
-            </div>
-          </div>
-        )}
-
         {/* Full Backdrop Overlay when Mobile Menu is Open */}
         <AnimatePresence>
           {isMobileOpen && (
@@ -346,59 +58,22 @@ export default function Navbar() {
           )}
         </AnimatePresence>
 
-        {/* Floating Mobile Trigger Tab (One click: open menubar | 3s hold: open move options) */}
+        {/* Floating Mobile & Tablet Trigger Tab (Visible on Right Edge when Menu is Closed) */}
         <AnimatePresence>
-          {!isMobileOpen && !isDragging && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              onClick={handleClick}
-              onTouchStart={(e) => {
-                const t = e.touches[0];
-                startHold(t.clientX, t.clientY);
-              }}
-              onTouchMove={(e) => {
-                const t = e.touches[0];
-                if (t) moveHold(t.clientX, t.clientY);
-              }}
-              onTouchEnd={(e) => {
-                const t = e.changedTouches[0];
-                if (t) endHold(t.clientX, t.clientY);
-              }}
-              onTouchCancel={cancelHold}
-              onMouseDown={(e) => {
-                startHold(e.clientX, e.clientY);
-              }}
-              onMouseMove={(e) => {
-                if (e.buttons === 1) moveHold(e.clientX, e.clientY);
-              }}
-              onMouseUp={(e) => {
-                endHold(e.clientX, e.clientY);
-              }}
-              onContextMenu={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-              }}
-              style={{
-                top: `calc(${dockPosition.topPercent}% - 58px)`,
-                WebkitTouchCallout: "none",
-                WebkitUserSelect: "none",
-                userSelect: "none",
-              }}
-              className={`fixed ${
-                dockPosition.side === "left" ? "left-0" : "right-0"
-              } z-[60] w-[42px] h-[116px] flex flex-col items-center justify-center cursor-pointer group pointer-events-auto select-none`}
-              aria-label="Open Navigation Menu (Click to open, Hold 3s to Move)"
+          {!isMobileOpen && (
+            <motion.button
+              initial={{ x: 30, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: 30, opacity: 0 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsMobileOpen(true)}
+              className="fixed right-0 inset-y-0 my-auto z-[60] w-[42px] h-[116px] flex flex-col items-center justify-center cursor-pointer group pointer-events-auto select-none"
+              aria-label="Open Navigation Menu"
             >
               {/* Unified Background and Seamless Inverse Fillets SVG */}
               <svg
                 viewBox="0 0 42 116"
-                className={`absolute inset-0 w-full h-full overflow-visible filter ${
-                  dockPosition.side === "left"
-                    ? "drop-shadow-[4px_4px_16px_rgba(249,115,22,0.35)] scale-x-[-1]"
-                    : "drop-shadow-[-4px_4px_16px_rgba(249,115,22,0.35)]"
-                }`}
+                className="absolute inset-0 w-full h-full overflow-visible filter drop-shadow-[-4px_4px_16px_rgba(249,115,22,0.35)]"
                 fill="none"
               >
                 <defs>
@@ -428,11 +103,7 @@ export default function Navbar() {
               </svg>
 
               {/* Foreground Interactive Elements */}
-              <div
-                className={`relative z-10 flex flex-col items-center justify-center ${
-                  dockPosition.side === "left" ? "pr-1" : "pl-1"
-                }`}
-              >
+              <div className="relative z-10 flex flex-col items-center justify-center pl-1">
                 {/* Droplet with Ping and Bounce */}
                 <div className="relative flex items-center justify-center my-0.5">
                   <div className="absolute w-5 h-5 bg-brand-primary/40 rounded-full animate-ping pointer-events-none" />
@@ -447,165 +118,19 @@ export default function Navbar() {
                 {/* Glowing Pulse Dot */}
                 <div className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
               </div>
-
-              {/* 3-Second Hold Countdown Tooltip & Animated Circular Progress Ring */}
-              <AnimatePresence>
-                {isHolding && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.85, x: dockPosition.side === "right" ? 10 : -10 }}
-                    animate={{ opacity: 1, scale: 1, x: 0 }}
-                    exit={{ opacity: 0, scale: 0.85 }}
-                    className={`absolute top-1/2 -translate-y-1/2 ${
-                      dockPosition.side === "right" ? "right-[48px]" : "left-[48px]"
-                    } bg-[#0c1220]/95 backdrop-blur-md text-white border border-orange-500/80 text-[11px] font-bold px-3 py-2 rounded-2xl whitespace-nowrap shadow-2xl flex items-center gap-2.5 pointer-events-none z-50`}
-                  >
-                    <div className="w-5 h-5 relative flex items-center justify-center shrink-0">
-                      <svg className="w-full h-full -rotate-90" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.2)" strokeWidth="2.5" fill="none" />
-                        <motion.circle
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="#f97316"
-                          strokeWidth="2.5"
-                          fill="none"
-                          strokeDasharray={62.8}
-                          initial={{ strokeDashoffset: 62.8 }}
-                          animate={{ strokeDashoffset: 0 }}
-                          transition={{ duration: 3.0, ease: "linear" }}
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                      <span className="absolute text-[8px] font-extrabold text-orange-400">3s</span>
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-white text-[11px] font-bold leading-tight">Hold 3s to Move</span>
-                      <span className="text-orange-400/80 text-[9px] font-medium leading-tight">Release early to open menu</span>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
+            </motion.button>
           )}
         </AnimatePresence>
 
-        {/* Move Option Modal (Opened by 3-Second Hold) */}
-        <AnimatePresence>
-          {isMoveOptionOpen && (
-            <div className="fixed inset-0 z-[160] flex items-center justify-center p-4 pointer-events-auto">
-              {/* Dark backdrop */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute inset-0 bg-black/80 backdrop-blur-md"
-                onClick={() => setIsMoveOptionOpen(false)}
-              />
-
-              {/* Modal Card */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                className="relative w-full max-w-[340px] bg-[#0c1220] border border-orange-500/50 rounded-3xl p-5 shadow-2xl text-white flex flex-col items-center z-10"
-              >
-                {/* Header */}
-                <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl">🧭</span>
-                    <div>
-                      <h3 className="text-sm font-bold text-white tracking-wide">Move Menubar</h3>
-                      <p className="text-[10px] text-white/60">Choose dock corner on screen</p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => setIsMoveOptionOpen(false)}
-                    className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
-                    aria-label="Close"
-                  >
-                    ✕
-                  </button>
-                </div>
-
-                {/* Simulated Screen with 6 Dock Targets */}
-                <div className="w-full my-4 p-3 rounded-2xl bg-black/40 border border-white/10 grid grid-cols-2 gap-2.5">
-                  {[
-                    { label: "↖ Top-Left", side: "left", topPercent: 16, desc: "Top Corner" },
-                    { label: "↗ Top-Right", side: "right", topPercent: 16, desc: "Top Corner" },
-                    { label: "⬅ Mid-Left", side: "left", topPercent: 42, desc: "Center Edge" },
-                    { label: "➡ Mid-Right", side: "right", topPercent: 42, desc: "Center Edge" },
-                    { label: "↙ Bot-Left", side: "left", topPercent: 82, desc: "Bottom Corner" },
-                    { label: "↘ Bot-Right", side: "right", topPercent: 82, desc: "Bottom Corner" },
-                  ].map((target) => {
-                    const isSelected =
-                      dockPosition.side === target.side &&
-                      Math.abs(dockPosition.topPercent - target.topPercent) < 18;
-                    return (
-                      <button
-                        key={target.label}
-                        onClick={() => {
-                          const newPos = { side: target.side as "left" | "right", topPercent: target.topPercent };
-                          savePosition(newPos);
-                          setIsMoveOptionOpen(false);
-                          setToastMessage(`Menubar moved to ${target.side === "left" ? "Left" : "Right"} ${target.desc}!`);
-                          setTimeout(() => setToastMessage(null), 2500);
-                        }}
-                        className={`p-3 rounded-xl border flex flex-col items-center justify-center transition-all cursor-pointer ${
-                          isSelected
-                            ? "bg-brand-primary text-white border-orange-400 shadow-lg shadow-brand-primary/40 ring-2 ring-white/50"
-                            : "bg-white/5 hover:bg-white/15 border-white/10 text-white/80 hover:text-white"
-                        }`}
-                      >
-                        <span className="text-xs font-bold">{target.label}</span>
-                        <span className="text-[9px] opacity-70 mt-0.5">{target.desc}</span>
-                        {isSelected && (
-                          <span className="text-[8px] font-extrabold uppercase bg-white/20 px-1.5 py-0.5 rounded-full mt-1">
-                            Active
-                          </span>
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {/* Free Drag option */}
-                <button
-                  onClick={() => {
-                    setIsMoveOptionOpen(false);
-                    setIsDragging(true);
-                    setDragCoords({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
-                    setToastMessage("🎯 Drag and release anywhere to dock!");
-                    setTimeout(() => setToastMessage(null), 2000);
-                  }}
-                  className="w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold text-orange-300 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-                >
-                  <span>🎯</span>
-                  <span>Drag Freely on Screen</span>
-                </button>
-              </motion.div>
-            </div>
-          )}
-        </AnimatePresence>
-
-        {/* Mobile Slide-Out Menu Island Panel (Docked on Left or Right) */}
+        {/* Mobile Slide-Out Menu Island Panel (Right Side Docked) */}
         <AnimatePresence>
           {isMobileOpen && (
             <motion.div
-              initial={{
-                x: dockPosition.side === "left" ? -180 : 180,
-                opacity: 0,
-                scale: 0.95,
-              }}
+              initial={{ x: 180, opacity: 0, scale: 0.95 }}
               animate={{ x: 0, opacity: 1, scale: 1 }}
-              exit={{
-                x: dockPosition.side === "left" ? -180 : 180,
-                opacity: 0,
-                scale: 0.95,
-              }}
+              exit={{ x: 180, opacity: 0, scale: 0.95 }}
               transition={{ type: "spring", stiffness: 260, damping: 25, mass: 0.8 }}
-              className={`fixed inset-y-2 sm:inset-y-4 ${
-                dockPosition.side === "left" ? "left-2 sm:left-4" : "right-2 sm:right-4"
-              } my-auto z-[120] w-[280px] landscape:w-[420px] max-w-[calc(100vw-16px)] h-fit max-h-[calc(100dvh-16px)] sm:max-h-[calc(100dvh-32px)] flex flex-col pointer-events-auto`}
+              className="fixed inset-y-2 sm:inset-y-4 right-2 sm:right-4 my-auto z-[120] w-[280px] landscape:w-[420px] max-w-[calc(100vw-16px)] h-fit max-h-[calc(100dvh-16px)] sm:max-h-[calc(100dvh-32px)] flex flex-col pointer-events-auto"
             >
               <div className="relative bg-brand-dark/95 backdrop-blur-2xl text-white p-3.5 sm:p-4 rounded-3xl border border-orange-500/40 shadow-2xl shadow-brand-primary/50 flex flex-col max-h-[calc(100dvh-16px)] sm:max-h-[calc(100dvh-32px)] overflow-hidden">
                 
@@ -665,7 +190,7 @@ export default function Navbar() {
                   className="absolute -top-2 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-gradient-to-r from-orange-600 via-amber-500 to-orange-600 rounded-full blur-xl pointer-events-none -z-10"
                 />
 
-                {/* Header with Droplet, Corner Dock Pills, and Close Button */}
+                {/* Header with Droplet and Close Button */}
                 <div className="flex items-center justify-between pt-1 pb-2 border-b border-white/10 shrink-0">
                   <div className="flex items-center gap-2">
                     <div className="relative flex items-center justify-center">
@@ -676,60 +201,13 @@ export default function Navbar() {
                       Navigation
                     </span>
                   </div>
-
-                  <div className="flex items-center gap-1.5">
-                    {/* 4 Corner Shortcut Dock Pills */}
-                    <div className="flex items-center bg-white/10 rounded-full p-0.5 border border-white/10">
-                      {[
-                        { label: "↖", pos: { side: "left", topPercent: 16 }, title: "Top-Left" },
-                        { label: "↗", pos: { side: "right", topPercent: 16 }, title: "Top-Right" },
-                        { label: "↙", pos: { side: "left", topPercent: 82 }, title: "Bottom-Left" },
-                        { label: "↘", pos: { side: "right", topPercent: 82 }, title: "Bottom-Right" },
-                      ].map((corner) => {
-                        const isCurrent =
-                          dockPosition.side === corner.pos.side &&
-                          Math.abs(dockPosition.topPercent - corner.pos.topPercent) < 22;
-                        return (
-                          <button
-                            key={corner.title}
-                            onClick={() => {
-                              savePosition(corner.pos as any);
-                              setToastMessage(`Menubar docked to ${corner.title} Corner!`);
-                              setTimeout(() => setToastMessage(null), 2000);
-                            }}
-                            className={`w-6 h-6 rounded-full text-[10px] font-bold flex items-center justify-center transition-all cursor-pointer ${
-                              isCurrent
-                                ? "bg-brand-primary text-white shadow-md shadow-brand-primary/50"
-                                : "text-white/70 hover:text-white hover:bg-white/10"
-                            }`}
-                            title={`Dock to ${corner.title}`}
-                            aria-label={`Dock to ${corner.title}`}
-                          >
-                            {corner.label}
-                          </button>
-                        );
-                      })}
-                    </div>
-
-                    <button
-                      onClick={() => {
-                        setIsMobileOpen(false);
-                        setIsMoveOptionOpen(true);
-                      }}
-                      className="px-2 py-0.5 rounded-full bg-white/10 hover:bg-orange-500/20 text-orange-300 text-[10px] font-semibold flex items-center gap-1 transition-colors cursor-pointer"
-                      title="Move Options"
-                    >
-                      <span>🧭 Move</span>
-                    </button>
-
-                    <button
-                      onClick={() => setIsMobileOpen(false)}
-                      className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
-                      aria-label="Close Menu"
-                    >
-                      ✕
-                    </button>
-                  </div>
+                  <button
+                    onClick={() => setIsMobileOpen(false)}
+                    className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
+                    aria-label="Close Menu"
+                  >
+                    ✕
+                  </button>
                 </div>
 
                 {/* Scrollable Links List */}
