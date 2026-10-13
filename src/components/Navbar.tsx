@@ -18,17 +18,15 @@ export default function Navbar() {
 
   // Long-press (3 seconds) & drag states
   const [isHolding, setIsHolding] = useState(false);
-  const [holdProgress, setHoldProgress] = useState(0); // 0 to 100
   const [isDragging, setIsDragging] = useState(false);
   const [dragCoords, setDragCoords] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [hoveredZone, setHoveredZone] = useState<"top-left" | "mid-left" | "bot-left" | "top-right" | "mid-right" | "bot-right" | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const holdTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const holdStartTimeRef = useRef<number>(0);
   const startPosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-  const didDragRef = useRef<boolean>(false);
+  const isDraggingRef = useRef<boolean>(false);
+  const didMoveRef = useRef<boolean>(false);
 
   // Restore saved position from localStorage
   useEffect(() => {
@@ -53,22 +51,16 @@ export default function Navbar() {
     } catch {}
   };
 
-  const clearHold = () => {
+  const cancelHoldTimer = () => {
     if (holdTimerRef.current) {
       clearTimeout(holdTimerRef.current);
       holdTimerRef.current = null;
     }
-    if (progressIntervalRef.current) {
-      clearInterval(progressIntervalRef.current);
-      progressIntervalRef.current = null;
-    }
-    setIsHolding(false);
-    setHoldProgress(0);
   };
 
   useEffect(() => {
     return () => {
-      clearHold();
+      cancelHoldTimer();
     };
   }, []);
 
@@ -83,35 +75,24 @@ export default function Navbar() {
     }
   }, [isMobileOpen]);
 
-  // Pointer event handlers for 3-second hold to drag
-  const handlePointerDown = (e: React.PointerEvent) => {
+  // Touch and pointer start/move/end handlers
+  const startHold = (clientX: number, clientY: number) => {
     if (isMobileOpen) return;
 
-    try {
-      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-    } catch {}
-
-    didDragRef.current = false;
-    startPosRef.current = { x: e.clientX, y: e.clientY };
-    holdStartTimeRef.current = Date.now();
+    startPosRef.current = { x: clientX, y: clientY };
+    isDraggingRef.current = false;
+    didMoveRef.current = false;
     setIsHolding(true);
-    setHoldProgress(0);
 
-    // Update circular progress every 30ms over 3000ms
-    progressIntervalRef.current = setInterval(() => {
-      const elapsed = Date.now() - holdStartTimeRef.current;
-      const pct = Math.min(100, (elapsed / 3000) * 100);
-      setHoldProgress(pct);
-    }, 30);
+    cancelHoldTimer();
 
-    // Trigger drag mode after 3 seconds (3000ms) of steady holding
+    // Exactly 3.0s (3000ms) uninterrupted hold threshold
     holdTimerRef.current = setTimeout(() => {
-      didDragRef.current = true;
-      clearHold();
+      isDraggingRef.current = true;
+      setIsHolding(false);
       setIsDragging(true);
-      setDragCoords({ x: e.clientX, y: e.clientY });
+      setDragCoords({ x: clientX, y: clientY });
 
-      // Haptic vibration feedback on mobile
       if (typeof navigator !== "undefined" && navigator.vibrate) {
         try {
           navigator.vibrate([60, 40, 80]);
@@ -120,36 +101,32 @@ export default function Navbar() {
     }, 3000);
   };
 
-  const handlePointerMove = (e: React.PointerEvent) => {
-    if (isDragging) {
-      setDragCoords({ x: e.clientX, y: e.clientY });
-
-      // Identify closest snap zone
-      const isLeft = e.clientX < window.innerWidth / 2;
-      const yRatio = e.clientY / window.innerHeight;
+  const moveHold = (clientX: number, clientY: number) => {
+    if (isDraggingRef.current) {
+      setDragCoords({ x: clientX, y: clientY });
+      const isLeft = clientX < window.innerWidth / 2;
+      const yRatio = clientY / window.innerHeight;
       const vZone = yRatio < 0.33 ? "top" : yRatio > 0.67 ? "bot" : "mid";
       setHoveredZone(`${vZone}-${isLeft ? "left" : "right"}` as any);
       return;
     }
 
-    if (isHolding) {
-      // If user swipes more than 14px before 3s, cancel hold (user was scrolling)
-      const dist = Math.hypot(e.clientX - startPosRef.current.x, e.clientY - startPosRef.current.y);
-      if (dist > 14) {
-        clearHold();
+    if (!didMoveRef.current) {
+      const dist = Math.hypot(clientX - startPosRef.current.x, clientY - startPosRef.current.y);
+      if (dist > 15) {
+        didMoveRef.current = true;
+        cancelHoldTimer();
+        setIsHolding(false);
       }
     }
   };
 
-  const handlePointerUp = (e: React.PointerEvent) => {
-    try {
-      (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
-    } catch {}
+  const endHold = (clientX: number, clientY: number) => {
+    cancelHoldTimer();
 
-    if (isDragging) {
-      // Drop and dock to chosen edge or corner
-      const isLeft = e.clientX < window.innerWidth / 2;
-      const yRatio = Math.max(0.12, Math.min(0.85, e.clientY / window.innerHeight));
+    if (isDraggingRef.current) {
+      const isLeft = clientX < window.innerWidth / 2;
+      const yRatio = Math.max(0.12, Math.min(0.85, clientY / window.innerHeight));
 
       let targetTop = Math.round(yRatio * 100);
       let cornerLabel = "Center Edge";
@@ -167,6 +144,7 @@ export default function Navbar() {
       };
 
       savePosition(newPos);
+      isDraggingRef.current = false;
       setIsDragging(false);
       setHoveredZone(null);
 
@@ -175,23 +153,54 @@ export default function Navbar() {
       return;
     }
 
-    const wasHolding = isHolding;
-    clearHold();
+    const wasHolding = !didMoveRef.current;
+    setIsHolding(false);
 
-    // If hold was released under 3 seconds without dragging, treat as normal click!
-    if (wasHolding && !didDragRef.current) {
+    // If tapped without moving and without waiting 3s, open menu immediately
+    if (wasHolding) {
       setIsMobileOpen(true);
     }
   };
 
-  const handlePointerCancel = (e: React.PointerEvent) => {
-    try {
-      (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
-    } catch {}
-    clearHold();
+  const cancelHold = () => {
+    cancelHoldTimer();
+    isDraggingRef.current = false;
+    setIsHolding(false);
     setIsDragging(false);
     setHoveredZone(null);
   };
+
+  // Window listeners during active drag
+  useEffect(() => {
+    if (!isDragging) return;
+
+    const handleWindowTouchMove = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (t) moveHold(t.clientX, t.clientY);
+    };
+    const handleWindowTouchEnd = (e: TouchEvent) => {
+      const t = e.changedTouches[0];
+      if (t) endHold(t.clientX, t.clientY);
+    };
+    const handleWindowMouseMove = (e: MouseEvent) => {
+      moveHold(e.clientX, e.clientY);
+    };
+    const handleWindowMouseUp = (e: MouseEvent) => {
+      endHold(e.clientX, e.clientY);
+    };
+
+    window.addEventListener("touchmove", handleWindowTouchMove, { passive: false });
+    window.addEventListener("touchend", handleWindowTouchEnd);
+    window.addEventListener("mousemove", handleWindowMouseMove);
+    window.addEventListener("mouseup", handleWindowMouseUp);
+
+    return () => {
+      window.removeEventListener("touchmove", handleWindowTouchMove);
+      window.removeEventListener("touchend", handleWindowTouchEnd);
+      window.removeEventListener("mousemove", handleWindowMouseMove);
+      window.removeEventListener("mouseup", handleWindowMouseUp);
+    };
+  }, [isDragging]);
 
   const toggleDockSide = () => {
     const nextSide = dockPosition.side === "left" ? "right" : "left";
@@ -318,12 +327,38 @@ export default function Navbar() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               whileTap={{ scale: 0.96 }}
-              onPointerDown={handlePointerDown}
-              onPointerMove={handlePointerMove}
-              onPointerUp={handlePointerUp}
-              onPointerCancel={handlePointerCancel}
+              onTouchStart={(e) => {
+                const t = e.touches[0];
+                startHold(t.clientX, t.clientY);
+              }}
+              onTouchMove={(e) => {
+                const t = e.touches[0];
+                if (t) moveHold(t.clientX, t.clientY);
+              }}
+              onTouchEnd={(e) => {
+                const t = e.changedTouches[0];
+                if (t) endHold(t.clientX, t.clientY);
+              }}
+              onTouchCancel={cancelHold}
+              onMouseDown={(e) => {
+                startHold(e.clientX, e.clientY);
+              }}
+              onMouseMove={(e) => {
+                if (e.buttons === 1) moveHold(e.clientX, e.clientY);
+              }}
+              onMouseUp={(e) => {
+                endHold(e.clientX, e.clientY);
+              }}
+              onContextMenu={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
               style={{
                 top: `calc(${dockPosition.topPercent}% - 58px)`,
+                WebkitTouchCallout: "none",
+                WebkitUserSelect: "none",
+                userSelect: "none",
+                touchAction: "none",
               }}
               className={`fixed ${
                 dockPosition.side === "left" ? "left-0" : "right-0"
@@ -409,12 +444,13 @@ export default function Navbar() {
                           strokeWidth="3"
                           fill="none"
                           strokeDasharray={62.8}
-                          strokeDashoffset={62.8 - (62.8 * holdProgress) / 100}
+                          strokeDashoffset={isHolding ? 0 : 62.8}
                           strokeLinecap="round"
+                          className={isHolding ? "transition-[stroke-dashoffset] duration-[3000ms] ease-linear" : "none"}
                         />
                       </svg>
                     </div>
-                    <span>Hold 3s to Move ({Math.max(1, Math.ceil((3000 - (holdProgress * 30)) / 1000))}s)</span>
+                    <span>Hold 3s to Move Menubar...</span>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -500,7 +536,7 @@ export default function Navbar() {
                   className="absolute -top-2 left-1/2 -translate-x-1/2 w-3/4 h-8 bg-gradient-to-r from-orange-600 via-amber-500 to-orange-600 rounded-full blur-xl pointer-events-none -z-10"
                 />
 
-                {/* Header with Droplet, Side-Switch, and Close Button */}
+                {/* Header with Droplet, Corner Dock Pills, and Close Button */}
                 <div className="flex items-center justify-between pt-1 pb-2 border-b border-white/10 shrink-0">
                   <div className="flex items-center gap-2">
                     <div className="relative flex items-center justify-center">
@@ -513,16 +549,38 @@ export default function Navbar() {
                   </div>
 
                   <div className="flex items-center gap-1.5">
-                    {/* Quick Switch Side Button */}
-                    <button
-                      onClick={toggleDockSide}
-                      className="px-2.5 py-1 rounded-full bg-white/10 hover:bg-orange-500/20 border border-white/10 text-[10px] font-semibold text-orange-300 flex items-center gap-1 transition-colors cursor-pointer"
-                      title="Switch side"
-                      aria-label="Switch side"
-                    >
-                      <span>⇋</span>
-                      <span>{dockPosition.side === "left" ? "Dock Right" : "Dock Left"}</span>
-                    </button>
+                    {/* 4 Corner Shortcut Dock Pills */}
+                    <div className="flex items-center bg-white/10 rounded-full p-0.5 border border-white/10">
+                      {[
+                        { label: "↖", pos: { side: "left", topPercent: 16 }, title: "Top-Left" },
+                        { label: "↗", pos: { side: "right", topPercent: 16 }, title: "Top-Right" },
+                        { label: "↙", pos: { side: "left", topPercent: 82 }, title: "Bottom-Left" },
+                        { label: "↘", pos: { side: "right", topPercent: 82 }, title: "Bottom-Right" },
+                      ].map((corner) => {
+                        const isCurrent =
+                          dockPosition.side === corner.pos.side &&
+                          Math.abs(dockPosition.topPercent - corner.pos.topPercent) < 22;
+                        return (
+                          <button
+                            key={corner.title}
+                            onClick={() => {
+                              savePosition(corner.pos as any);
+                              setToastMessage(`Menubar docked to ${corner.title} Corner!`);
+                              setTimeout(() => setToastMessage(null), 2000);
+                            }}
+                            className={`w-6 h-6 rounded-full text-[10px] font-bold flex items-center justify-center transition-all cursor-pointer ${
+                              isCurrent
+                                ? "bg-brand-primary text-white shadow-md shadow-brand-primary/50"
+                                : "text-white/70 hover:text-white hover:bg-white/10"
+                            }`}
+                            title={`Dock to ${corner.title}`}
+                            aria-label={`Dock to ${corner.title}`}
+                          >
+                            {corner.label}
+                          </button>
+                        );
+                      })}
+                    </div>
 
                     <button
                       onClick={() => setIsMobileOpen(false)}
