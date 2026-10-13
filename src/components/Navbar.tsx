@@ -41,7 +41,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-[3px] z-[70] pointer-events-auto"
+              className="fixed inset-0 bg-black/60 backdrop-blur-[3px] z-[110] pointer-events-auto"
               onClick={() => setIsMobileOpen(false)}
             />
           )}
@@ -119,9 +119,9 @@ export default function Navbar() {
               animate={{ x: 0, opacity: 1, scale: 1 }}
               exit={{ x: 200, opacity: 0, scale: 0.92 }}
               transition={{ type: "spring", stiffness: 220, damping: 24, mass: 0.8 }}
-              className="fixed right-3 top-[38%] -translate-y-1/2 z-[80] w-[270px] max-w-[85vw] pointer-events-auto"
+              className="fixed right-2 sm:right-4 top-1/2 -translate-y-1/2 z-[120] w-[280px] max-w-[88vw] max-h-[calc(100dvh-20px)] flex flex-col pointer-events-auto"
             >
-              <div className="relative bg-brand-dark/95 backdrop-blur-2xl text-white p-5 rounded-3xl border border-orange-500/40 shadow-2xl shadow-brand-primary/50 flex flex-col gap-3 overflow-hidden">
+              <div className="relative bg-brand-dark/95 backdrop-blur-2xl text-white p-3.5 sm:p-5 rounded-3xl border border-orange-500/40 shadow-2xl shadow-brand-primary/50 flex flex-col max-h-[calc(100dvh-20px)] overflow-hidden">
                 
                 {/* Traveling Sine Wave Light Ribbon (Top of Island) */}
                 <div className="absolute top-0 left-0 right-0 h-4 overflow-hidden pointer-events-none">
@@ -180,7 +180,7 @@ export default function Navbar() {
                 />
 
                 {/* Header with Droplet and Close Button */}
-                <div className="flex items-center justify-between pt-1 pb-1 border-b border-white/10">
+                <div className="flex items-center justify-between pt-1 pb-2 border-b border-white/10 shrink-0">
                   <div className="flex items-center gap-2">
                     <div className="relative flex items-center justify-center">
                       <div className="absolute w-5 h-5 bg-brand-primary/40 rounded-full animate-ping" />
@@ -192,15 +192,15 @@ export default function Navbar() {
                   </div>
                   <button
                     onClick={() => setIsMobileOpen(false)}
-                    className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80 hover:text-white transition-colors"
+                    className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
                     aria-label="Close Menu"
                   >
                     ✕
                   </button>
                 </div>
 
-                {/* Vertical Links List */}
-                <div className="flex flex-col gap-2 pt-1">
+                {/* Vertical Scrollable Links List */}
+                <div className="flex flex-col gap-1.5 sm:gap-2 pt-2 overflow-y-auto overscroll-contain pr-1 flex-1 min-h-0 [scrollbar-width:thin] [scrollbar-color:rgba(249,115,22,0.4)_transparent] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-orange-500/40 [&::-webkit-scrollbar-thumb]:rounded-full">
                   {navLinks.map((link) => {
                     const isActive = currentPath === normalizePath(link.href);
                     if (link.isCta) {
@@ -209,7 +209,7 @@ export default function Navbar() {
                           key={link.href}
                           href={link.href}
                           onClick={() => setIsMobileOpen(false)}
-                          className={`mt-1 px-4 py-2.5 rounded-2xl text-xs font-bold flex items-center justify-between transition-all ${
+                          className={`mt-1 px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-bold flex items-center justify-between transition-all shrink-0 ${
                             isActive
                               ? "bg-white text-brand-dark shadow-md ring-2 ring-brand-primary/50"
                               : "bg-brand-primary text-white shadow-lg shadow-brand-primary/20 hover:bg-orange-600"
@@ -225,7 +225,7 @@ export default function Navbar() {
                         key={link.href}
                         href={link.href}
                         onClick={() => setIsMobileOpen(false)}
-                        className={`px-4 py-2.5 rounded-2xl text-xs font-medium flex items-center justify-between transition-all ${
+                        className={`px-4 py-2 sm:py-2.5 rounded-2xl text-xs font-medium flex items-center justify-between transition-all shrink-0 ${
                           isActive
                             ? "bg-white text-brand-dark font-bold shadow-md"
                             : "bg-white/5 text-white/80 hover:bg-white/15 border border-white/5 hover:text-white"
