@@ -56,7 +56,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <h4 className="text-lg font-bold mb-6">Legal Policies</h4>
             <ul className="space-y-4">
-              <li><a href="#terms" className="text-gray-400 hover:text-brand-primary transition-colors">Terms & Conditions</a></li>
+              <li><Link href="/terms" className="text-gray-400 hover:text-brand-primary transition-colors">Terms & Conditions</Link></li>
               <li><a href="#privacy" className="text-gray-400 hover:text-brand-primary transition-colors">Privacy Policy</a></li>
             </ul>
           </div>
