@@ -7,17 +7,18 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="pt-24 pb-4 md:pt-32 md:pb-6 px-4 overflow-hidden relative">
+    <section className="pt-8 sm:pt-14 md:pt-32 pb-4 md:pb-6 px-4 overflow-hidden relative">
       <div className="max-w-7xl mx-auto text-center relative z-10 w-full flex flex-col items-center">
 
 
         <motion.h1 
-          className="text-[1.05rem] min-[360px]:text-[1.2rem] min-[400px]:text-[1.35rem] sm:text-[1.75rem] md:text-[2.25rem] lg:text-[2.85rem] xl:text-[3.5rem] font-extrabold text-brand-dark tracking-tight mb-5 md:mb-7 leading-none whitespace-nowrap w-full mx-auto"
+          className="text-[1.35rem] min-[360px]:text-[1.6rem] min-[400px]:text-[1.75rem] sm:text-[1.75rem] md:text-[2.25rem] lg:text-[2.85rem] xl:text-[3.5rem] font-extrabold text-brand-dark tracking-tight mb-4 md:mb-7 leading-[1.2] sm:leading-none sm:whitespace-nowrap w-full mx-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          Website Design & <span className="text-brand-primary">Digital Marketing Agency</span>
+          <span className="block sm:inline">Website Design &amp; </span>
+          <span className="text-brand-primary block sm:inline">Digital Marketing Agency</span>
         </motion.h1>
         
         <motion.p 
