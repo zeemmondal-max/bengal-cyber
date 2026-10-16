@@ -29,11 +29,11 @@ export default function ServicesHero() {
   };
 
   return (
-    <section className="pt-6 sm:pt-12 md:pt-28 pb-4 md:pb-6 text-center relative z-10 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+    <section className="pt-2 sm:pt-8 md:pt-28 pb-4 md:pb-6 text-center relative z-10 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         
         {/* Main Lucrative Hero Container */}
-        <div className="relative rounded-[2rem] sm:rounded-[3.5rem] p-4 sm:p-10 md:p-14 lg:p-16 overflow-hidden border border-orange-500/25 bg-gradient-to-b from-[#0a0f1d]/95 via-[#0d1629]/95 to-[#080d19]/95 backdrop-blur-2xl shadow-2xl shadow-orange-500/10">
+        <div className="relative rounded-[1.5rem] sm:rounded-[3.5rem] pt-4 pb-5 px-3 sm:p-10 md:p-14 lg:p-16 overflow-hidden border border-orange-500/25 bg-gradient-to-b from-[#0a0f1d]/95 via-[#0d1629]/95 to-[#080d19]/95 backdrop-blur-2xl shadow-2xl shadow-orange-500/10">
           
           {/* Ambient Lighting Gradients */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 max-w-2xl h-48 bg-gradient-to-r from-orange-600/30 via-amber-500/25 to-orange-500/30 blur-[100px] pointer-events-none -z-10" />
@@ -57,7 +57,7 @@ export default function ServicesHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-2xl min-[360px]:text-3xl sm:text-4xl md:text-5xl lg:text-[3.2rem] xl:text-[3.75rem] font-extrabold text-white tracking-tight mb-5 leading-tight sm:whitespace-nowrap w-full mx-auto"
+            className="text-2xl min-[360px]:text-3xl sm:text-4xl md:text-5xl lg:text-[3.2rem] xl:text-[3.75rem] font-extrabold text-white tracking-tight mb-3 sm:mb-5 leading-tight sm:whitespace-nowrap w-full mx-auto"
           >
             <span className="block sm:inline">Digital Marketing &amp; </span>
             <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-500 bg-clip-text text-transparent drop-shadow-sm block sm:inline">
