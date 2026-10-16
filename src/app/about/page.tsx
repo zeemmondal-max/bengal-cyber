@@ -11,11 +11,11 @@ export default function AboutPage() {
     <main className="min-h-screen bg-white">
       <Navbar />
       
-      {/* Spacer */}
-      <div className="h-20 bg-slate-50"></div>
+      {/* Spacer on desktop */}
+      <div className="hidden lg:block h-20 bg-slate-50"></div>
       
       {/* Hero Section */}
-      <section className="py-24 bg-slate-50 relative overflow-hidden">
+      <section className="pt-6 pb-16 sm:pt-12 sm:pb-20 md:py-24 bg-slate-50 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3"></div>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <motion.div

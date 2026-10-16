@@ -165,11 +165,11 @@ export default function ProjectsPage() {
       />
       <Navbar />
       
-      {/* Spacer to account for fixed navbar */}
-      <div className="h-20 bg-transparent"></div>
+      {/* Spacer to account for fixed navbar on desktop */}
+      <div className="hidden lg:block h-20 bg-transparent"></div>
       
       {/* Page Header */}
-      <section className="py-20 text-center relative z-10">
+      <section className="pt-4 pb-12 sm:pt-10 sm:pb-16 md:py-20 text-center relative z-10">
         <div className="max-w-4xl mx-auto px-4">
           <span className="inline-block px-4 py-1.5 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-widest mb-4">
             Proven Results & Client Transformations

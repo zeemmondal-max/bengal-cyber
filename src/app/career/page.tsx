@@ -253,7 +253,7 @@ export default function CareerPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative pt-20 sm:pt-24 md:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-20 bg-brand-dark text-white rounded-b-[2rem] sm:rounded-b-[2.5rem] lg:rounded-b-[3.5rem] overflow-hidden">
+      <section className="relative pt-8 sm:pt-20 md:pt-28 lg:pt-36 pb-12 sm:pb-16 lg:pb-20 bg-brand-dark text-white rounded-b-[2rem] sm:rounded-b-[2.5rem] lg:rounded-b-[3.5rem] overflow-hidden">
         {/* Glow gradients */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-brand-primary/20 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-10 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />

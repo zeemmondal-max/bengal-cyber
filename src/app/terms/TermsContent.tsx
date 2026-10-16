@@ -67,11 +67,11 @@ export default function TermsContent() {
     <main className="min-h-screen bg-white text-slate-800">
       <Navbar />
 
-      {/* Top Header Spacer */}
-      <div className="h-20 bg-slate-50"></div>
+      {/* Top Header Spacer on desktop */}
+      <div className="hidden lg:block h-20 bg-slate-50"></div>
 
       {/* Hero Header Section */}
-      <section className="py-16 md:py-20 bg-gradient-to-b from-slate-50 via-white to-slate-50 relative overflow-hidden border-b border-slate-200">
+      <section className="pt-6 pb-12 sm:pt-10 sm:pb-16 md:py-20 bg-gradient-to-b from-slate-50 via-white to-slate-50 relative overflow-hidden border-b border-slate-200">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
