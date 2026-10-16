@@ -29,7 +29,7 @@ export default function ServicesHero() {
   };
 
   return (
-    <section className="pt-24 pb-4 sm:pt-28 md:pb-6 text-center relative z-10 overflow-hidden">
+    <section className="pt-6 sm:pt-12 md:pt-28 pb-4 md:pb-6 text-center relative z-10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         
         {/* Main Lucrative Hero Container */}
