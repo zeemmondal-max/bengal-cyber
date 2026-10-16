@@ -52,15 +52,15 @@ export default function ServicesHero() {
           {/* Glowing Top Rim Streak */}
           <div className="absolute top-0 left-10 right-10 h-[1.5px] bg-gradient-to-r from-transparent via-orange-400 to-transparent opacity-80" />
 
-          {/* SEO-Friendly Headline (Guaranteed Single Line) */}
+          {/* Headline (2 lines on mobile, 1 line on desktop/tablet) */}
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="text-xl min-[360px]:text-2xl min-[420px]:text-3xl sm:text-4xl md:text-5xl lg:text-[3.2rem] xl:text-[3.75rem] font-extrabold text-white tracking-tight mb-5 leading-tight whitespace-nowrap w-full mx-auto"
+            className="text-2xl min-[360px]:text-3xl sm:text-4xl md:text-5xl lg:text-[3.2rem] xl:text-[3.75rem] font-extrabold text-white tracking-tight mb-5 leading-tight sm:whitespace-nowrap w-full mx-auto"
           >
-            Digital Marketing &{" "}
-            <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-500 bg-clip-text text-transparent drop-shadow-sm">
+            <span className="block sm:inline">Digital Marketing &amp; </span>
+            <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-orange-500 bg-clip-text text-transparent drop-shadow-sm block sm:inline">
               Web Services
             </span>
           </motion.h1>
