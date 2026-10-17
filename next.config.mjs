@@ -1,13 +1,15 @@
+const isProd = process.env.NODE_ENV === 'production';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  output: isProd ? 'export' : undefined,
   trailingSlash: true,
   poweredByHeader: false,
   compress: true,
   productionBrowserSourceMaps: false,
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
+  compiler: isProd ? {
+    removeConsole: true,
+  } : {},
   experimental: {
     optimizePackageImports: ['lucide-react', 'react-icons', 'framer-motion'],
   },
