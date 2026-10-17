@@ -110,7 +110,7 @@ export default function ProjectHighlights() {
                     loop 
                     muted 
                     playsInline 
-                    preload="metadata"
+                    preload="none"
                     onMouseEnter={(e) => {
                       const v = e.currentTarget;
                       if (v.paused) v.play().catch(() => {});

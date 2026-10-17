@@ -229,8 +229,8 @@ export default function AboutPage() {
                   src="/babul-hossen.jpg"
                   alt="Babul Hossen - IT Head at Bengal Cyber"
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover object-top hover:scale-105 transition-transform duration-700"
-                  priority
                 />
                 <div className="absolute top-4 right-4 z-10">
                   <span className="px-3.5 py-1.5 bg-brand-dark/85 backdrop-blur-md text-white text-xs font-bold rounded-full uppercase tracking-wider shadow-md border border-white/20">
@@ -269,8 +269,8 @@ export default function AboutPage() {
                   src="/zereen-mondal.jpg"
                   alt="Zereen Mondal - HR Head at Bengal Cyber"
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover object-top hover:scale-105 transition-transform duration-700"
-                  priority
                 />
                 <div className="absolute top-4 right-4 z-10">
                   <span className="px-3.5 py-1.5 bg-brand-primary text-white text-xs font-bold rounded-full uppercase tracking-wider shadow-md">
@@ -309,8 +309,8 @@ export default function AboutPage() {
                   src="/ismahile-hossain.jpg"
                   alt="Ismahile Hossain - Operation Head at Bengal Cyber"
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover object-top hover:scale-105 transition-transform duration-700"
-                  priority
                 />
                 <div className="absolute top-4 right-4 z-10">
                   <span className="px-3.5 py-1.5 bg-brand-dark/85 backdrop-blur-md text-white text-xs font-bold rounded-full uppercase tracking-wider shadow-md border border-white/20">

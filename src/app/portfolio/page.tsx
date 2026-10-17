@@ -199,7 +199,7 @@ export default function ProjectsPage() {
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                preload="none"
               >
                 <source src="/projects/project1.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
@@ -282,6 +282,8 @@ export default function ProjectsPage() {
                   <img 
                     src="/brands/brand7.png" 
                     alt="Athena's Furniture BD Logo" 
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -313,6 +315,8 @@ export default function ProjectsPage() {
                   <img 
                     src="/brands/brand1.png" 
                     alt="TIANAS BD Logo" 
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -408,6 +412,8 @@ export default function ProjectsPage() {
               <img 
                 src="/projects/bengal-glory-mockup.png" 
                 alt="Bengal Glory Ltd - Corporate Website Development Case Study by Bengal Cyber" 
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover object-top relative z-10 group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-brand-dark text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm z-20">
@@ -429,7 +435,7 @@ export default function ProjectsPage() {
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                preload="none"
               >
                 <source src="/projects/cancer-answer.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
@@ -517,6 +523,8 @@ export default function ProjectsPage() {
               <img 
                 src="/projects/eva-iqra-motors.jpg" 
                 alt="Eva Iqra Motors - Automotive Social Media Ads Case Study by Bengal Cyber" 
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover relative z-10 group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-brand-dark text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm z-20">

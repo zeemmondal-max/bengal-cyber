@@ -178,6 +178,7 @@ if ($file_key !== null) {
         $body .= "Content-Disposition: attachment; filename=\"{$file_name}\"\r\n";
         $body .= "Content-Transfer-Encoding: base64\r\n\r\n";
         $body .= $file_content . "\r\n\r\n";
+        unset($file_content);
     }
 }
 
