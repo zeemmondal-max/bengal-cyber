@@ -88,6 +88,12 @@ const aboutJsonLd = {
             "name": "Ismahile Hossain",
             "jobTitle": "Operation Head",
             "image": "https://bengalcyber.com/ismahile-hossain.jpg"
+          },
+          {
+            "@type": "Person",
+            "name": "Enam Hossain Masud Alom",
+            "jobTitle": "Tax and Audit",
+            "image": "https://bengalcyber.com/enam-hossain.jpg"
           }
         ],
         "knowsAbout": [

@@ -208,13 +208,13 @@ export default function AboutPage() {
               <h4 className="text-brand-primary font-bold tracking-widest uppercase text-sm mb-4">Core Management</h4>
               <h2 className="text-4xl md:text-5xl font-extrabold text-brand-dark mb-6 tracking-tight">Leadership Team</h2>
               <p className="text-lg md:text-xl text-slate-600 leading-relaxed text-balance">
-                The powerhouse department heads driving Bengal Cyber's technical innovation, people culture, and operational excellence.
+                The powerhouse department heads driving Bengal Cyber's technical innovation, people culture, financial compliance, and operational excellence.
               </p>
             </motion.div>
           </div>
 
-          {/* 3-Column Profile Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* 4-Column Profile Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8">
             
             {/* 1. Babul Hossen - IT Head */}
             <motion.div
@@ -229,7 +229,7 @@ export default function AboutPage() {
                   src="/babul-hossen.jpg"
                   alt="Babul Hossen - IT Head at Bengal Cyber"
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover object-top hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute top-4 right-4 z-10">
@@ -239,10 +239,10 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="p-8 flex flex-col flex-1 justify-between bg-white">
+              <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between bg-white">
                 <div>
                   <span className="text-brand-primary font-bold text-xs uppercase tracking-widest">Technical Leadership</span>
-                  <h3 className="text-2xl font-extrabold text-brand-dark mt-1 mb-1">Babul Hossen</h3>
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-brand-dark mt-1 mb-1">Babul Hossen</h3>
                   <p className="text-slate-500 font-semibold text-sm mb-4">IT Head</p>
                   <p className="text-slate-600 text-sm leading-relaxed mb-6">
                     Leads technical operations, scalable systems architecture, web and app engineering, and robust cybersecurity protocols across client platforms.
@@ -269,7 +269,7 @@ export default function AboutPage() {
                   src="/zereen-mondal.jpg"
                   alt="Zereen Mondal - HR Head at Bengal Cyber"
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover object-top hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute top-4 right-4 z-10">
@@ -279,10 +279,10 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="p-8 flex flex-col flex-1 justify-between bg-white">
+              <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between bg-white">
                 <div>
                   <span className="text-brand-primary font-bold text-xs uppercase tracking-widest">People & Culture</span>
-                  <h3 className="text-2xl font-extrabold text-brand-dark mt-1 mb-1">Zereen Mondal</h3>
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-brand-dark mt-1 mb-1">Zereen Mondal</h3>
                   <p className="text-slate-500 font-semibold text-sm mb-4">HR Head</p>
                   <p className="text-slate-600 text-sm leading-relaxed mb-6">
                     Directs human resources, talent acquisition, professional development, and organizational culture—fostering high morale and creative excellence.
@@ -309,7 +309,7 @@ export default function AboutPage() {
                   src="/ismahile-hossain.jpg"
                   alt="Ismahile Hossain - Operation Head at Bengal Cyber"
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover object-top hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute top-4 right-4 z-10">
@@ -319,10 +319,10 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="p-8 flex flex-col flex-1 justify-between bg-white">
+              <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between bg-white">
                 <div>
                   <span className="text-brand-primary font-bold text-xs uppercase tracking-widest">Operations & Delivery</span>
-                  <h3 className="text-2xl font-extrabold text-brand-dark mt-1 mb-1">Ismahile Hossain</h3>
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-brand-dark mt-1 mb-1">Ismahile Hossain</h3>
                   <p className="text-slate-500 font-semibold text-sm mb-4">Operation Head</p>
                   <p className="text-slate-600 text-sm leading-relaxed mb-6">
                     Orchestrates agile project execution, cross-department workflows, delivery schedules, and quality assurance for flawless client delivery.
@@ -332,6 +332,46 @@ export default function AboutPage() {
                 <div className="pt-4 border-t border-slate-100 flex flex-wrap gap-2">
                   <span className="px-3 py-1 bg-slate-50 border border-slate-100 rounded-full text-xs text-slate-600 font-medium">Agile Delivery</span>
                   <span className="px-3 py-1 bg-slate-50 border border-slate-100 rounded-full text-xs text-slate-600 font-medium">Quality Control</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* 4. Enam Hossain Masud Alom - Tax and Audit */}
+            <motion.div
+              className="bg-slate-50 rounded-[2.5rem] border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col group relative"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <div className="relative aspect-[4/4.5] overflow-hidden bg-slate-200">
+                <Image
+                  src="/enam-hossain.jpg"
+                  alt="Enam Hossain Masud Alom - Tax and Audit at Bengal Cyber"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-cover object-top hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute top-4 right-4 z-10">
+                  <span className="px-3.5 py-1.5 bg-brand-primary text-white text-xs font-bold rounded-full uppercase tracking-wider shadow-md">
+                    Tax & Audit
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between bg-white">
+                <div>
+                  <span className="text-brand-primary font-bold text-xs uppercase tracking-widest">Financial & Legal</span>
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-brand-dark mt-1 mb-1">Enam Hossain Masud Alom</h3>
+                  <p className="text-slate-500 font-semibold text-sm mb-4">Tax and Audit</p>
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                    Directs corporate tax planning, statutory auditing, financial integrity frameworks, and regulatory advisory ensuring airtight fiscal governance.
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-slate-100 flex flex-wrap gap-2">
+                  <span className="px-3 py-1 bg-slate-50 border border-slate-100 rounded-full text-xs text-slate-600 font-medium">Tax Advisory</span>
+                  <span className="px-3 py-1 bg-slate-50 border border-slate-100 rounded-full text-xs text-slate-600 font-medium">Statutory Audit</span>
                 </div>
               </div>
             </motion.div>
