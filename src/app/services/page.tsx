@@ -9,38 +9,65 @@ import Script from "next/script";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-
-  title: "Top Digital Marketing & Website Design Services in Bangladesh | Bengal Cyber",
-  description: "Scale your revenue with Bengal Cyber's elite digital services: Custom Website Design & Development, Viral Social Media Marketing, Performance Media Buying, High-End Graphics Design, and Video Editing in Bangladesh.",
+  title: "Digital Marketing Services for RMG, Doctors, SME & Food Business in Bangladesh | Bengal Cyber",
+  description: "Bengal Cyber offers expert Digital Marketing, Website Design, Meta Ads & Social Media Marketing for Company Owners, RMG Industry, Doctors, Hospitals, SME Entrepreneurs, Food & Restaurant Businesses, and Influencers across Bangladesh.",
   keywords: [
+    // Core Services
     "Digital Marketing Bangladesh",
     "Website Design Bangladesh",
     "Social Media Marketing Dhaka",
     "Web Development Agency Bangladesh",
-    "Media Buying Bangladesh",
-    "Meta Ads Management Dhaka",
-    "Facebook Marketing Bangladesh",
-    "Creative Graphics Design Dhaka",
-    "Video Editing Services Bangladesh",
-    "E-Commerce Website Development Dhaka",
-    "SEO Agency Bangladesh",
+    "Meta Ads Management Bangladesh",
+    "Facebook Ads Bangladesh",
+    "SEO Services Bangladesh",
+    // RMG Industry
+    "Digital Marketing for Garments Bangladesh",
+    "RMG Industry Website Dhaka",
+    "Garments Factory Marketing Bangladesh",
+    "Textile Industry Digital Marketing",
+    "Export Company Website Bangladesh",
+    // Doctors & Health
+    "Digital Marketing for Doctors Bangladesh",
+    "Doctor Website Design Dhaka",
+    "Hospital Marketing Agency Bangladesh",
+    "Clinic Social Media Marketing",
+    "Healthcare SEO Bangladesh",
+    "Medical Practice Marketing Dhaka",
+    // SME & Business
+    "SME Marketing Bangladesh",
+    "Small Business Website Design Dhaka",
+    "Startup Digital Marketing Bangladesh",
+    "B2B Marketing Agency Dhaka",
+    "E-Commerce Marketing Bangladesh",
+    // Food Industry
+    "Restaurant Marketing Dhaka",
+    "Food Business Social Media Marketing",
+    "Restaurant Website Design Bangladesh",
+    "Food Brand Marketing Agency Dhaka",
+    "Cloud Kitchen Marketing Bangladesh",
+    // Influencers
+    "Influencer Marketing Bangladesh",
+    "Brand Deal Agency Dhaka",
+    "Content Creator Marketing Bangladesh",
     "Bengal Cyber Services"
   ],
   alternates: {
     canonical: "https://bengalcyber.com/services",
   },
   openGraph: {
-    title: "Elite Digital Marketing & Web Design Services | Bengal Cyber",
-    description: "Architect your brand's digital dominance with custom Website Design, ROI-driven Media Buying, and viral Social Media Marketing in Bangladesh.",
+    title: "Digital Marketing for RMG, Doctors, SME & Food Business | Bengal Cyber Bangladesh",
+    description: "Expert Website Design, Meta Ads, Social Media Marketing for Company Owners, RMG Industry, Doctors, SME, Food & Restaurant Businesses in Bangladesh. Call Bengal Cyber now!",
     url: "https://bengalcyber.com/services",
     siteName: "Bengal Cyber",
-    locale: "en_US",
+    locale: "en_BD",
     type: "website",
+    images: [{ url: "https://bengalcyber.com/logo.png", width: 1200, height: 630, alt: "Bengal Cyber Services Bangladesh" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Elite Digital Services in Bangladesh | Bengal Cyber",
-    description: "Transform your business with high-converting Web Design, Social Media Marketing, and Performance Media Buying.",
+    title: "Bengal Cyber Services | Digital Marketing for Every Business in Bangladesh",
+    description: "RMG, Doctors, SME, Food Industry & Influencers — grow fast with expert Digital Marketing & Web Design from Bengal Cyber, Dhaka Bangladesh.",
+    images: ["https://bengalcyber.com/logo.png"],
   },
 };
 
