@@ -537,6 +537,170 @@ export default function ProjectsPage() {
         </div>
       </section>
 
+      {/* Healthcare Industry Blog Post */}
+      <section className="py-20 bg-white relative z-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          {/* Blog Label */}
+          <div className="flex items-center gap-3 mb-6">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00a859]/10 text-[#00a859] text-xs font-bold uppercase tracking-widest border border-[#00a859]/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              Industry Insight — Healthcare
+            </span>
+            <span className="text-slate-400 text-sm">November 2024</span>
+          </div>
+
+          {/* Blog Title */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-dark mb-6 leading-tight tracking-tight">
+            Why Digital Marketing is Now Essential for Doctors, Hospitals & the Healthcare Industry in Bangladesh
+          </h2>
+          <p className="text-lg md:text-xl text-slate-500 mb-12 leading-relaxed max-w-3xl">
+            The healthcare landscape in Bangladesh has changed forever. Patients no longer rely solely on word of mouth — they search online, browse social media, and choose doctors based on digital presence. Here's why your clinic or hospital must be online, and how Bengal Cyber can take you there.
+          </p>
+
+          {/* Section 1: Why Web & Social Media Matter */}
+          <div className="bg-slate-50 rounded-3xl p-8 md:p-12 mb-10 border border-slate-100">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-10 h-10 rounded-2xl bg-[#00a859] flex items-center justify-center flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <h3 className="text-2xl font-bold text-brand-dark">Why Web & Social Media Are Critical for Healthcare</h3>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6 text-slate-600 leading-relaxed">
+              <div className="space-y-4">
+                <p>
+                  <span className="font-bold text-brand-dark">🔍 Patients Search Online First.</span> Over 70% of patients in Bangladesh now search for doctors, clinics, and hospitals on Google and Facebook before making an appointment. If you are not visible online, you simply don't exist to them.
+                </p>
+                <p>
+                  <span className="font-bold text-brand-dark">📱 Social Media Builds Trust.</span> A strong Facebook or YouTube presence lets doctors and hospitals share health tips, patient education, and success stories — building the credibility and trust that leads to appointments. People choose doctors they feel they know.
+                </p>
+              </div>
+              <div className="space-y-4">
+                <p>
+                  <span className="font-bold text-brand-dark">🏥 Your Competitors Are Already Online.</span> Hospitals and clinics in Dhaka, Chittagong, and other cities are aggressively growing their digital presence. Without a professional website and active social media, you will lose patients to competitors who invest in digital branding.
+                </p>
+                <p>
+                  <span className="font-bold text-brand-dark">📊 Measurable Patient Growth.</span> Unlike traditional advertising, digital marketing lets you see exactly how many people saw your post, clicked your website, or booked an appointment — giving you full control over your growth.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Section 2: Our Services for Healthcare */}
+          <div className="mb-10">
+            <h3 className="text-2xl md:text-3xl font-bold text-brand-dark mb-8 flex items-center gap-3">
+              <span className="w-8 h-1 bg-[#00a859] rounded-full inline-block"></span>
+              How Bengal Cyber Helps the Healthcare Industry Grow
+            </h3>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {/* Service 1 */}
+              <div className="bg-gradient-to-br from-[#00a859]/5 to-white border border-[#00a859]/15 rounded-2xl p-6 hover:shadow-lg hover:shadow-[#00a859]/10 transition-all duration-300 hover:-translate-y-1">
+                <div className="w-11 h-11 rounded-xl bg-[#00a859]/10 flex items-center justify-center mb-4">
+                  <span className="text-xl">📋</span>
+                </div>
+                <h4 className="font-bold text-brand-dark mb-2 text-lg">1. Total 1-Year Digital Plan</h4>
+                <p className="text-slate-600 text-sm leading-relaxed">We build a complete 12-month digital roadmap tailored to your clinic or hospital — covering every touchpoint from brand setup to patient acquisition and retention.</p>
+              </div>
+
+              {/* Service 2 */}
+              <div className="bg-gradient-to-br from-[#1877F2]/5 to-white border border-[#1877F2]/15 rounded-2xl p-6 hover:shadow-lg hover:shadow-[#1877F2]/10 transition-all duration-300 hover:-translate-y-1">
+                <div className="w-11 h-11 rounded-xl bg-[#1877F2]/10 flex items-center justify-center mb-4">
+                  <span className="text-xl">📲</span>
+                </div>
+                <h4 className="font-bold text-brand-dark mb-2 text-lg">2. Social Media Setup & Marketing</h4>
+                <p className="text-slate-600 text-sm leading-relaxed">From Facebook page setup and professional branding to daily content creation, targeted Meta Ads, and community management — we build your digital following and patient base.</p>
+              </div>
+
+              {/* Service 3 */}
+              <div className="bg-gradient-to-br from-brand-primary/5 to-white border border-brand-primary/15 rounded-2xl p-6 hover:shadow-lg hover:shadow-brand-primary/10 transition-all duration-300 hover:-translate-y-1">
+                <div className="w-11 h-11 rounded-xl bg-brand-primary/10 flex items-center justify-center mb-4">
+                  <span className="text-xl">💻</span>
+                </div>
+                <h4 className="font-bold text-brand-dark mb-2 text-lg">3. Website Design & Marketing</h4>
+                <p className="text-slate-600 text-sm leading-relaxed">We design professional, fast-loading, mobile-first websites for doctors, clinics, and hospitals — with built-in SEO, appointment booking forms, and Google Maps integration.</p>
+              </div>
+
+              {/* Service 4 */}
+              <div className="bg-gradient-to-br from-purple-500/5 to-white border border-purple-500/15 rounded-2xl p-6 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300 hover:-translate-y-1">
+                <div className="w-11 h-11 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4">
+                  <span className="text-xl">🎬</span>
+                </div>
+                <h4 className="font-bold text-brand-dark mb-2 text-lg">4. Video Shooting & Editing</h4>
+                <p className="text-slate-600 text-sm leading-relaxed">Professional health awareness videos, doctor interviews, clinic tours, and patient education content — shot and edited to broadcast quality. Video drives 5x more engagement in healthcare marketing.</p>
+              </div>
+
+              {/* Service 5 */}
+              <div className="bg-gradient-to-br from-orange-500/5 to-white border border-orange-500/15 rounded-2xl p-6 hover:shadow-lg hover:shadow-orange-500/10 transition-all duration-300 hover:-translate-y-1">
+                <div className="w-11 h-11 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4">
+                  <span className="text-xl">🎨</span>
+                </div>
+                <h4 className="font-bold text-brand-dark mb-2 text-lg">5. Graphics & Picture Design</h4>
+                <p className="text-slate-600 text-sm leading-relaxed">Eye-catching health awareness posts, doctor profile banners, clinic brochures, and campaign creatives — designed to look professional, trustworthy, and highly shareable.</p>
+              </div>
+
+              {/* Service 6 */}
+              <div className="bg-gradient-to-br from-teal-500/5 to-white border border-teal-500/15 rounded-2xl p-6 hover:shadow-lg hover:shadow-teal-500/10 transition-all duration-300 hover:-translate-y-1">
+                <div className="w-11 h-11 rounded-xl bg-teal-500/10 flex items-center justify-center mb-4">
+                  <span className="text-xl">📅</span>
+                </div>
+                <h4 className="font-bold text-brand-dark mb-2 text-lg">6. Monthly Digital Channel Management</h4>
+                <p className="text-slate-600 text-sm leading-relaxed">We manage your Facebook, Instagram, YouTube, and Google Business Profile every month — handling content posting, ad campaigns, inbox responses, and performance reporting.</p>
+              </div>
+
+              {/* Service 7 — Full width */}
+              <div className="sm:col-span-2 lg:col-span-3 bg-gradient-to-br from-brand-dark/5 to-white border border-brand-dark/15 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <div className="flex items-start gap-4">
+                  <div className="w-11 h-11 rounded-xl bg-brand-dark/10 flex items-center justify-center flex-shrink-0">
+                    <span className="text-xl">🗓️</span>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-brand-dark mb-2 text-lg">7. Customer Support & Appointment Setup System</h4>
+                    <p className="text-slate-600 text-sm leading-relaxed max-w-3xl">We set up and manage complete patient appointment booking systems — integrated into your website and social media — along with dedicated inbox support and CRM tools, so you never miss a patient inquiry again.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Experience Badge */}
+          <div className="bg-gradient-to-r from-brand-dark to-slate-800 rounded-3xl p-8 md:p-12 text-white mb-10">
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="flex-shrink-0 text-center">
+                <div className="text-6xl md:text-7xl font-black text-[#00a859]">5+</div>
+                <div className="text-white/70 text-sm font-semibold uppercase tracking-widest mt-1">Years Experience</div>
+              </div>
+              <div>
+                <h3 className="text-2xl md:text-3xl font-bold mb-4">Hands-On Healthcare Digital Marketing Experience</h3>
+                <p className="text-white/80 leading-relaxed text-lg">
+                  For more than 5 years, Bengal Cyber has been supporting healthcare clients — doctors, hospitals, clinics, and health brands across Bangladesh — with all of these digital marketing needs. We understand the unique trust, compliance, and communication requirements of the healthcare industry. Our team has on-hand experience running campaigns that actually bring patients through the door, not just likes on a post.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  {["Doctor Personal Branding", "Hospital Social Media", "Patient Education Videos", "Healthcare SEO", "Appointment System Setup", "Medical Graphic Design"].map((tag) => (
+                    <span key={tag} className="px-3 py-1 rounded-full bg-white/10 text-white/90 text-xs font-semibold border border-white/20">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA inside blog */}
+          <div className="text-center">
+            <p className="text-slate-500 text-lg mb-6">Ready to grow your healthcare practice with digital marketing?</p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 bg-[#00a859] text-white px-10 py-4 rounded-full text-lg font-bold hover:bg-[#00924c] shadow-lg shadow-[#00a859]/30 transition-all hover:-translate-y-1"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.26h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.1a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 15.5a2 2 0 0 1 .27 1.42z"/></svg>
+              Book a Free Healthcare Marketing Consultation
+            </Link>
+          </div>
+
+        </div>
+      </section>
+
       {/* Call to action */}
       <section className="py-24 bg-gradient-to-br from-brand-primary via-orange-500 to-brand-primary text-white text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
