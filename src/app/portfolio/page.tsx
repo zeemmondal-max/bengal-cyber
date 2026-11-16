@@ -5,34 +5,105 @@ import Script from "next/script";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Client Case Studies & Portfolio | Web Design & Marketing | Bengal Cyber",
-  description: "Explore real client transformations by Bengal Cyber: Custom Website Design, viral Social Media Marketing, High-ROAS Meta Ads, and Video Production across Bangladesh.",
+  title: "আমাদের কাজ | Digital Marketing & Web Design Portfolio Bangladesh | Bengal Cyber Dhaka",
+  description: "Bengal Cyber-এর সফল client projects দেখুন। বাংলাদেশে সেরা Digital Marketing, Website Design, Social Media Marketing, Meta Ads, Video Production এবং Healthcare Marketing। Dhaka-based #1 Digital Agency — আপনার business কে আমরা online-এ নিয়ে যাই।",
   keywords: [
-    "Bengal Cyber Portfolio",
-    "Digital Marketing Case Studies Bangladesh",
+    // Portfolio & Case Studies
+    "Digital Marketing Portfolio Bangladesh",
     "Website Design Portfolio Dhaka",
-    "Facebook Ads Success Stories Bangladesh",
-    "Medical Branding Bangladesh",
-    "E-Commerce Web Development Dhaka",
-    "Corporate Website Portfolio",
-    "Creative Video Editing Bangladesh",
-    "Top Marketing Agency Portfolio"
+    "Social Media Marketing Case Study Bangladesh",
+    "Meta Ads Success Bangladesh",
+    "Facebook Ads Portfolio Bangladesh",
+    "Best Digital Marketing Results Bangladesh",
+    "Bengal Cyber Portfolio",
+    "Bengal Cyber Case Study",
+    "Digital Agency Work Bangladesh",
+    "Marketing Agency Portfolio Dhaka",
+
+    // Service-specific Bangladesh
+    "Website Design Company Bangladesh",
+    "Web Development Portfolio Dhaka",
+    "Custom Website Bangladesh",
+    "Corporate Website Design Dhaka",
+    "E-Commerce Website Bangladesh",
+    "Business Website Design Bangladesh",
+
+    // Social Media
+    "Facebook Marketing Agency Bangladesh",
+    "Instagram Marketing Dhaka",
+    "Social Media Management Bangladesh",
+    "Facebook Page Management Dhaka",
+    "Meta Ads Agency Bangladesh",
+    "Facebook Ads Expert Bangladesh",
+
+    // Healthcare
+    "Healthcare Digital Marketing Bangladesh",
+    "Doctor Digital Marketing Dhaka",
+    "Hospital Marketing Agency Bangladesh",
+    "Doctor Website Design Bangladesh",
+    "Medical Social Media Marketing",
+    "Cancer Doctor Marketing Bangladesh",
+
+    // Industry specific
+    "RMG Industry Marketing Bangladesh",
+    "Garments Company Website Bangladesh",
+    "Food Business Marketing Dhaka",
+    "Restaurant Digital Marketing Bangladesh",
+    "Furniture Brand Marketing Bangladesh",
+    "Automotive Facebook Ads Bangladesh",
+    "SME Marketing Bangladesh",
+
+    // Video
+    "Video Marketing Bangladesh",
+    "Video Production Agency Dhaka",
+    "Professional Video Editing Bangladesh",
+    "Product Video Bangladesh",
+
+    // Location targeting
+    "Digital Marketing Agency Dhaka",
+    "Digital Agency Gulshan Dhaka",
+    "Best Digital Agency Bangladesh 2024",
+    "Top Marketing Company Dhaka",
+    "Digital Marketing Agency Chittagong",
+    "Digital Marketing Bangladesh",
+    "Online Marketing Bangladesh",
+
+    // Intent-based
+    "Social Media Agency Bangladesh er kaaj",
+    "Website banano Bangladesh",
+    "Facebook Marketing Bangladesh",
+    "Digital Marketing kotha theke nibo Bangladesh",
+    "Best marketing agency near me Dhaka",
   ],
   alternates: {
     canonical: "https://bengalcyber.com/portfolio",
+    languages: {
+      "en-BD": "https://bengalcyber.com/portfolio",
+      "bn-BD": "https://bengalcyber.com/portfolio",
+    },
   },
   openGraph: {
-    title: "Client Case Studies & Proven Results | Bengal Cyber",
-    description: "Discover how Bengal Cyber scales brands across Bangladesh with high-converting Website Design, viral Social Media Marketing, and precision Media Buying.",
+    title: "Bengal Cyber Portfolio | Real Results for Bangladeshi Businesses — Dhaka's #1 Digital Agency",
+    description: "দেখুন কিভাবে Bengal Cyber বাংলাদেশের ব্যবসাগুলোকে Digital Marketing, Website Design, Meta Ads, Video Production দিয়ে এগিয়ে নিয়েছে। Healthcare, RMG, Food, Furniture, Automotive — সব industry তে আমাদের proven results আছে।",
     url: "https://bengalcyber.com/portfolio",
     siteName: "Bengal Cyber",
-    locale: "en_US",
+    locale: "en_BD",
     type: "website",
+    images: [
+      {
+        url: "https://bengalcyber.com/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Bengal Cyber Portfolio — Digital Marketing & Web Design Bangladesh",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bengal Cyber Portfolio | Web Design & Digital Marketing Results",
-    description: "Real client results in Web Development, Meta Ads, Video Production, and Brand Scaling in Bangladesh.",
+    title: "Bengal Cyber Portfolio | Digital Marketing Results in Bangladesh",
+    description: "Real client success stories: Website Design, Facebook Ads, Healthcare Marketing, Video Production — Bangladesh's leading digital agency. Dhaka.",
+    images: ["https://bengalcyber.com/logo.png"],
+    creator: "@bengalcyber",
   },
 };
 
@@ -43,41 +114,45 @@ export default function ProjectsPage() {
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://bengalcyber.com"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Portfolio",
-            "item": "https://bengalcyber.com/portfolio"
-          }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bengalcyber.com" },
+          { "@type": "ListItem", "position": 2, "name": "Portfolio & Case Studies", "item": "https://bengalcyber.com/portfolio" }
         ]
       },
       {
         "@type": "CollectionPage",
         "@id": "https://bengalcyber.com/portfolio/#webpage",
         "url": "https://bengalcyber.com/portfolio",
-        "name": "Client Case Studies & Portfolio | Bengal Cyber",
-        "description": "Explore real client transformations by Bengal Cyber: Custom Website Design, viral Social Media Marketing, High-ROAS Meta Ads, and Video Production across Bangladesh.",
+        "name": "Digital Marketing & Web Design Portfolio Bangladesh | Bengal Cyber Dhaka",
+        "description": "Bengal Cyber-এর proven client success stories। Bangladesh-এ সেরা Digital Marketing, Website Design, Social Media Marketing, Healthcare Marketing, Video Production। Dhaka based #1 Digital Agency।",
+        "inLanguage": ["en", "bn"],
+        "about": {
+          "@type": "Organization",
+          "name": "Bengal Cyber",
+          "url": "https://bengalcyber.com",
+          "areaServed": "Bangladesh",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Gulshan 1",
+            "addressRegion": "Dhaka",
+            "addressCountry": "BD"
+          }
+        },
         "mainEntity": {
           "@type": "ItemList",
+          "name": "Bengal Cyber Client Portfolio Bangladesh",
+          "numberOfItems": 6,
           "itemListElement": [
             {
               "@type": "ListItem",
               "position": 1,
               "item": {
                 "@type": "CreativeWork",
-                "name": "Karizma Care - Bangladesh's First Seaweed Mermaid Soap",
-                "headline": "Product Launch & Video Marketing Campaign",
-                "creator": {
-                  "@type": "Organization",
-                  "name": "Bengal Cyber"
-                },
-                "genre": "Video Marketing & Product Launch"
+                "name": "Karizma Care — Bangladesh's First Seaweed Mermaid Soap",
+                "headline": "Product Launch & Viral Video Marketing Campaign Bangladesh",
+                "description": "Professional product launch video campaign and social media marketing for Karizma Care skincare brand in Bangladesh.",
+                "creator": { "@type": "Organization", "name": "Bengal Cyber", "url": "https://bengalcyber.com" },
+                "genre": "Video Marketing & Product Launch",
+                "keywords": "Video Marketing Bangladesh, Product Launch Marketing, Skincare Brand Marketing Bangladesh"
               }
             },
             {
@@ -85,13 +160,12 @@ export default function ProjectsPage() {
               "position": 2,
               "item": {
                 "@type": "CreativeWork",
-                "name": "Athena's Furniture BD",
-                "headline": "Social Media Management & Meta Ads",
-                "creator": {
-                  "@type": "Organization",
-                  "name": "Bengal Cyber"
-                },
-                "genre": "Media Buying & Furniture Brand Growth"
+                "name": "Athena's Furniture BD — Social Media & Meta Ads",
+                "headline": "Facebook & Instagram Ads Management for Furniture Brand Bangladesh",
+                "description": "Comprehensive social media management, Meta Ads, and audience retargeting for premium furniture brand in Bangladesh.",
+                "creator": { "@type": "Organization", "name": "Bengal Cyber", "url": "https://bengalcyber.com" },
+                "genre": "Media Buying & Furniture Brand Growth",
+                "keywords": "Furniture Marketing Bangladesh, Facebook Ads Dhaka, Social Media Management Bangladesh"
               }
             },
             {
@@ -99,13 +173,12 @@ export default function ProjectsPage() {
               "position": 3,
               "item": {
                 "@type": "CreativeWork",
-                "name": "TIANAS BD",
-                "headline": "Ad Campaigns & E-Commerce Marketing Strategy",
-                "creator": {
-                  "@type": "Organization",
-                  "name": "Bengal Cyber"
-                },
-                "genre": "Digital Marketing & Fashion Retargeting"
+                "name": "TIANAS BD — Fashion E-Commerce Marketing",
+                "headline": "E-Commerce Ad Campaigns & Digital Marketing Bangladesh",
+                "description": "High-ROAS Facebook ad campaigns and e-commerce growth strategy for TIANAS fashion brand in Bangladesh.",
+                "creator": { "@type": "Organization", "name": "Bengal Cyber", "url": "https://bengalcyber.com" },
+                "genre": "E-Commerce Digital Marketing",
+                "keywords": "E-Commerce Marketing Bangladesh, Fashion Brand Ads, Facebook Ads Bangladesh"
               }
             },
             {
@@ -113,13 +186,12 @@ export default function ProjectsPage() {
               "position": 4,
               "item": {
                 "@type": "CreativeWork",
-                "name": "Bengal Glory Ltd",
-                "headline": "Full-Stack Custom Corporate Web Development & SEO",
-                "creator": {
-                  "@type": "Organization",
-                  "name": "Bengal Cyber"
-                },
-                "genre": "Web Design & Development"
+                "name": "Bengal Glory Ltd — Corporate Website Design Bangladesh",
+                "headline": "Full-Stack Corporate Web Development & SEO Bangladesh",
+                "description": "Complete corporate website design, development and SEO optimization for Bengal Glory Ltd in Dhaka, Bangladesh.",
+                "creator": { "@type": "Organization", "name": "Bengal Cyber", "url": "https://bengalcyber.com" },
+                "genre": "Web Design & Development",
+                "keywords": "Corporate Website Design Bangladesh, Web Development Dhaka, Company Website Bangladesh, SEO Bangladesh"
               }
             },
             {
@@ -127,13 +199,12 @@ export default function ProjectsPage() {
               "position": 5,
               "item": {
                 "@type": "CreativeWork",
-                "name": "Cancer Answer",
-                "headline": "Doctor Personal Branding & Medical Video Production",
-                "creator": {
-                  "@type": "Organization",
-                  "name": "Bengal Cyber"
-                },
-                "genre": "Healthcare Marketing & Medical Video Editing"
+                "name": "Cancer Answer — Doctor Digital Marketing Bangladesh",
+                "headline": "Healthcare Digital Marketing & Medical Video Production Bangladesh",
+                "description": "Doctor personal branding, medical video editing, and patient engagement social media marketing for oncology specialist in Bangladesh.",
+                "creator": { "@type": "Organization", "name": "Bengal Cyber", "url": "https://bengalcyber.com" },
+                "genre": "Healthcare Marketing & Medical Video",
+                "keywords": "Doctor Marketing Bangladesh, Healthcare Digital Marketing, Medical Video Bangladesh, Hospital Marketing Dhaka"
               }
             },
             {
@@ -141,17 +212,53 @@ export default function ProjectsPage() {
               "position": 6,
               "item": {
                 "@type": "CreativeWork",
-                "name": "Eva Iqra Motors",
-                "headline": "Automotive Lead Generation & Facebook Ad Campaigns",
-                "creator": {
-                  "@type": "Organization",
-                  "name": "Bengal Cyber"
-                },
-                "genre": "Automotive Social Media Marketing"
+                "name": "Eva Iqra Motors — Automotive Facebook Ads Bangladesh",
+                "headline": "Automotive Lead Generation & Facebook Ad Campaigns Dhaka",
+                "description": "High-performance automotive Facebook ads, lead generation, and social media marketing for Eva Iqra Motors in Bangladesh.",
+                "creator": { "@type": "Organization", "name": "Bengal Cyber", "url": "https://bengalcyber.com" },
+                "genre": "Automotive Social Media Marketing",
+                "keywords": "Automotive Marketing Bangladesh, Car Dealer Facebook Ads, Lead Generation Dhaka"
               }
             }
           ]
         }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Bangladesh-এ কোন Digital Marketing Agency সবচেয়ে ভালো?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bengal Cyber হলো Bangladesh-এর অন্যতম সেরা Digital Marketing Agency, যারা Dhaka-র Gulshan থেকে পরিচালিত। আমরা Website Design, Social Media Marketing, Meta Ads, Healthcare Marketing, Video Production এবং SEO তে ৫+ বছরের proven experience নিয়ে কাজ করি।"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Dhaka-তে কোথায় ভালো Website Design পাবো?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bengal Cyber Dhaka-র Gulshan 1 ভিত্তিক একটি Professional Web Design Agency। আমরা Doctors, Hospitals, RMG Companies, SME, Food Businesses এবং Influencer-দের জন্য custom website তৈরি করি।"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Bangladesh-এ Doctor বা Hospital-এর জন্য Digital Marketing কে করবে?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bengal Cyber ৫+ বছর ধরে Bangladesh-এ Healthcare Digital Marketing করছে। আমরা Doctor Personal Branding, Hospital Social Media Marketing, Medical Video Production, Appointment System Setup এবং Patient Engagement Campaign পরিচালনা করি।"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Bengal Cyber-এর কাজের portfolio কোথায় দেখবো?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Bengal Cyber-এর portfolio দেখতে পারবেন https://bengalcyber.com/portfolio তে। এখানে Karizma Care, Athena's Furniture, TIANAS, Bengal Glory, Cancer Answer ও Eva Iqra Motors সহ বিভিন্ন client-এর case study রয়েছে।"
+            }
+          }
+        ]
       }
     ]
   };
@@ -174,7 +281,7 @@ export default function ProjectsPage() {
           <span className="inline-block px-4 py-1.5 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-widest mb-4">
             Proven Results & Client Transformations
           </span>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-brand-dark mb-6 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-brand-dark mb-6 tracking-tight whitespace-nowrap">
             Client Success Stories & Portfolio
           </h1>
           <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-10 leading-relaxed text-balance">
