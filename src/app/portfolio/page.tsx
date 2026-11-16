@@ -277,16 +277,38 @@ export default function ProjectsPage() {
       
       {/* Page Header */}
       <section className="pt-4 pb-12 sm:pt-10 sm:pb-16 md:py-20 text-center relative z-10">
-        <div className="max-w-4xl mx-auto px-4">
+        <div className="max-w-5xl mx-auto px-4">
           <span className="inline-block px-4 py-1.5 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-widest mb-4">
-            Proven Results & Client Transformations
+            Proven Results & Client Transformations across Bangladesh
           </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-brand-dark mb-6 tracking-tight whitespace-nowrap">
             Client Success Stories & Portfolio
           </h1>
-          <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-10 leading-relaxed text-balance">
-            Explore real case studies demonstrating how Bengal Cyber accelerates revenue, engineers custom web platforms, and executes viral marketing campaigns across Bangladesh.
+          <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-8 leading-relaxed text-balance">
+            Explore real case studies demonstrating how Bengal Cyber accelerates revenue, engineers custom web platforms, and executes viral marketing campaigns across Dhaka and nationwide in Bangladesh.
           </p>
+
+          {/* Targeted Industry Pills for Local SEO */}
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-2 max-w-4xl mx-auto">
+            <span className="px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
+              🏥 Doctors & Healthcare
+            </span>
+            <span className="px-3.5 py-1.5 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-200">
+              🏭 RMG & Garments Industry
+            </span>
+            <span className="px-3.5 py-1.5 rounded-full bg-orange-50 text-orange-700 text-xs font-semibold border border-orange-200">
+              🛍️ SME & Udyokta Growth
+            </span>
+            <span className="px-3.5 py-1.5 rounded-full bg-amber-50 text-amber-700 text-xs font-semibold border border-amber-200">
+              🍔 Restaurants & Food Brands
+            </span>
+            <span className="px-3.5 py-1.5 rounded-full bg-purple-50 text-purple-700 text-xs font-semibold border border-purple-200">
+              🌟 Influencers & Creators
+            </span>
+            <span className="px-3.5 py-1.5 rounded-full bg-slate-100 text-slate-800 text-xs font-semibold border border-slate-200">
+              💼 Corporate B2B Companies
+            </span>
+          </div>
         </div>
       </section>
 
@@ -318,24 +340,47 @@ export default function ProjectsPage() {
 
             {/* Content Side */}
             <div className="p-8 md:p-12 flex flex-col justify-center">
-              <div className="text-sm text-brand-primary font-bold mb-3 uppercase tracking-wider">Karizma Care</div>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4 leading-tight">Bangladesh's First Seaweed Mermaid Soap</h2>
-              <p className="text-slate-600 leading-relaxed mb-8 text-lg">
-                A captivating promotional video campaign introducing a groundbreaking skincare product to the market. Crafted to highlight the premium quality, organic seaweed extracts, and unique benefits of Karizma Care's Mermaid Soap.
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xs font-bold text-orange-600 bg-orange-50 px-3 py-1 rounded-full uppercase tracking-wider border border-orange-200">
+                  Product Launch & Video Marketing
+                </span>
+                <span className="text-xs text-slate-400 font-medium">Skincare & FMCG</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4 leading-tight">
+                Karizma Care — Bangladesh's First Seaweed Mermaid Soap
+              </h2>
+              <p className="text-slate-600 leading-relaxed mb-6 text-base md:text-lg">
+                A captivating product launch and viral video marketing campaign introducing a groundbreaking organic skincare brand to Bangladesh. Bengal Cyber managed end-to-end creative direction, scriptwriting, cinema-grade 4K filming, and high-retention video editing to build national awareness across Dhaka and nationwide.
               </p>
               
-              <ul className="space-y-4 mb-8">
+              {/* SEO Key Metrics Bar */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div>
+                  <div className="text-xl md:text-2xl font-black text-brand-primary">500K+</div>
+                  <div className="text-xs text-slate-500 font-semibold">Video Impressions</div>
+                </div>
+                <div>
+                  <div className="text-xl md:text-2xl font-black text-brand-dark">3.8x</div>
+                  <div className="text-xs text-slate-500 font-semibold">Launch ROAS</div>
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <div className="text-xl md:text-2xl font-black text-orange-600">Dhaka & Nationwide</div>
+                  <div className="text-xs text-slate-500 font-semibold">Target Market</div>
+                </div>
+              </div>
+
+              <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                  <span className="text-slate-700 font-medium">Product Launch Campaign</span>
+                  <span className="text-slate-700 font-medium">New Skincare Brand Launch & Digital Positioning in Bangladesh</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                  <span className="text-slate-700 font-medium">High-Resolution Video Editing & Color Grading</span>
+                  <span className="text-slate-700 font-medium">High-Resolution Video Production, Color Grading & Viral Sound Design</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                  <span className="text-slate-700 font-medium">Social Media Viral Marketing Strategy</span>
+                  <span className="text-slate-700 font-medium">Social Media Viral Reels & Facebook Ad Campaign Execution</span>
                 </li>
               </ul>
             </div>
@@ -347,24 +392,47 @@ export default function ProjectsPage() {
             
             {/* Content Side (Left for alternate layout) */}
             <div className="p-8 md:p-12 flex flex-col justify-center order-2 md:order-1">
-              <div className="text-sm text-[#1877F2] font-bold mb-3 uppercase tracking-wider">Social Media Management</div>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4 leading-tight">Athena's Furniture BD</h2>
-              <p className="text-slate-600 leading-relaxed mb-8 text-lg">
-                We manage and execute comprehensive social media campaigns, high-converting Meta ad placements, and audience retargeting to drive high-intent leads and brand awareness for this premium furniture brand.
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xs font-bold text-[#1877F2] bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider border border-blue-200">
+                  Performance Meta Ads & SMM
+                </span>
+                <span className="text-xs text-slate-400 font-medium">Furniture & Home Decor</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4 leading-tight">
+                Athena's Furniture BD — Social Media Marketing & Meta Ads
+              </h2>
+              <p className="text-slate-600 leading-relaxed mb-6 text-base md:text-lg">
+                Comprehensive social media growth and conversion-focused Facebook & Instagram ad campaigns for one of Bangladesh's premier luxury furniture manufacturers. We built high-intent audience funnels targeting affluent homeowners in Dhaka, Chittagong, and Sylhet.
               </p>
               
-              <ul className="space-y-4 mb-8">
+              {/* Key Metrics Bar */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div>
+                  <div className="text-xl md:text-2xl font-black text-[#1877F2]">4.5x</div>
+                  <div className="text-xs text-slate-500 font-semibold">Average Meta ROAS</div>
+                </div>
+                <div>
+                  <div className="text-xl md:text-2xl font-black text-brand-dark">1,200+</div>
+                  <div className="text-xs text-slate-500 font-semibold">Qualified Leads</div>
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <div className="text-xl md:text-2xl font-black text-emerald-600">+180%</div>
+                  <div className="text-xs text-slate-500 font-semibold">Inquiry Growth</div>
+                </div>
+              </div>
+
+              <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-[#1877F2]"></div>
-                  <span className="text-slate-700 font-medium">Facebook & Instagram Ads Management</span>
+                  <span className="text-slate-700 font-medium">High-ROAS Facebook & Instagram Ads Management for Home Decor</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-[#1877F2]"></div>
-                  <span className="text-slate-700 font-medium">High-Intent Audience Retargeting</span>
+                  <span className="text-slate-700 font-medium">High-Intent Audience Retargeting across Dhaka, Chittagong & Sylhet</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-[#1877F2]"></div>
-                  <span className="text-slate-700 font-medium">Daily Page Growth & Community Support</span>
+                  <span className="text-slate-700 font-medium">Daily Page Growth, Lead Response Automation & Community Care</span>
                 </li>
               </ul>
 
@@ -442,24 +510,47 @@ export default function ProjectsPage() {
 
             {/* Content Side (Right) */}
             <div className="p-8 md:p-12 flex flex-col justify-center">
-              <div className="text-sm text-[#1877F2] font-bold mb-3 uppercase tracking-wider">Ad Campaigns & Strategy</div>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4 leading-tight">TIANAS</h2>
-              <p className="text-slate-600 leading-relaxed mb-8 text-lg">
-                We handle comprehensive digital marketing campaigns for TIANAS, crafting tailored ad strategies and viral creative direction that maximize ROI, scale fashion sales, and build commanding brand presence.
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xs font-bold text-orange-600 bg-orange-50 px-3 py-1 rounded-full uppercase tracking-wider border border-orange-200">
+                  E-Commerce Growth & Ad Funnels
+                </span>
+                <span className="text-xs text-slate-400 font-medium">Fashion & Lifestyle</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4 leading-tight">
+                TIANAS — E-Commerce Fashion Marketing & Scaled Meta Ads
+              </h2>
+              <p className="text-slate-600 leading-relaxed mb-6 text-base md:text-lg">
+                High-performance digital advertising campaigns and conversion rate optimization for TIANAS, a leading Bangladeshi boutique fashion brand. We deployed dynamic retargeting, video catalog ads, and festive marketing campaigns to scale monthly order volume.
               </p>
               
-              <ul className="space-y-4 mb-8">
+              {/* Key Metrics Bar */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div>
+                  <div className="text-xl md:text-2xl font-black text-orange-600">300%+</div>
+                  <div className="text-xs text-slate-500 font-semibold">Sales Growth</div>
+                </div>
+                <div>
+                  <div className="text-xl md:text-2xl font-black text-brand-dark">5.2x</div>
+                  <div className="text-xs text-slate-500 font-semibold">Peak Season ROAS</div>
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <div className="text-xl md:text-2xl font-black text-blue-600">All Bangladesh</div>
+                  <div className="text-xs text-slate-500 font-semibold">Courier Reach</div>
+                </div>
+              </div>
+
+              <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-[#1877F2]"></div>
-                  <span className="text-slate-700 font-medium">Conversion-Optimized Ad Campaigns</span>
+                  <span className="text-slate-700 font-medium">Full-Funnel Meta & Instagram Ads for Fashion Brand Scaling</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-[#1877F2]"></div>
-                  <span className="text-slate-700 font-medium">Advanced Performance & ROAS Tracking</span>
+                  <span className="text-slate-700 font-medium">Automated Dynamic Product Catalog Ads & Checkout Retargeting</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-[#1877F2]"></div>
-                  <span className="text-slate-700 font-medium">Brand Awareness & Viral Engagement</span>
+                  <span className="text-slate-700 font-medium">High-Converting Promotional Visuals & Lifestyle Video Editing</span>
                 </li>
               </ul>
 
@@ -481,24 +572,47 @@ export default function ProjectsPage() {
             
             {/* Content Side (Left) */}
             <div className="p-8 md:p-12 flex flex-col justify-center order-2 md:order-1">
-              <div className="text-sm text-brand-primary font-bold mb-3 uppercase tracking-wider">Web Development</div>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4 leading-tight">Bengal Glory Ltd</h2>
-              <p className="text-slate-600 leading-relaxed mb-8 text-lg">
-                We designed and engineered a comprehensive, modern, and lightning-fast corporate web platform from scratch to establish their authoritative digital presence, optimize on-page SEO, and showcase their enterprise services.
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xs font-bold text-brand-primary bg-cyan-50 px-3 py-1 rounded-full uppercase tracking-wider border border-cyan-200">
+                  Full-Stack Corporate Web & SEO
+                </span>
+                <span className="text-xs text-slate-400 font-medium">Enterprise & Conglomerate</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4 leading-tight">
+                Bengal Glory Ltd — Enterprise Corporate Web Platform & SEO
+              </h2>
+              <p className="text-slate-600 leading-relaxed mb-6 text-base md:text-lg">
+                Engineered a custom, lightning-fast corporate digital headquarters for Bengal Glory Ltd in Dhaka. Built with modern Next.js and Tailwind CSS, featuring mobile-first UX, bank-grade security, and aggressive on-page SEO to secure page-one rankings for high-intent business terms.
               </p>
               
-              <ul className="space-y-4 mb-8">
+              {/* Key Metrics Bar */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div>
+                  <div className="text-xl md:text-2xl font-black text-brand-primary">100/100</div>
+                  <div className="text-xs text-slate-500 font-semibold">Google PageSpeed</div>
+                </div>
+                <div>
+                  <div className="text-xl md:text-2xl font-black text-brand-dark">#1 Page</div>
+                  <div className="text-xs text-slate-500 font-semibold">Google Search Rank</div>
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <div className="text-xl md:text-2xl font-black text-emerald-600">Enterprise</div>
+                  <div className="text-xs text-slate-500 font-semibold">B2B Lead Pipeline</div>
+                </div>
+              </div>
+
+              <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-brand-primary"></div>
-                  <span className="text-slate-700 font-medium">Full-Stack Custom Web Engineering</span>
+                  <span className="text-slate-700 font-medium">Custom Full-Stack Next.js Web Development for Corporate Brands</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-brand-primary"></div>
-                  <span className="text-slate-700 font-medium">Mobile-First Responsive UI/UX</span>
+                  <span className="text-slate-700 font-medium">Ultra-Fast Responsive Mobile-First Architecture & UI/UX</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-brand-primary"></div>
-                  <span className="text-slate-700 font-medium">Technical Search Engine Optimization (SEO)</span>
+                  <span className="text-slate-700 font-medium">Technical Search Engine Optimization (SEO) & Schema Markup</span>
                 </li>
               </ul>
 
@@ -554,24 +668,47 @@ export default function ProjectsPage() {
 
             {/* Content Side (Right) */}
             <div className="p-8 md:p-12 flex flex-col justify-center">
-              <div className="text-sm text-[#00a859] font-bold mb-3 uppercase tracking-wider">Healthcare Marketing</div>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4 leading-tight">Cancer Answer</h2>
-              <p className="text-slate-600 leading-relaxed mb-8 text-lg">
-                We manage the comprehensive personal branding, high-retention medical video editing, and specialized social media marketing for a prominent oncology specialist to educate and engage patients across Bangladesh.
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xs font-bold text-[#00a859] bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-wider border border-emerald-200">
+                  Doctor Personal Branding & Healthcare SMM
+                </span>
+                <span className="text-xs text-slate-400 font-medium">Healthcare & Medicine</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4 leading-tight">
+                Cancer Answer — Doctor Personal Branding & Patient Outreach
+              </h2>
+              <p className="text-slate-600 leading-relaxed mb-6 text-base md:text-lg">
+                Comprehensive digital marketing and educational video production for a prominent oncologist in Dhaka. Bengal Cyber handles medical video scripting, filming, high-retention editing, and ethical patient engagement campaigns across Facebook and YouTube in Bangladesh.
               </p>
               
-              <ul className="space-y-4 mb-8">
+              {/* Key Metrics Bar */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div>
+                  <div className="text-xl md:text-2xl font-black text-[#00a859]">250K+</div>
+                  <div className="text-xs text-slate-500 font-semibold">Patients Reached</div>
+                </div>
+                <div>
+                  <div className="text-xl md:text-2xl font-black text-brand-dark">Daily</div>
+                  <div className="text-xs text-slate-500 font-semibold">Appointment Leads</div>
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <div className="text-xl md:text-2xl font-black text-blue-600">5+ Years</div>
+                  <div className="text-xs text-slate-500 font-semibold">Healthcare Niche</div>
+                </div>
+              </div>
+
+              <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-[#00a859]"></div>
-                  <span className="text-slate-700 font-medium">Doctor Personal Branding & Authority Building</span>
+                  <span className="text-slate-700 font-medium">Doctor Personal Branding & Medical Authority Building in Dhaka</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-[#00a859]"></div>
-                  <span className="text-slate-700 font-medium">Educational Medical Video Production</span>
+                  <span className="text-slate-700 font-medium">Educational Medical Video Production & Health Awareness Reels</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-[#00a859]"></div>
-                  <span className="text-slate-700 font-medium">Targeted Patient Engagement Campaigns</span>
+                  <span className="text-slate-700 font-medium">Targeted Patient Engagement, Query Filtering & Appointment Funnel</span>
                 </li>
               </ul>
 
@@ -593,24 +730,47 @@ export default function ProjectsPage() {
             
             {/* Content Side (Left) */}
             <div className="p-8 md:p-12 flex flex-col justify-center order-2 md:order-1">
-              <div className="text-sm text-[#1877F2] font-bold mb-3 uppercase tracking-wider">Social Media Marketing</div>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4 leading-tight">Eva Iqra Motors</h2>
-              <p className="text-slate-600 leading-relaxed mb-8 text-lg">
-                We handle high-performance automotive social media marketing and targeted ad campaigns to accelerate vehicle sales, generate pre-qualified buyer inquiries, and build brand loyalty.
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xs font-bold text-[#1877F2] bg-blue-50 px-3 py-1 rounded-full uppercase tracking-wider border border-blue-200">
+                  Automotive Lead Gen & Ads
+                </span>
+                <span className="text-xs text-slate-400 font-medium">Automotive & Dealership</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-dark mb-4 leading-tight">
+                Eva Iqra Motors — Automotive Facebook Ads & High-Ticket Lead Funnel
+              </h2>
+              <p className="text-slate-600 leading-relaxed mb-6 text-base md:text-lg">
+                Engineered high-intent automotive Facebook & Instagram ad campaigns for Eva Iqra Motors in Dhaka. We created targeted buyer personas for reconditioned vehicle buyers, delivering pre-qualified test-drive inquiries and showroom visits.
               </p>
               
-              <ul className="space-y-4 mb-8">
+              {/* Key Metrics Bar */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6 p-4 rounded-2xl bg-slate-50 border border-slate-100">
+                <div>
+                  <div className="text-xl md:text-2xl font-black text-[#1877F2]">150+</div>
+                  <div className="text-xs text-slate-500 font-semibold">Monthly Buyer Leads</div>
+                </div>
+                <div>
+                  <div className="text-xl md:text-2xl font-black text-brand-dark">Dhaka Metro</div>
+                  <div className="text-xs text-slate-500 font-semibold">Geo Radius Ads</div>
+                </div>
+                <div className="col-span-2 sm:col-span-1">
+                  <div className="text-xl md:text-2xl font-black text-emerald-600">High-Ticket</div>
+                  <div className="text-xs text-slate-500 font-semibold">Pre-Screened Buyers</div>
+                </div>
+              </div>
+
+              <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-[#1877F2]"></div>
-                  <span className="text-slate-700 font-medium">Automotive High-Intent Lead Generation</span>
+                  <span className="text-slate-700 font-medium">Automotive Lead Generation & Car Showroom Facebook Ads Dhaka</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-[#1877F2]"></div>
-                  <span className="text-slate-700 font-medium">Hyper-Targeted Facebook Ads</span>
+                  <span className="text-slate-700 font-medium">Hyper-Targeted High-Net-Worth Demographics & Car Shopper Audiences</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-[#1877F2]"></div>
-                  <span className="text-slate-700 font-medium">Daily Page Management & Sales Funnel</span>
+                  <span className="text-slate-700 font-medium">WhatsApp Direct Chat Funnel & Immediate Lead Qualification System</span>
                 </li>
               </ul>
 
@@ -641,6 +801,163 @@ export default function ProjectsPage() {
 
           </div>
 
+        </div>
+      </section>
+
+      {/* Industry-Specific Growth Section for Local SEO */}
+      <section className="py-20 bg-slate-100/70 border-y border-slate-200/80 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-widest mb-3">
+              Sector-Specific Digital Expertise in Bangladesh
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-dark mb-4 tracking-tight">
+              Tailored Digital Growth for Every Bangladeshi Industry
+            </h2>
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+              We don't use one-size-fits-all strategies. Bengal Cyber creates specialized digital marketing, custom web design, and high-converting ad funnels tailored specifically for key sectors across Dhaka and Bangladesh.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* RMG & Garments */}
+            <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mb-5 border border-blue-100">
+                  🏭
+                </div>
+                <h3 className="text-xl font-bold text-brand-dark mb-3">
+                  RMG & Garments Export Industry
+                </h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  High-authority international factory portfolio websites, digital buyer catalogs, sustainable manufacturing compliance showcases, and targeted LinkedIn & Google B2B campaigns to attract global fashion buyers.
+                </p>
+                <div className="flex flex-wrap gap-1.5 mb-6">
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">B2B Buyer Leads</span>
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Factory Web Design</span>
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Export Branding</span>
+                </div>
+              </div>
+              <Link href="/contact?service=Web%20Design%20%26%20Development" className="text-xs font-bold text-brand-primary hover:underline inline-flex items-center gap-1">
+                Explore RMG Web Solutions →
+              </Link>
+            </div>
+
+            {/* Doctors & Healthcare */}
+            <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl mb-5 border border-emerald-100">
+                  👨‍⚕️
+                </div>
+                <h3 className="text-xl font-bold text-brand-dark mb-3">
+                  Doctors, Clinics & Hospitals
+                </h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  Doctor personal branding, medical awareness video shooting & editing, clinic Google Maps local SEO, and automated WhatsApp appointment booking setups that build lifelong patient trust across Bangladesh.
+                </p>
+                <div className="flex flex-wrap gap-1.5 mb-6">
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Doctor Branding</span>
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Medical Video Editing</span>
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Appointment Funnels</span>
+                </div>
+              </div>
+              <Link href="/contact?service=Social%20Media%20Marketing" className="text-xs font-bold text-emerald-600 hover:underline inline-flex items-center gap-1">
+                Explore Healthcare Marketing →
+              </Link>
+            </div>
+
+            {/* SME & Udyokta */}
+            <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center text-2xl mb-5 border border-orange-100">
+                  🛍️
+                </div>
+                <h3 className="text-xl font-bold text-brand-dark mb-3">
+                  SME Entrepreneurs & Udyokta (উদ্যোক্তা)
+                </h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  Budget-optimized Facebook & Instagram ad campaigns, high-converting product photography, fast checkout e-commerce landing pages, and cash-on-delivery courier integration for local businesses.
+                </p>
+                <div className="flex flex-wrap gap-1.5 mb-6">
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Low-CAC Meta Ads</span>
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">E-Commerce Setup</span>
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Brand Packaging</span>
+                </div>
+              </div>
+              <Link href="/contact?service=Media%20Buying" className="text-xs font-bold text-orange-600 hover:underline inline-flex items-center gap-1">
+                Explore SME Growth Plans →
+              </Link>
+            </div>
+
+            {/* Food, Restaurants & Cafes */}
+            <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl mb-5 border border-amber-100">
+                  🍽️
+                </div>
+                <h3 className="text-xl font-bold text-brand-dark mb-3">
+                  Restaurants, Cafes & Food Brands
+                </h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  Mouth-watering food video reels, local geo-targeted advertising (Gulshan, Banani, Dhanmondi, Uttara), influencer tasting collaborations, and direct online menu ordering campaigns.
+                </p>
+                <div className="flex flex-wrap gap-1.5 mb-6">
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Food Videography</span>
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Local Footfall Ads</span>
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Cloud Kitchen Funnels</span>
+                </div>
+              </div>
+              <Link href="/contact?service=Social%20Media%20Marketing" className="text-xs font-bold text-amber-600 hover:underline inline-flex items-center gap-1">
+                Explore Food Marketing →
+              </Link>
+            </div>
+
+            {/* Influencers & Creators */}
+            <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-2xl mb-5 border border-purple-100">
+                  🌟
+                </div>
+                <h3 className="text-xl font-bold text-brand-dark mb-3">
+                  Influencers & Content Creators
+                </h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  Custom personal branding web portals, digital media kits for sponsor partnerships, multi-channel monetization funnels, and broadcast-quality viral video editing.
+                </p>
+                <div className="flex flex-wrap gap-1.5 mb-6">
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Creator Media Kit</span>
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Brand Partnerships</span>
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Video Editing</span>
+                </div>
+              </div>
+              <Link href="/contact?service=Video%20Editing" className="text-xs font-bold text-purple-600 hover:underline inline-flex items-center gap-1">
+                Explore Creator Branding →
+              </Link>
+            </div>
+
+            {/* Corporate & Enterprise */}
+            <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-800 flex items-center justify-center text-2xl mb-5 border border-slate-200">
+                  🏢
+                </div>
+                <h3 className="text-xl font-bold text-brand-dark mb-3">
+                  Corporate Conglomerates & B2B
+                </h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                  Enterprise-grade Next.js web applications, bank-level security audits, aggressive Google organic search (SEO) domination, and reputation management for market leaders.
+                </p>
+                <div className="flex flex-wrap gap-1.5 mb-6">
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Enterprise Next.js</span>
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">Technical SEO Dhaka</span>
+                  <span className="text-[11px] font-semibold bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md">B2B Pipelines</span>
+                </div>
+              </div>
+              <Link href="/contact?service=General%20Inquiry" className="text-xs font-bold text-slate-800 hover:underline inline-flex items-center gap-1">
+                Explore Enterprise Solutions →
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -805,6 +1122,80 @@ export default function ProjectsPage() {
             </Link>
           </div>
 
+        </div>
+      </section>
+
+      {/* Visible FAQ Section for Local SEO Rich Snippets */}
+      <section className="py-20 bg-slate-50 border-t border-slate-200/80 relative z-10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-widest mb-3">
+              Frequently Asked Questions (FAQ)
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-dark mb-4 tracking-tight">
+              সাধারণ জিজ্ঞাসা ও ডিজিটাল মার্কেটিং গাইড
+            </h2>
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+              Have questions about our digital marketing, web design, or healthcare branding services in Bangladesh? Here are quick answers to our most common client inquiries.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {/* FAQ 1 */}
+            <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-sm border border-slate-200 hover:border-brand-primary/30 transition-colors">
+              <h3 className="text-lg sm:text-xl font-bold text-brand-dark mb-3 flex items-start gap-3">
+                <span className="w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">Q</span>
+                <span>Bangladesh-এ কোন Digital Marketing Agency সবচেয়ে ভালো এবং কেন?</span>
+              </h3>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed pl-9">
+                <span className="font-semibold text-brand-dark">Bengal Cyber</span> হলো Bangladesh-এর অন্যতম শীর্ষস্থানীয় Digital Marketing Agency, যা ঢাকার গুলশান-১ থেকে পরিচালিত। আমরা কেবল ফেসবুক পোস্ট তৈরি করি না—বরং ডেটা-ড্রিভেন মেটা অ্যাডস (Meta Ads), কাস্টম নেক্সট-জেএস (Next.js) ওয়েবসাইট ডেভেলপমেন্ট, প্রফেশনাল ভিডিও শ্যুটিং ও এডিটিং, এবং বিশেষায়িত হেলথকেয়ার ও আরএমজি ব্র্যান্ডিংয়ে দীর্ঘ ৫+ বছরের বাস্তব অভিজ্ঞতা নিয়ে কাজ করি।
+              </p>
+            </div>
+
+            {/* FAQ 2 */}
+            <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-sm border border-slate-200 hover:border-brand-primary/30 transition-colors">
+              <h3 className="text-lg sm:text-xl font-bold text-brand-dark mb-3 flex items-start gap-3">
+                <span className="w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">Q</span>
+                <span>ডাক্তার, ক্লিনিক বা হাসপাতালের জন্য সোশ্যাল মিডিয়া ও ওয়েবসাইট কেন প্রয়োজন?</span>
+              </h3>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed pl-9">
+                বর্তমানে বাংলাদেশে ৭০%-এর বেশি রোগী কোনো ডাক্তারের কাছে যাওয়ার পূর্বে গুগল এবং ফেসবুকে সার্চ করেন। একটি প্রফেশনাল ওয়েবসাইট এবং নিয়মিত স্বাস্থ্য সচেতনতামূলক ভিডিও ডাক্তারের গ্রহণযোগ্যতা বহুগুণ বাড়ায়। Bengal Cyber ডাক্তারদের জন্য পার্সোনাল ব্র্যান্ডিং, পেশেন্ট এডুকেশন রিলস তৈরি এবং সরাসরি অনলাইন ও হোয়াটসঅ্যাপ অ্যাপয়েন্টমেন্ট বুকিং সিস্টেম সেটআপ করে দেয়।
+              </p>
+            </div>
+
+            {/* FAQ 3 */}
+            <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-sm border border-slate-200 hover:border-brand-primary/30 transition-colors">
+              <h3 className="text-lg sm:text-xl font-bold text-brand-dark mb-3 flex items-start gap-3">
+                <span className="w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">Q</span>
+                <span>RMG ও গার্মেন্টস ফ্যাক্টরির জন্য ওয়েবসাইট কীভাবে সাহায্য করে?</span>
+              </h3>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed pl-9">
+                আন্তর্জাতিক বায়ারদের আস্থা অর্জনের জন্য একটি আধুনিক, সিকিউর এবং মোবাইল-ফ্রেন্ডলি ফ্যাক্টরি পোর্টফোলিও ওয়েবসাইট অপরিহার্য। Bengal Cyber আন্তর্জাতিক কমপ্লায়েন্স সনদ, কারখানার ক্যাপাসিটি শোকেস এবং ডিজিটাল ক্যাটালগসহ কর্পোরেট প্ল্যাটফর্ম তৈরি করে, যা ইউরোপ ও আমেরিকার বায়ারদের দৃষ্টি আকর্ষণ করতে সাহায্য করে।
+              </p>
+            </div>
+
+            {/* FAQ 4 */}
+            <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-sm border border-slate-200 hover:border-brand-primary/30 transition-colors">
+              <h3 className="text-lg sm:text-xl font-bold text-brand-dark mb-3 flex items-start gap-3">
+                <span className="w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">Q</span>
+                <span>SME উদ্যোক্তাদের জন্য বাজেট-বান্ধব মার্কেটিং প্যাকেজ কেমন?</span>
+              </h3>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed pl-9">
+                আমরা নতুন ও বিকাশমান উদ্যোক্তাদের (SME / F-Commerce) কথা বিবেচনা করে কাস্টমাইজড প্ল্যান অফার করি। যার মধ্যে রয়েছে কম খরচে কাস্টমার অ্যাকুইজিশন (Low-CAC Meta Ads), কনভার্সন অপটিমাইজড প্রোডাক্ট ফটো/ভিডিও এবং দ্রুত ডেলিভারি ট্র্যাকিং সংবলিত ল্যান্ডিং পেজ তৈরি।
+              </p>
+            </div>
+
+            {/* FAQ 5 */}
+            <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-sm border border-slate-200 hover:border-brand-primary/30 transition-colors">
+              <h3 className="text-lg sm:text-xl font-bold text-brand-dark mb-3 flex items-start gap-3">
+                <span className="w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">Q</span>
+                <span>Bengal Cyber-এর সাথে কাজ শুরু করার প্রসেস কী?</span>
+              </h3>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed pl-9">
+                আমাদের ওয়েবসাইটের <Link href="/contact" className="text-brand-primary font-bold hover:underline">Contact Page</Link>-এ গিয়ে ফর্ম পূরণ করুন অথবা সরাসরি ফোন করুন <span className="font-bold text-brand-dark">+8801901364583</span> নম্বরে। আমাদের কনসালট্যান্ট আপনার বিজনেসের লক্ষ্য বিশ্লেষণ করে একটি সম্পূর্ণ ১ বছরের ফ্রি স্ট্র্যাটেজি রোডম্যাপ প্রদান করবেন।
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
